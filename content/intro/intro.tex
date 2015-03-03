@@ -1,0 +1,37 @@
+% include the figures path relative to the master file
+\graphicspath{ {./content/intro/figures/} }
+
+\section{Introduction}
+\label{sec:intro}  % \label{} allows reference to this section
+
+
+Breast cancer is the second most common cancer (1.4 million cases per year, 10.9\% of  diagnosed cancers) after lung cancer, followed by colorectal, stomach, prostate and liver cancers. %~\cite{Ferlay2010}.
+In terms of mortality, breast cancer is the fifth most common cause of cancer death.
+However, it is ranked as the leading cause of cancer death among females in both western countries and economically developing countries~\cite{cancerStatistics2011}.
+
+Medical imaging plays an important role in breast cancer mortality reduction, contributing to its early detection through screening for diagnosis, image-guided biopsy, treatment follow-up and suchlike procedures~\cite{smith2003american}.
+Although \ac{dm} remains the reference imaging modality for breast cancer screening, \ac{us} imaging has proven to be a successful adjunct image modality~\cite{smith2003american}.%,berg2004diagnostic}.
+The main advantage of \ac{us} imaging, opposed to other image modalities, lies in the discriminative power that \ac{us} offers to visually differentiate benign from malignant solid lesions~\cite{Stavros:1995p12392}.
+In this manner, \ac{us} screening contributes to reduce the amount of unnecessary biopsies~\cite{ciatto1994contribution}, which is estimated to be between $65\sim85\%$ of the prescribed biopsies~\cite{yuan2010multimodality}, in favour of a less traumatic short-term screening follow-up using \ac{bus} images. %~\cite{gordon1995malignant}.
+As the standard for assessing this \ac{bus} images, the \ac{acr} proposes the \ac{birads} lexicon for \ac{bus} images~\cite{biradsus}.
+This \ac{us} \ac{birads} lexicon is a set of standard markers that characterizes the lesions encoding the visual cues found in \ac{bus} images and facilitates their analysis.
+Further details regarding the \ac{us} \ac{birads} lexicon descriptors proposed by the \ac{acr}, can be found in this document in \cref{sec:method:dterm:feat}, where visual cues of \ac{bus} images and breast structures are discussed to define feature descriptors.
+
+All these facts show the interest in the medical community for incorporating \ac{us} screening as part of the standard procedure in breast screening programs~\cite{biradsus}, which encourages the development of \ac{cad} systems using \ac{us} to be applied to breast cancer diagnosis.
+Building \ac{cad} systems based on the clinical tools already in use (\emph{i.e.} \ac{us} \ac{birads} lexicon) is not straight forward.
+Shortcomings like the location and explicit delineation of the lesions need to be addressed, since those tasks are intrinsically carried out by the radiologists during their visual assessment of the images to infer the lexicon representation of the lesions.
+Therefore, developing accurate segmentation methodologies for breast lesions and structures are crucial in order to develop \ac{cad} systems that can take advantage of the already validated clinical tools.
+
+%Regardless of the clinical utility of the \ac{us} images, such image modality suffers from different inconveniences due to strong noise natural of \ac{us} imaging  and the presence of strong \ac{us} artifacts, both degrading the overall image quality~\cite{Ensminger:2008p6920} which compromise the performance of the radiologists.
+%Radiologists infer health state of the patients based on visual inspection of images which by means of some screening technique (e.g.~\ac{us}) depict physical properties of the screened body.
+%The radiologic diagnosis error rates are similar to those found in any other tasks requiring human visual inspection, and such errors, are subject to the quality of the images and the ability of the reader to interpret the physical properties depicted on them\cite{manning2005perception}.
+%
+%Therefore the interest from the medical imaging community, also for the specific case of breast lesion assessment using \ac{us} data, in developing \ac{cad} systems that provide better instrumentation to improve image interpretation, and consequently achieve better diagnosis.
+
+This article proposes a highly modular and flexible framework for segmenting lesions and tissues present in \ac{bus} images.
+The proposal takes advantage of an energy-based strategy to perform segmentations based on discrete optimizations using super-pixels and a set of novel features analogous to the elements encoded by the \ac{us} \ac{birads} lexicon~\cite{biradsus}.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../../master.tex"
+%%% End: \section{introduction}

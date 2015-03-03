@@ -1,0 +1,3 @@
+# Modify the behaviour of git to take into accunt that this is a LaTeX project
+*.tex diff=tex
+*.pdf binary

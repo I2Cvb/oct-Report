@@ -1,0 +1,89 @@
+%  The subcaption package allows for subfloat figure within a single float.
+%  This package substitutes the depregated subfigure and subfig packages 
+%  allowing to have subfigures within figures, or subtables within table 
+%  floats. Subfloats have their own caption, and an optional global 
+%  caption. 
+%  >> WARNING: some journal templates from Springer and IEETrans might not
+%              be compatible with this package forcing to use the 
+%              deprecated packages instead.
+\usepackage{subcaption}
+\usepackage{subfig}
+
+%  The following command loads a graphics package to include images 
+%  in the document. It may be necessary to specify a DVI driver option,
+%  e.g., [dvips], but that may be inappropriate for some LaTeX 
+%  installations. 
+\usepackage[]{graphicx}
+
+% In order to include files without having a clear page using \include*, 
+% the newclude package is required
+\usepackage{newclude}
+
+% Required for acronyms
+% use \acresetall to reset the acroyms counter
+\usepackage{acro}
+
+% Managing TODOES and unfinished figures
+\usepackage{todonotes}
+
+% Mathematics extra symols and commands
+\usepackage{amssymb, amsmath}
+\usepackage{pifont,amsfonts} % import fonts for tick and x-mark
+  % define the extra symbols
+  \newcommand{\cmarkgLarge}{\text{\large \color{green!60!black!80}\ding{51}}}
+  \newcommand{\cmarkrLarge}{\text{\large \color{red!60!black!80}\ding{51}}}
+  \newcommand{\xmarkLarge}{\text{\large \color{red!60!black!80}\ding{55}}}
+  \newcommand{\cmark}{\text{\color{green!60!black!80}\ding{51}}}
+  \newcommand{\xmark}{\text{\color{red!60!black!80}\ding{55}}}
+
+%% In order to draw some graphs
+\usepackage{tikz,xifthen}
+\usepackage{tikz-qtree}
+\usetikzlibrary{decorations.pathmorphing} % noisy shapes
+\usetikzlibrary{fit}                                            % fitting shapes to coordinates
+\usetikzlibrary{backgrounds}                                    % drawing the background after the foreground
+\usetikzlibrary{shapes,arrows,shadows}
+\usetikzlibrary{calc,decorations.pathreplacing,decorations.markings,positioning}
+\usetikzlibrary{snakes,decorations.text,shapes,patterns}
+\usetikzlibrary{snakes}
+\usetikzlibrary{decorations}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes}
+\usetikzlibrary{patterns}
+\usepackage{pgfplots}
+
+%%----- To generate stand onle tikz legends
+% argument #1: any options
+\newenvironment{customlegend}[1][]{%
+    \begingroup
+    % inits/clears the lists (which might be populated from previous
+    % axes):
+    \csname pgfplots@init@cleared@structures\endcsname
+    \pgfplotsset{#1}%
+}{%
+    % draws the legend:
+    \csname pgfplots@createlegend\endcsname
+    \endgroup
+}%
+% makes \addlegendimage available (typically only available within an
+% axis environment):
+\def\addlegendimage{\csname pgfplots@addlegendimage\endcsname}
+\pgfkeys{/pgfplots/number in legend/.style={%
+        /pgfplots/legend image code/.code={%
+            \node at (0.295,-0.0225){#1};
+        },%
+    },
+}
+%%---- end tikz legends
+
+
+% Clever cross referencing. Using cleverref, instead of writting 
+% figure~\ref{...} or equation~\ref{...}, only \cref{...} is required.
+% The package interprates the references and introduces the figure, fig.,
+% equation, eq., etc keywords. \Cref forces first letter capital. 
+% >> WARNING: This package needs to be loaded after hyperref, math packages,
+%             etc. if used.
+%             Cleveref is recomended to load late
+%\usepackage{hyperref}
+\usepackage{cleveref}

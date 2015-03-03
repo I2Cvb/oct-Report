@@ -1,0 +1,73 @@
+%  article.tex (Version 3.3, released 19 January 2008)
+%  Article to demonstrate format for SPIE Proceedings
+%  Special instructions are included in this file after the
+%  symbol %>>>>
+%  Numerous commands are commented out, but included to show how
+%  to effect various options, e.g., to print page numbers, etc.
+%  This LaTeX source file is composed for LaTeX2e.
+
+%  The following commands have been added in the SPIE class 
+%  file (spie.cls) and will not be understood in other classes:
+%  \supit{}, \authorinfo{}, \skiplinehalf, \keywords{}
+%  The bibliography style file is called spiebib.bst, 
+%  which replaces the standard style unstr.bst.  
+
+\documentclass{llncs}
+%%\documentclass[a4paper]{spie}  %>>> use this instead for A4 paper
+%%\documentclass[nocompress]{spie}  %>>> to avoid compression of citations
+%% \addtolength{\voffset}{9mm}   %>>> moves text field down
+%% \renewcommand{\baselinestretch}{1.65}   %>>> 1.65 for double spacing, 1.25 for 1.5 spacing 
+
+%% Latex documents that need direct input
+\input{latex/filesystem/package.tex}        % contains the latex packages
+\input{content/frontmatter.tex}             % contains the Title and Autor info
+\input{latex/filesystem/fileSetup.tex}      % contains package and variables init.
+\input{content/acronym_definition.tex}      % contains the acronims 
+
+%% Select inputing only one part of the document
+%\includeonly{content/intro/intro}   % the file wihtout .tex
+%\includeonly{content/other/other_content}
+ 
+\begin{document} 
+\maketitle 
+
+\begin{abstract}
+\acresetall  % reset the acronyms from the title (if any)
+  Breast cancer is the second most common cancer and the leading cause of cancer death among women.
+  Medical imaging has become an indispensable tool for its diagnosis and follow up.
+  During the last decade, the medical community has promoted to incorporate \ac{us} screening as part of the standard routine.
+  The main reason for using \ac{us} imaging is its capability to differentiate benign from malignant masses, when compared to other imaging techniques.
+  The increasing usage of \ac{us} imaging encourages the development of \ac{cad} systems applied to \ac{bus} images.  
+  However accurate delineations of the lesions and structures of the breast are essential for \ac{cad} systems in order to extract information needed to perform diagnosis.
+
+  This article proposes a highly modular and flexible framework for segmenting lesions and tissues present in \ac{bus} images.
+  The proposal takes advantage of optimization strategies using super-pixels and high-level descriptors, which are analogous to the visual cues used by radiologists.
+  Qualitative and quantitative results are provided stating a performance within the range of the state-of-the-art.
+\end{abstract}
+
+\keywords{Breast Ultra-Sound, BI-RADS lexicon, Optimization based Segmentation, Machine-Learning based Segmentation, Graph-Cuts}
+
+%% Incldue the content without .tex extension
+\acresetall  % reset the acronyms from the abstract
+\include*{content/intro/intro}          % the file wihtout .tex
+\include*{content/method/method}        
+%\include*{content/features/features}    
+\include*{content/results/results}
+
+\section{Conclusions}
+This work presents a segmentation strategy to delineate lesions in \ac{bus} images using an optimization framework that takes advantage of all the facilities available when using \ac{ml} techniques.
+Despite the limitation that the final segmentation is subject to the super-pixels' boundaries, the \ac{aov} results here reported are similar to those reported by other methodologies in the literature.
+A higher \ac{aov} result can be achieved by deforming the delineation resulting from the proposed framework using this to initialize a second post-processing step based on \ac{acm}. In this manner the contour constrains could be applied to achieve a more natural delineation.
+
+%\acknowledgments     %>>>> equivalent to \section*{ACKNOWLEDGMENTS}       
+% 
+%This unnumbered section is used to identify those who have aided the authors in understanding or accomplishing the work presented and to acknowledge sources of funding.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% References %%%%%
+
+
+\bibliography{./content/literature_review}   %>>>> bibliography data in report.bib
+\bibliographystyle{spiebib}   %>>>> makes bibtex use spiebib.bst
+
+\end{document} 
