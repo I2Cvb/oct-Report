@@ -33,10 +33,10 @@ MICCAI attracts scientists, engineers, and clinicians from a wide range of disci
 * [x] Papers should be formatted in Lecture Notes in Computer Science style.
 * [ ] 8 pages maximum.
 * [ ] The review process is double blind:
-  * [ ] Remove author and institutional information by replacing the information using * .
-  * [ ] Remove author information from all paper headers.
+  * [x] Remove author and institutional information by replacing the information using * .
+  * [x] Remove author information from all paper headers.
   * [ ] Remove clues from:
-    * [ ] Acknowledgment
+    * [x] Acknowledgment
     * [ ] collaborating partners (hospitals, companies)
     * [ ] Your own published work (including online publications) must be cited in the third person.
     * [ ] Your own work that is in press or accepted for publication and thus not available for the reviewers should be listed as "Anonymous" (with no other information) in the bibliography. For example: "In [5], Muller and Doe have proposed ..." is not acceptable if [5] is listed as "Anonymous".
@@ -98,7 +98,7 @@ Keeping this file updated is important, it can help in further projects.
 
 TODO
 ----
-* [ ] Branch properly
+* [x] Branch properly
 * [ ] Reduce Abstract
 * [ ] Kill comparison references (and refer to the PhD dissertation)
 * [ ] Add authors and replace information by *
