@@ -1,0 +1,98 @@
+
+\newcommand{\myCoord}[1]{
+  \tikz[remember picture]{\coordinate[remember picture] (#1) at (0,0);
+    %\fill[red] (#1) circle[radius=1pt];
+  }
+}
+
+\newcommand{\drawBox}[5] {
+  % draw a colored bar [0..MaxValue] 
+  % parameters:
+  %  #1 - bar color
+  %  #2 - bar width
+  %  #3 - bar height
+  %  #4 - MaxValue
+  %  #5 - actual Value
+  \begin{tikzpicture}[baseline=(value.center)]
+    \def\w{#2}                   % width of a box
+    \def\h{#3}                   % height of a box
+    \pgfmathsetmacro{\v}{#5/#4}  % value to display in ratio [0-1]  
+    \pgfmathsetmacro{\V}{100*\v} % value to display in percentage   
+    \def\x{\v*\w}                % position of the desired value
+
+    % draw rectangle (value dims between color and: white-body, gray-border)
+    \draw[draw=#1!\V!gray!] (0,0) rectangle (\w,\h);
+    \filldraw[fill=#1!\V!white!, draw=#1!\V!gray!] (0,0) rectangle (\x,\h);
+    % display the value
+    \path (0,0) -- (0,\h) node[midway,anchor=west] (value) {#5};
+
+%    \draw [blue] (current bounding box.south west) rectangle (current bounding box.north east);
+  \end{tikzpicture}
+}
+
+\centering
+\begin{tabular}{lcccccccccccccccc}
+  Method Id\textsuperscript{[ref]}:
+              &a\cite{Liu:2010p14328}
+              &b\cite{Gao:2012p14336}
+              &c\cite{AlemanFlores:2007p14310}
+              &d\cite{Huang:2012p14313}
+              &e\cite{Madabhushi:2003p6036}
+              &f\cite{hao2012combining}
+              &g\cite{Zhang:2010p14317}
+              &h\cite{Xiao:2002p5639}
+              &i\cite{massich2010lesion}
+              &j\cite{Shan:2012p14347}
+              &k\cite{Yeh:2009p11985}
+              &l\cite{Horsch:2001p6028}
+              &m\cite{Gomez:2010p14339}
+              &n\cite{Huang:2005p11636}
+              &o\cite{Huang:2007p6100}
+              &p\cite{Cui:2009p14325}\\
+  \\\hline \\
+  Dataset size:     & 76   & 20   & 32   & 20   & 42   & 480  & 347    & 352  & 25
+                    & 120  & 6    & 400  & 50   & 20   & 118  & 488 \\
+
+  techonlogy used for:  &\\
+  \quad detection       & \myCoord{Adetect} & \myCoord{Bdetect} & \myCoord{Cdetect} & \myCoord{Ddetect} & \myCoord{Edetect} 
+                        & \myCoord{Fdetect} & \myCoord{Gdetect} & \myCoord{Hdetect} & \myCoord{Idetect} & \myCoord{Jdetect}
+                        & \myCoord{Kdetect} & \myCoord{Ldetect} & \myCoord{Mdetect} & \myCoord{Ndetect} & \myCoord{Odetect}
+                        & \myCoord{Pdetect}\\
+
+  \quad segmetnation    & \myCoord{Aseg} & \myCoord{Bseg} & \myCoord{Cseg} & \myCoord{Dseg} & \myCoord{Eseg} 
+                        & \myCoord{Fseg} & \myCoord{Gseg} & \myCoord{Hseg} & \myCoord{Iseg} & \myCoord{Jseg}
+                        & \myCoord{Kseg} & \myCoord{Lseg} & \myCoord{Mseg} & \myCoord{Nseg} & \myCoord{Oseg}
+                        & \myCoord{Pseg}\\
+
+  \quad post-processing & \myCoord{App} & \myCoord{Bpp} & \myCoord{Cpp} & \myCoord{Dpp} & \myCoord{Epp} 
+                        & \myCoord{Fpp} & \myCoord{Gpp} & \myCoord{Hpp} & \myCoord{Ipp} & \myCoord{Jpp}
+                        & \myCoord{Kpp} & \myCoord{Lpp} & \myCoord{Mpp} & \myCoord{Npp} & \myCoord{Opp}
+                        & \myCoord{Ppp}\\
+  \\\hline \\
+  \ac{aov} (in \%): & 88.1 & 86.3 & 88.3 & 85.2 & 62.0 & 75.0 & 84.0   & 54.9 & 64.0
+                    & 83.1 & 73.3 & 73.0 & 85.0 & 78.6 & 77.6 & 74.5\\
+\end{tabular}
+
+
+\begin{tikzpicture}[remember picture, overlay]
+  % single step ACM
+  \foreach \x in {Cseg, Cpp, Dpp, Epp, Npp, Opp, Ppp}
+  \node[nodeBase, acmStyle, anchor=center] at (\x) {};
+
+  % single step ML
+  \foreach \x in {Edetect, Gdetect, Idetect, Pseg}
+  \node[nodeBase, mlStyle, anchor=center] at (\x) {};
+
+  % single step Other
+  \foreach \x in {Eseg, Iseg, Ipp, Jpp, Kseg, Lseg, Mseg, Mpp, Nseg}
+  \node[nodeBase, otherStyle, anchor=center] at (\x) {};
+
+  \node[nodeBase, acmStyle, fit= (Adetect) (Aseg) (App)] {};
+  \node[nodeBase, acmStyle, fit= (Bseg)(Bpp)] {};
+  \node[nodeBase, mlStyle, fit= (Ddetect)(Dseg)] {};
+  \node[nodeBase, mlStyle, fit= (Fdetect)(Fseg)] {};
+  \node[nodeBase, mlStyle, fit= (Gseg)(Gpp)] {};
+  \node[nodeBase, mlStyle, fit= (Hseg)(Hpp)] {};
+  \node[nodeBase, mlStyle, fit= (Jdetect)(Jseg)] {};
+  \node[nodeBase, otherStyle, fit= (Odetect)(Oseg)] {};
+\end{tikzpicture}
