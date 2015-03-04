@@ -1,30 +1,16 @@
 \documentclass{llncs}
-%
-\title{Hamiltonian Mechanics unter besonderer Ber\"ucksichtigung der
-h\"ohreren Lehranstalten}
-%
-\titlerunning{Hamiltonian Mechanics}  % abbreviated title (for running head)
-%                                     also used for the TOC unless
-%                                     \toctitle is used
-%
-\author{Ivar Ekeland\inst{1} \and Roger Temam\inst{2}
-Jeffrey Dean \and David Grove \and Craig Chambers \and Kim~B.~Bruce \and
-Elsa Bertino}
-%
-\authorrunning{Ivar Ekeland et al.} % abbreviated author list (for running head)
-%
-%%%% list of authors for the TOC (use if author list has to be modified)
-\tocauthor{Ivar Ekeland, Roger Temam, Jeffrey Dean, David Grove,
-Craig Chambers, Kim B. Bruce, and Elisa Bertino}
-%
-\institute{Princeton University, Princeton NJ 08544, USA,\\
-\email{I.Ekeland@princeton.edu},\\ WWW home page:
-\texttt{http://users/\homedir iekeland/web/welcome.html}
-\and
-Universit\'{e} de Paris-Sud,
-Laboratoire d'Analyse Num\'{e}rique, B\^{a}timent 425,\\
-F-91405 Orsay Cedex, France}
-\addtocmark{Hamiltonian Mechanics} % additional mark in the TOC
+
+\input{latex/filesystem/package.tex}        % contains the latex packages
+\input{content/frontmatter.tex}             % contains the Title and Autor info
+\input{latex/filesystem/fileSetup.tex}      % contains package and variables init.
+\input{content/acronym_definition.tex}      % contains the acronims 
+
+%% Select inputing only one part of the document
+%\includeonly{content/intro/intro}   % the file wihtout .tex
+%\includeonly{content/other/other_content}
+
+
+
 %
 \begin{document}
 
@@ -37,18 +23,6 @@ font size and be inset 1.0 cm from the right and left margins.
 There will be two blank lines before and after the Abstract. \dots
 \keywords{computational geometry, graph theory, Hamilton cycles}
 \end{abstract}
-%
-\section{Fixed-Period Problems: The Sublinear Case}
-%
-With this chapter, the preliminaries are over, and we begin the search
-for periodic solutions to Hamiltonian systems. All this will be done in
-the convex case; that is, we shall study the boundary-value problem
-\begin{eqnarray*}
-  \dot{x}&=&JH' (t,x)\\
-  x(0) &=& x(T)
-\end{eqnarray*}
-with $H(t,\cdot)$ a convex function of $x$, going to $+\infty$ when
-$\left\|x\right\| \to \infty$.
 
 %
 \subsection{Autonomous Systems}
@@ -446,4 +420,4 @@ Comm. Pure Appl. Math. 33, 609--633 (1980)
 
 \end{thebibliography}
 
-\end{document}
+\end{document} 
