@@ -105,9 +105,7 @@ V_{s,r}(\omega_s,\omega_r) =
 
 \Cref{fig:methodTerms:boundary} offers a visual interpretation of this cost.
 The more fragmented is the segmentation $\omega$, the higher the overall pairwise term; since every boundary brings a penalization $\beta$ to the total cost $U(\omega)$.
-In this manner the regularization term can be seen as a post-processing or denoising stage since that some sites will flip their labelling if the cost of fragmenting the regions is larger than the cost of adopting their neighbour's label. 
-
-More sophisticated smoothing terms, where boundaries have different penalization based on site relations in $\mathcal{S}$ and image information as illustrated in \cref{fig:methodTerms:boundary}, are also naturally handled by the proposed framework. %~\cite{massich2013phd}.
+In this manner the regularization term can be seen as a post-processing or denoising stage since that some sites will flip their labelling if the cost of fragmenting the regions is larger than the cost of adopting their neighbour's label.
 
 % Review %contribute have different or variable costs (see \cref{fig:methodTerms:boundary}) are also possible by taking into account not only relations in $\mathcal{S}$ of but also image information (see \cref{fig:method}). 
 %Further details can be found in \cref{sec:smoothing}.
@@ -126,9 +124,6 @@ Once defined $U(\omega)$ so that the cost for a particular labelling configurati
 %%The minimization strategy used for this work is \ac{gc}. 
 %%This technique was initially introduced to solve \ac{cv} applications by Boykov et al.~\cite{boykov2001fast}.
 %%Soon after its introduction, it becomes the minimization technique of choice for \ac{cv} problems.
-\ac{gc} when applicable allows to rapidly find a strong local minima guaranteeing that no other minimum with lower energies can be found~\cite{delong2012fast}. 
-\ac{gc} is applicable if, and only if, the pairwise term favours coherent labelling configurations and penalizes labelling configurations where neighbours labels differs; 
-such is our case, given in \cref{eq:smoothing}.
 
 % Good % \subsection{Similitude with other optimization techniques}
 % Good % \todo{needs reworking}

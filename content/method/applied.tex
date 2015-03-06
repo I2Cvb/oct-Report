@@ -48,7 +48,7 @@ We recall that the aim in segmentation is to affect to a discrete set of element
     \label{fig:features}
 \end{figure}
 
-\subsubsection{Features generation}
+\subsubsection{Features generation based on visual cues}
 
 The structures of the breast and their rendering when using a hand-held 2D \ac{us} probe are sketched in \cref{fig:features:breast}. \Cref{fig:features:lexicon} illustrates the lexicon proposed by the \ac{acr}~\cite{biradsus} and used by clinicians to perform their diagnosis. Thus, our aim is to generate a set of computer vision features which is able to encode the characteristic described in the lexicon. Thus, \cref{fig:features:relation} depicts the relations between the visual clues of the lexicon and the computer vision features selected. These features can be summarized as:
 
@@ -77,9 +77,19 @@ This is not the case, since the bottom-line is to aggregate small regions to for
 The lesion boundary cue falls at the other extreme.
 To encode this visual cue as features implies to use smaller super-pixels in order to be fully contained within the halo, limiting the discriminatory power of other features that need larger regions to build higher-level descriptors.
 
-\subsubsection{The data term encoding}
+\subsubsection{Encoding the data term}
 
  A choice regarding the encoding of the data term has to be made by using a \ac{ml} classifier. An \ac{svm} classifier  with an \ac{rbf} kernel is selected to determine the data model during the training stage. During the testing stage, $D_s(\omega_s=l)$ corresponds to the distance between the testing samples and the model associated with $l$ as the \ac{svm} classification reward. 
+
+\subsection{Pairwise term definition for segmentation of \ac{bus} imaging.}
+
+The pairwise term is our framework was defined as in \cref{eq:smoothing}.
+
+\subsection{Optimization of our cost function.}
+
+The optimization used to solver our cost function $U(\cdot)$ is \ac{gc}. \ac{gc} when applicable allows to rapidly find a strong local minima guaranteeing that no other minimum with lower energies can be found~\cite{delong2012fast}. 
+\ac{gc} is applicable if, and only if, the pairwise term favours coherent labelling configurations and penalizes labelling configurations where neighbours labels differs; 
+such is our case, given by \cref{eq:smoothing}.
 
 %%% Local Variables: 
 %%% mode: latex

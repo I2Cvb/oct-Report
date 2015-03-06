@@ -19,7 +19,7 @@ Notice that for the proposed framework, the performance in terms of \ac{aov} is 
 %The situation of having a larger \ac{fnr} is less desirable than reducing the \ac{fpr}. 
 %The \ac{fnr} reported in \cref{fig:surveyResults:method} is caused by an image within the dataset that its lesion is fully contained in a single super-pixel and still around $20\%$ of this super-pixel's area is healty tissue. 
 
-\begin{figure}[h]
+\begin{figure}[t]
   \centering
   
   \begin{tikzpicture}
@@ -80,7 +80,7 @@ The boundaries of this swatch correspond to performance of expert radiologists i
 When comparing the results it is clear the inconvenience of unexciting public data, since several of the results outperform the manual delineations studied in~\cite{gerard2013}.
 It can also be seen that the category tested in larger datasets is \ac{ml}, whereas \ac{acm} lead to better segmentations since the lesion boundary is easier to model in \ac{acm} compared to \ac{ml} based techniques.
 
-\begin{figure}[h]
+\begin{figure}[t]
   \begin{subfigure}[b]{\textwidth}
     {\tiny \input{content/results/figures/survey_table.tex}}
     %\caption{\ac{bus} images lesion segmentation strategies compiled from the bulk of the literature: reported quantitative results and methodology highlights.}
