@@ -1,5 +1,5 @@
 % include the figures path relative to the master file
-\graphicspath{ {./content/method/figures/visual_cues/} {./content/method/figures/}}
+\graphicspath{ {./content/method/figures/visual_cues/}{./content/method/figures/}}
 
 \section{Description of the segmentation methodology} 
 
@@ -18,9 +18,7 @@ and (3) a re-mapping the labels obtained from the previous stage to produce the 
 \end{figure}
 
 
-In order to formulate the segmentation like a metric labelling problem, the image is conceived as a discrete set of elements $\mathcal{S}$ that need to be labelled using a label $l$ from the labelling set $\mathcal{L}$ 
-(i.e.\, $\mathcal{L} = \{\text{lesion}, \overline{\text{lesion}}\}$ 
-or $\mathcal{L} = \{\text{lungs}, \text{fat},\,\cdots\,, \text{lesion}\}$).
+In order to formulate the segmentation like a metric labelling problem, the image is conceived as a discrete set of elements $\mathcal{S}$ that need to be labelled using a label $l$ from the labelling set $\mathcal{L}$.
 Let $\mathcal{W}$ be all the possible labelling configurations of the set $\mathcal{S}$, given $\mathcal{L}$.
 Let $U(\cdot)$ be a cost function encoding the goodness of the labelling configuration $\omega \in \mathcal{W}$ based on the appearance of the elements in $\mathcal{S}$, their inner relation and some designing constraints.
 Then, the desired segmentation $\hat{\omega}$ corresponds to the labelling configuration that minimizes this cost function, as described in \Cref{eq:costMin}.
@@ -37,13 +35,16 @@ This goodness measure $U(\cdot)$ must be defined to take into account the appear
 \Cref{eq:labelingeq} describes this cost function as the combination of two independent costs that need to be simultaneously minimized as a whole.
 
 \begin{equation}
-  U(\omega) = \sum_{s\in s} D_s(\omega_s) + \sum_{s}\sum_{r \in \mathcal{N}_{s}} V_{s,r}(\omega_s,\omega_r)
+  U(\omega) = \sum_{s\in \mathcal{S}} D_s(\omega_s) + \sum_{s \in \mathcal{S}}\sum_{r \in \mathcal{N}_{s}} V_{s,r}(\omega_s,\omega_r)
   \label{eq:labelingeq}
 \end{equation}
 
 Where, the left hand side of the expression integrates the so-called \emph{data} term, while the right hand side integrates the \emph{pairwise} term, which is also referred as the \emph{smoothing} term.
 Both terms are shaped by $\mathcal{S}$ and evaluated in the labelling space $\mathcal{W}$.
 \Cref{fig:methodterms} uses the problem of delineating the tissues present in a \ac{bus} image to represent the working principles of the data and pairwise terms in \cref{eq:labelingeq}.
+In general, $\mathcal{S}$ can be any discrete set representing the image (i.e.\, pixels, overlapping or non overlapping windows, super-pixels, etc.). 
+\Cref{fig:methodTerms:problem} illustrates one such representation $\mathcal{S}$, applied to a \ac{bus} image example using super-pixels. The super-pixels are coloured according to the image's \ac{gt}.
+
 
 \begin{figure}
     \centering
@@ -71,14 +72,7 @@ Both terms are shaped by $\mathcal{S}$ and evaluated in the labelling space $\ma
     \label{fig:methodterms}
 \end{figure}
 
-In general, $\mathcal{S}$ can be any discrete set representing the image (i.e.\, pixels, overlapping or non overlapping windows, etc.). 
-For this work $\mathcal{S}$ is chosen to be a super-pixels representation of the image.
-Super-pixels can be seen as the output of an over-segmentation process or as a set of pixel collections that are contiguous and coherent with respect to a given metric. Either way, super-pixels are no overlapped irregular groups of similar connected pixels~\cite{achanta2012slic}.
-\Cref{fig:methodTerms:problem} illustrates one such representation $\mathcal{S}$, applied to a \ac{bus} image example. The super-pixels are coloured according to the image's \ac{gt}.
-For the rest of this work, $\mathcal{S}$ is considered to be the super-pixels resulting from an over-segmentation of the image using Quick-shift. %~\cite{massich2013phd}.
-
-Bear in mind that given an unseen \ac{bus} image, the ultimate goal is to represent the image as a set of super-pixels and infer the appropriated labelling for each of them.
-This goal requires to define: a data term, a pairwise term, and a proper minimization methodology.
+{\color{red}In our quest to optimize the cost function $U(\cdot)$, it is required to define a representation for the set $\mathcal{S}$, a data term $D(\cdot)$, a pairwise term $V(\cdot)$, and a proper minimization methodology.}
 
 \subsection{The data term} \label{sec:method:dataTerm}
 
@@ -93,32 +87,7 @@ The idea is to generate a data model for each label (or class) in $\mathcal{L}$ 
 \ac{ml} offers a systematic but flexible approach to customize $D(\cdot)$.
 Different features to represent the data, custom construction of the data models by using different classifiers, training techniques or including arbitrary constraints; can be used to achieve the desired data term without changing the overall scheme. 
 
-Despite details regarding the construction $D(\cdot)$ are out of the scope of this report, the rest of this \cref{sec:method:dataTerm} summarizes this process.
-%For further details the reader is referred to Massich et al.~\cite{massich2013phd}.
-The usage of \ac{ml} as part of the proposed framework to determine $D(\cdot)$ is represented at the upper side of the diagram in~\cref{fig:method},
-which can be divided into two blocks:
-(a) the features to represent the samples,
-and (b) the tools to encode $D(\cdot)$ based on the features and the training. 
-
-\subsubsection{\ac{bus} features to build the data term} \label{sec:method:dterm:feat}
-\Cref{fig:features} is a three-parts illustration to graphically summarize the visual cues that can be found in \ac{bus} images and their incorporation to the data term.
-The structures of the breast and their rendering when using a hand-held 2D \ac{us} probe are shown in \cref{fig:features:breast}.
-\Cref{fig:features:lexicon} illustrates the lexicon proposed by the \ac{acr}~\cite{biradsus}.
-Whereas \cref{fig:features:relation} relates the visual cues to the following features:
-
-\begin{description}
-  \item[Appearance] 
-    Based on the multi-labelled \ac{gt}, a \ac{mad} histogram model for every tissue label is built. The Appearance feature is computed as the $\chi^2$ distance between histogram of $s$ and the models.
-  \item[Atlas] 
-    Based on the multi-labelled \ac{gt} an atlas is build to encode the label likelihood based on the location of $s$.
-  \item[Brightness] 
-    Takes an intensity descriptor of $s$ (\emph{i.e:} mean, median, mode) and compares it with some intensity markers of the set $\mathcal{S}$ such as the minimum intensity value, the maximum, its mean, etc.
-  \item[\ac{sift}-\ac{bof}]
-    $s$ is represented as the occurrences of a \ac{sift} dictionary of 36 words~\cite{massich2014sift}.
-\end{description}
-
-In order to incorporate multi-resolution, each super-pixel is group with its adjacent super-pixels such that $s' = \{s \cup \mathcal{N}_{s}\}$, the features are recalculated using $s'$ and concatenated to the original feature descriptor of $s$.
-This operation can be repeated several times.
+{\color{red} Defining the data term $D(\cdot)$ with the help of \ac{ml} follows a systematic process. For each site $s \in \mathcal{S}$, features describing $s$ have to be detected. Then, different optional steps can be applied to this set of feature: (i) features normalization, (ii) features selection or (iii) features extraction. Finally, features have to be classified using \ac{ml} classifiers which will encode $D(.)$ based on the features and a training step. This representation is in fact depicted in the upper row of~\cref{fig:method}.}
 
 \begin{figure}
     \centering

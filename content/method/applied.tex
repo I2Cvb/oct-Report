@@ -1,0 +1,33 @@
+\section{This generic framework applied to \ac{bus} imaging.}
+
+In this section, the generic framework presented in the previous section is applied to \ac{bus} imaging. We need to define our problem properly. We recall that the aim in segmentation is to affect to a discrete set of elements $\mathcal{S}$, a label $l$ from a labelling set $\mathcal{L}$. 
+
+In our case, our labelling set $\mathcal{L} = \{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$ (see \Cref{fig:methodTerms:problem} for the entire set of labels) and the set $\mathcal{S}$ is chosen to be a super-pixels representation of the image~\cite{achanta2012slic}. In our case, $\mathcal{S}$ is the result from an over-segmentation of the image using Quick-shift super-pixel.
+
+\Cref{fig:methodTerms:problem} illustrates one such representation $\mathcal{S}$, applied to a \ac{bus} image example. The super-pixels are coloured according to the image's \ac{gt}. Bear in mind that given an unseen \ac{bus} image, the ultimate goal is to represent the image as a set of super-pixels and infer the appropriated labelling for each of them.
+
+\subsubsection{\ac{bus} features to build the data term} \label{sec:method:dterm:feat}
+\Cref{fig:features} is a three-parts illustration to graphically summarize the visual cues that can be found in \ac{bus} images and their incorporation to the data term.
+The structures of the breast and their rendering when using a hand-held 2D \ac{us} probe are shown in \cref{fig:features:breast}.
+\Cref{fig:features:lexicon} illustrates the lexicon proposed by the \ac{acr}~\cite{biradsus}.
+Whereas \cref{fig:features:relation} relates the visual cues to the following features:
+
+\begin{description}
+  \item[Appearance] 
+    Based on the multi-labelled \ac{gt}, a \ac{mad} histogram model for every tissue label is built. The Appearance feature is computed as the $\chi^2$ distance between histogram of $s$ and the models.
+  \item[Atlas] 
+    Based on the multi-labelled \ac{gt} an atlas is build to encode the label likelihood based on the location of $s$.
+  \item[Brightness] 
+    Takes an intensity descriptor of $s$ (\emph{i.e:} mean, median, mode) and compares it with some intensity markers of the set $\mathcal{S}$ such as the minimum intensity value, the maximum, its mean, etc.
+  \item[\ac{sift}-\ac{bof}]
+    $s$ is represented as the occurrences of a \ac{sift} dictionary of 36 words~\cite{massich2014sift}.
+\end{description}
+
+In order to incorporate multi-resolution, each super-pixel is group with its adjacent super-pixels such that $s' = \{s \cup \mathcal{N}_{s}\}$, the features are recalculated using $s'$ and concatenated to the original feature descriptor of $s$.
+This operation can be repeated several times.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End: 
