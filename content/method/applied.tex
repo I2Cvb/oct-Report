@@ -1,12 +1,6 @@
-\section{This generic framework applied to \ac{bus} imaging.}
+\section{This generic framework applied to \ac{bus} imaging}\label{sec:method:dterm:feat}
 
-In this section, the generic framework presented in the previous section is applied to \ac{bus} imaging. We need to define our problem properly. 
-
-\subsection{Problem formulation for segmentation of \ac{bus} imaging.}
-
-We recall that the aim in segmentation is to affect to a discrete set of elements $\mathcal{S}$, a label $l$ from a labelling set $\mathcal{L}$. In our case, our labelling set $\mathcal{L} = \{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$ (see \Cref{fig:methodTerms:problem} for the entire set of labels) and the set $\mathcal{S}$ is chosen to be a super-pixels representation of the image~\cite{achanta2012slic}. In our case, $\mathcal{S}$ is the result from an over-segmentation of the image using Quick-shift super-pixel. \Cref{fig:methodTerms:problem} illustrates one such representation $\mathcal{S}$, applied to a \ac{bus} image example. The super-pixels are coloured according to the image's \ac{gt}. Bear in mind that given an unseen \ac{bus} image, the ultimate goal is to represent the image as a set of super-pixels and infer the appropriated labelling for each of them.
-
-\subsection{Data term definition for segmentation of \ac{bus} imaging.} \label{sec:method:dterm:feat}
+In this section, the generic framework presented in the previous section is applied to \ac{bus} imaging. We need to define our problem properly. We recall that the aim in segmentation is to affect to a discrete set of elements $\mathcal{S}$, a label $l$ from a labelling set $\mathcal{L}$. In our case, our labelling set $\mathcal{L} = \{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$ (see Fig\,\ref{fig:methodTerms:problem} for the entire set of labels) and the set $\mathcal{S}$ is chosen to be a super-pixels representation of the image~\cite{achanta2012slic}. In our case, $\mathcal{S}$ is the result from an over-segmentation of the image using Quick-shift super-pixel. Figure~\ref{fig:methodTerms:problem} illustrates one such representation $\mathcal{S}$, applied to a \ac{bus} image example. The super-pixels are coloured according to the image's \ac{gt}. Bear in mind that given an unseen \ac{bus} image, the ultimate goal is to represent the image as a set of super-pixels and infer the appropriated labelling for each of them.
 
 \begin{figure}
     \centering
@@ -48,9 +42,7 @@ We recall that the aim in segmentation is to affect to a discrete set of element
     \label{fig:features}
 \end{figure}
 
-\subsubsection{Features generation based on visual cues}
-
-The structures of the breast and their rendering when using a hand-held 2D \ac{us} probe are sketched in \cref{fig:features:breast}. \Cref{fig:features:lexicon} illustrates the lexicon proposed by the \ac{acr}~\cite{biradsus} and used by clinicians to perform their diagnosis. Thus, our aim is to generate a set of computer vision features which is able to encode the characteristic described in the lexicon. Thus, \cref{fig:features:relation} depicts the relations between the visual clues of the lexicon and the computer vision features selected. These features can be summarized as:
+The structures of the breast and their rendering when using a hand-held 2D \ac{us} probe are sketched in Fig.\,\ref{fig:features:breast}. Figure~\ref{fig:features:lexicon} illustrates the lexicon proposed by the \ac{acr}~\cite{biradsus} and used by clinicians to perform their diagnosis. Thus, our aim is to generate a set of computer vision features which is able to encode the characteristic described in the lexicon. Thus, Fig.\,\ref{fig:features:relation} depicts the relations between the visual clues of the lexicon and the computer vision features selected. These features can be summarized as:
 
 \begin{description}
   \item[Appearance] 
@@ -70,26 +62,11 @@ The B.Echo-texture, is mainly encoded by the SIFT-BoF but also through the Appea
 Acoustic Posterior is mainly captured by the Brightness feature, but the Atlas also brings crucial information to compensate for intensity inhomogeneities caused by signal attenuation present in the most posterior parts of the image.
 The Echo Pattern cue, encodes the echogenity of a region with respect to the adipose tissue. This can be found at the anterior part of the image with its echogenity close to the middle of the spectrum. Appearance, Brightness and the Atlas account for such information.
 
-However, it can be notice that not all the visual cues compiled in the lexicon are suitable to be encoded by the features.
-Mass shape, orientation and margin cues do not characterize an individual super-pixel but a group of contiguous super-pixels sharing the same label.
-Characterising super-pixels in those terms imply that super-pixels should be image elements of the same order as the lesions. 
-This is not the case, since the bottom-line is to aggregate small regions to form the segmentation.
-The lesion boundary cue falls at the other extreme.
-To encode this visual cue as features implies to use smaller super-pixels in order to be fully contained within the halo, limiting the discriminatory power of other features that need larger regions to build higher-level descriptors.
+ A choice regarding the encoding of the data term has to be made by using a \ac{ml} classifier. An \ac{svm} classifier  with an \ac{rbf} kernel is selected to determine the data model during the training stage. During the testing stage, $D_s(\omega_s=l)$ corresponds to the distance between the testing samples and the model associated with $l$ as the \ac{svm} classification reward. The pairwise term is our framework was defined as in Eq.\,\eqref{eq:smoothing}.
 
-\subsubsection{Encoding the data term}
-
- A choice regarding the encoding of the data term has to be made by using a \ac{ml} classifier. An \ac{svm} classifier  with an \ac{rbf} kernel is selected to determine the data model during the training stage. During the testing stage, $D_s(\omega_s=l)$ corresponds to the distance between the testing samples and the model associated with $l$ as the \ac{svm} classification reward. 
-
-\subsection{Pairwise term definition for segmentation of \ac{bus} imaging.}
-
-The pairwise term is our framework was defined as in \cref{eq:smoothing}.
-
-\subsection{Optimization of our cost function.}
-
-The optimization used to solver our cost function $U(\cdot)$ is \ac{gc}. \ac{gc} when applicable allows to rapidly find a strong local minima guaranteeing that no other minimum with lower energies can be found~\cite{delong2012fast}. 
+The optimization method used as solver to minimize our cost function $U(\cdot)$ is \ac{gc}. \ac{gc} when applicable allows to rapidly find a strong local minima guaranteeing that no other minimum with lower energies can be found~\cite{delong2012fast}. 
 \ac{gc} is applicable if, and only if, the pairwise term favours coherent labelling configurations and penalizes labelling configurations where neighbours labels differs; 
-such is our case, given by \cref{eq:smoothing}.
+such is our case, given by Eq.\,\eqref{eq:smoothing}.
 
 %%% Local Variables: 
 %%% mode: latex
