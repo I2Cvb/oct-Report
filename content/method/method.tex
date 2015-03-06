@@ -79,7 +79,6 @@ In general, $\mathcal{S}$ can be any discrete set representing the image (i.e.\,
 Given a label configuration $\omega \in \mathcal{W}$, the data term penalizes the labelling of a particular image element or site ($\omega_s = l$) based on the data associated to $s$.
 In this manner, $D_s(\omega_s=l_\cmark) << D_s(\omega_s=l_\xmark)$.
 \Cref{fig:methodTerms:data} illustrates the data cost associated to some arbitrary labelling configurations to clarify the desired effect (or behaviour) of this data term (\cref{fig:methodTerms:problem} shows the \ac{gt} of each site $s$).
-Notice that the labelling configurations $\omega$ used in \cref{fig:methodTerms:data} have the particularity that all sites share the same label, $\omega \in \{ \omega_s=l,~\forall s\in\mathcal{S}\}$.
 
 Designing an obscure heuristic to comply with the desired behaviour of $D(\cdot)$ out of the box, is rather a complicated task.
 Therefore, an easier and cleaner approach is to take advantage of \ac{ml} techniques to design this data cost in a systematic manner based on a training stage. 
@@ -87,63 +86,7 @@ The idea is to generate a data model for each label (or class) in $\mathcal{L}$ 
 \ac{ml} offers a systematic but flexible approach to customize $D(\cdot)$.
 Different features to represent the data, custom construction of the data models by using different classifiers, training techniques or including arbitrary constraints; can be used to achieve the desired data term without changing the overall scheme. 
 
-{\color{red} Defining the data term $D(\cdot)$ with the help of \ac{ml} follows a systematic process. For each site $s \in \mathcal{S}$, features describing $s$ have to be detected. Then, different optional steps can be applied to this set of feature: (i) features normalization, (ii) features selection or (iii) features extraction. Finally, features have to be classified using \ac{ml} classifiers which will encode $D(.)$ based on the features and a training step. This representation is in fact depicted in the upper row of~\cref{fig:method}.}
-
-\begin{figure}
-    \centering
-    \begin{subfigure}[b]{0.30\textwidth}
-        \centering
-        \begin{tikzpicture}
-          \node[inner sep=0, draw] (breast) {\includegraphics[width=0.4\textwidth]{breast}};
-          \node[inner sep=0, draw, below= 2pt of breast] (slice) {\includegraphics[width=0.4\textwidth]{slice}};
-        \end{tikzpicture}
-        %\caption{{\small Breast structure}}    
-        \label{fig:features:breast}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.34\textwidth}   
-        \centering 
-        \includegraphics[trim = 65 345 200 124, clip,width=0.9\textwidth]{birads}
-        %\caption[]%
-        %{Breast lesion characteristics in \ac{us} screening influencing clinical management~\cite{biradsus}}    
-        \label{fig:features:lexicon}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.2\textwidth}
-      \newcommand{\insertVisualCue}[2]{
-        \tikz{\node[label=above:#2]{\includegraphics[width=0.3\textwidth]{#1}};}
-      }
-      \centering
-      \begin{tiny}
-        \insertVisualCue{AppearanceCues}{Appearance}
-        \vfill
-        \insertVisualCue{AtlasCues}{{Atlas, Brightness}}
-        \vfill
-        \insertVisualCue{siftCues}{SIFT-BoF}
-      \end{tiny}
-      %\caption{Visual cues encoded in the features}
-      \label{fig:features:relation}
-    \end{subfigure}
-    \hfill
-    \caption {{\footnotesize Visual reference: (a) breast structures, (b) US BI-RADS lexicon, (c) encoded visual cues.}} 
-    \label{fig:features}
-\end{figure}
-
-Notice that not all the visual cues compiled by the lexicon are suitable to build the data term.
-Mass shape, orientation and margin cues do not characterize an individual super-pixel but a group of contiguous super-pixels sharing the same label.
-Characterising super-pixels in those terms imply that super-pixels should be image elements of the same order as the lesions. 
-This is not the case, since the bottom-line is to aggregate small regions to form the segmentation.
-The lesion boundary cue falls at the other extreme.
-To encode this visual cue as data term feature implies to use smaller super-pixels in order to be fully contained within the halo, limiting the discriminatory power of other features that need larger regions to build higher-level descriptors.
-%These cues are more suitable for \ac{cade} stages. 
-
-In this manner the B.Echo-texture, is mainly encoded by the SIFT-BoF but also through the Appearance feature since elements would have the same model.
-Acoustic Posterior is mainly captured by the Brightness feature, but the Atlas also brings crucial information to compensate for intensity inhomogeneities caused by signal attenuation present in the most posterior parts of the image.
-The Echo Pattern cue, encodes the echogenity of a region with respect to the adipose tissue. This can be found at the anterior part of the image with its echogenity close to the middle of the spectrum. Appearance, Brightness and the Atlas account for such information.
-
-\subsubsection{The data term construction}
-For the work here reported, a \ac{rbf}-\ac{svm} classifier is used to determine the data model during the training stage.
-During the testing stage, $D_s(\omega_s=l)$ corresponds to the distance between the testing samples and the model associated to $l$ as the \ac{svm} classification reward. 
+{\color{red} Defining the data term $D(\cdot)$ with the help of \ac{ml} follows a systematic process. For each site $s \in \mathcal{S}$, features describing $s$ have to be detected. Then, different optional steps can be applied to this set of feature: (i) features normalization, (ii) features selection or (iii) features extraction. Finally, the data term $D(.)$ is encoded based on \ac{ml} classifiers, the features and a training step. This representation is in fact depicted in the upper row of~\cref{fig:method}.}
 
 \subsection{The pairwise (or smoothing) term} \label{sec:method:mrfTerm}
  
