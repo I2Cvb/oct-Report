@@ -9,9 +9,9 @@ Every image in the dataset presents a single lesion with variable extension.
 The size of the lesions ranges from under $1/100$ to over $1/5$ of the image.
 The dataset composed of cysts, \acp{fa}, \acp{dic} and \acp{ilc}.
 
-\Cref{fig:results} shows qualitative results, whereas the quantitative results from the best configuration are reported as a table in \cref{fig:surveyResults:method}. %~\cite{massich2013phd}.
+Figure~\ref{fig:results} shows qualitative results, whereas the quantitative results from the best configuration are reported as a table in Fig.\,\ref{fig:surveyResults:survey}. %~\cite{massich2013phd}.
 Notice that for the proposed framework, the performance in terms of \ac{aov} is limited by the capacity of the super-pixels to snap the desired boundary.
-\Cref{fig:results} shows how the delineation resulting from a proper labeling of the super-pixels differs from the \ac{gt}.
+Figure~\ref{fig:results} shows how the delineation resulting from a proper labeling of the super-pixels differs from the \ac{gt}.
 %Despite the fact that a \ac{fpr} of $0.4$ seems significant, based on our experiments most of the images produce no \ac{fp} lesions.
 %However, images with \ac{fp} lesions, are likely to produce more several of them as shown in \cref{fig:results}c-e.
 %The amount of \ac{fp} lesions can be trimmed by applying a higher cost in the pairwise therm (compare \cref{fig:resuts:smallPWterm} and \cref{fig:results:bigPWterm}.
@@ -19,7 +19,7 @@ Notice that for the proposed framework, the performance in terms of \ac{aov} is 
 %The situation of having a larger \ac{fnr} is less desirable than reducing the \ac{fpr}. 
 %The \ac{fnr} reported in \cref{fig:surveyResults:method} is caused by an image within the dataset that its lesion is fully contained in a single super-pixel and still around $20\%$ of this super-pixel's area is healty tissue. 
 
-\begin{figure}[h]
+\begin{figure}[t]
   \centering
   
   \begin{tikzpicture}
@@ -58,29 +58,29 @@ Notice that for the proposed framework, the performance in terms of \ac{aov} is 
 \end{figure}
 
 Due to the lack of publicly available data (and code) there is no manner to perform a methodology comparison further than compiling the results reported in the literature.
-\Cref{fig:surveyResults} resumes some of the methodologies found in the literature and traslates the reported results into \ac{aov} for comparison purposes.
+Fig.\,\ref{fig:surveyResults} resumes some of the methodologies found in the literature and traslates the reported results into \ac{aov} for comparison purposes.
 %compiles relevant metholodologies relevant methodologies found in the literature 
 %The table in \Cref{fig:surveyResults:survey} complies the evaluation reported by the authors of the most relevant methodologies found in the literature. %~\cite{massich2013phd}.
 %Details about the methodologies proposed in the literature can also be found in the aforesaid table.
 %Specifically it is detailed the category of technique been used for detecting the lesions, segmenting it and post-process the delineations (if any).
 %The studied categories are: \ac{ml}, \ac{acm} and others.
-The iconography used in \cref{fig:surveyResults:survey} relates methodology stages, technology used and if the stages have been treated separately or as a single stage.
+The iconography used in Fig.\,\ref{fig:surveyResults:survey} relates methodology stages, technology used and if the stages have been treated separately or as a single stage.
 %if the those stages are treated as independent and connected in a daisy-chain fashion, or otherwise the stages are addressed in an atomic manner.
 
-\Cref{fig:surveyResults:comparison} arrenge the information for direct visual comparison.
+Figure~\ref{fig:surveyResults:comparison} arrange the information for direct visual comparison.
 %\Cref{fig:surveyResults:comparison} renders the information present in \cref{fig:surveyResults:survey} and \cref{fig:surveyResults:method} in a visual manner compare all the results at once.
 %The methodologies arranged in a radial fashion and grouped by its most representative technology category. 
 %In red it can be found a small, medium and large categorization of the dataset reported for testing.
 %The concentric circles represent \ac{aov}. 
 %The blue line correspond to the \ac{aov} results reported in the literature, whereas the black line indicates the \ac{aov} our framework scored in our testing.
-An extra element is also represented in \cref{fig:surveyResults:comparison} as blue swatch delimited by two blue dashed lines.
+An extra element is also represented in Fig.\,\ref{fig:surveyResults:comparison} as blue swatch delimited by two blue dashed lines.
 The boundaries of this swatch correspond to performance of expert radiologists in terms of \ac{aov} based on an inter- and intra-observer experiment carried out by Pons et al.~\cite{gerard2013}.
 %\footnote{The dataset used for testing the framework here proposed corresponds to the subset of images used by Pons et al.~\cite{gerard2013} that have accompanying multi-labelled \ac{gt}.}.
 
 When comparing the results it is clear the inconvenience of unexciting public data, since several of the results outperform the manual delineations studied in~\cite{gerard2013}.
 It can also be seen that the category tested in larger datasets is \ac{ml}, whereas \ac{acm} lead to better segmentations since the lesion boundary is easier to model in \ac{acm} compared to \ac{ml} based techniques.
 
-\begin{figure}[h]
+\begin{figure}[t]
   \begin{subfigure}[b]{\textwidth}
     {\tiny \input{content/results/figures/survey_table.tex}}
     %\caption{\ac{bus} images lesion segmentation strategies compiled from the bulk of the literature: reported quantitative results and methodology highlights.}
