@@ -99,9 +99,10 @@ Keeping this file updated is important, it can help in further projects.
 TODO
 ----
 * [x] Branch properly
-* [ ] Reduce Abstract
+* [x] Reduce Abstract
+* [ ] Reduce Introduction
 * [ ] Kill comparison references (and refer to the PhD dissertation)
-* [ ] Add authors and replace information by *
+* [x] Add authors and replace information by *
 * [ ] Evolve figures
 * [ ] Tray a split strategy (1) Generic method, (2) for breast
 * [ ] 
