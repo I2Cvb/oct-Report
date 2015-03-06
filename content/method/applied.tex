@@ -3,41 +3,7 @@
 In this section, the generic framework presented in the previous section is applied to \ac{bus} imaging. We need to define our problem properly. We recall that the aim in segmentation is to affect to a discrete set of elements $\mathcal{S}$, a label $l$ from a labelling set $\mathcal{L}$. In our case, our labelling set $\mathcal{L} = \{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$ (see Fig\,\ref{fig:methodTerms:problem} for the entire set of labels) and the set $\mathcal{S}$ is chosen to be a super-pixels representation of the image~\cite{achanta2012slic}. In our case, $\mathcal{S}$ is the result from an over-segmentation of the image using Quick-shift super-pixel. Figure~\ref{fig:methodTerms:problem} illustrates one such representation $\mathcal{S}$, applied to a \ac{bus} image example. The super-pixels are coloured according to the image's \ac{gt}. Bear in mind that given an unseen \ac{bus} image, the ultimate goal is to represent the image as a set of super-pixels and infer the appropriated labelling for each of them.
 
 \begin{figure}
-    \centering
-    \begin{subfigure}[b]{0.30\textwidth}
-        \centering
-        \begin{tikzpicture}
-          \node[inner sep=0, draw] (breast) {\includegraphics[width=0.4\textwidth]{breast}};
-          \node[inner sep=0, draw, below= 2pt of breast] (slice) {\includegraphics[width=0.4\textwidth]{slice}};
-        \end{tikzpicture}
-        %\caption{{\small Breast structure}}    
-        \label{fig:features:breast}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.34\textwidth}   
-        \centering 
-        \includegraphics[trim = 65 345 200 124, clip,width=0.9\textwidth]{birads}
-        %\caption[]%
-        %{Breast lesion characteristics in \ac{us} screening influencing clinical management~\cite{biradsus}}    
-        \label{fig:features:lexicon}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.2\textwidth}
-      \newcommand{\insertVisualCue}[2]{
-        \tikz{\node[label=above:#2]{\includegraphics[width=0.3\textwidth]{#1}};}
-      }
-      \centering
-      \begin{tiny}
-        \insertVisualCue{AppearanceCues}{Appearance}
-        \vfill
-        \insertVisualCue{AtlasCues}{{Atlas, Brightness}}
-        \vfill
-        \insertVisualCue{siftCues}{SIFT-BoF}
-      \end{tiny}
-      %\caption{Visual cues encoded in the features}
-      \label{fig:features:relation}
-    \end{subfigure}
-    \hfill
+  \includegraphics[width=0.9\textwidth]{lexiconReworked}
     \caption {{\footnotesize Visual reference: (a) breast structures, (b) US BI-RADS lexicon, (c) encoded visual cues.}} 
     \label{fig:features}
 \end{figure}
