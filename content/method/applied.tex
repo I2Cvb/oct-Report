@@ -8,7 +8,11 @@ In this section, the generic framework presented in the previous section is appl
     \label{fig:features}
 \end{figure}
 
-The structures of the breast and their rendering when using a hand-held 2D \ac{us} probe are sketched in Fig.\,\ref{fig:features:breast}. Figure~\ref{fig:features:lexicon} illustrates the lexicon proposed by the \ac{acr}~\cite{biradsus} and used by clinicians to perform their diagnosis. Thus, our aim is to generate a set of computer vision features which is able to encode the characteristic described in the lexicon. Thus, Fig.\,\ref{fig:features:relation} depicts the relations between the visual clues of the lexicon and the computer vision features selected. These features can be summarized as:
+In this section, the generic framework presented in the previous section is applied to \ac{bus} imaging. We need to define our problem properly. We recall that the aim in segmentation is to affect to a discrete set of elements $\mathcal{S}$, a label $l$ from a labelling set $\mathcal{L}$. In our case, our labelling set $\mathcal{L} = \{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$ (see Fig\,\ref{fig:methodTerms:problem} for the entire set of labels).
+
+As illustrated in Fig.\,{\color{red}??}, choices have to be made regarding the different elements: the set $\mathcal{S}$, the data term $D(\cdot)$, the pairwise term $V(.)$, and the optimizer choice. These preferences are summarized in Table~{\color{red}??} and justified thereafter.
+
+$\mathcal{S}$ is chosen to be the result from an over-segmentation of the input image using the Quick-shift super-pixel. The structures of the breast and their rendering when using a hand-held 2D \ac{us} probe are sketched in Fig.\,\ref{fig:features}. Figure~\ref{fig:features:lexicon} illustrates the lexicon proposed by the \ac{acr}~\cite{biradsus} and used by clinicians to perform their diagnosis. Thus, our aim is to generate a set of computer vision features which is able to encode the characteristic described in the lexicon. The selected features are the following:
 
 \begin{description}
   \item[Appearance] 
@@ -21,18 +25,7 @@ The structures of the breast and their rendering when using a hand-held 2D \ac{u
     $s$ is described as an histogram of visual words based on \ac{sift}~\cite{massich2014sift}. The dictionary is built with $36$ words.
 \end{description}
 
-In order to incorporate multi-resolution, each super-pixel is group with its adjacent super-pixels such that $s' = \{s \cup \mathcal{N}_{s}\}$, the features are recalculated using $s'$ and concatenated to the original feature descriptor of $s$.
-This operation can be repeated several times.
-
-The B.Echo-texture, is mainly encoded by the SIFT-BoF but also through the Appearance feature since elements would have the same model.
-Acoustic Posterior is mainly captured by the Brightness feature, but the Atlas also brings crucial information to compensate for intensity inhomogeneities caused by signal attenuation present in the most posterior parts of the image.
-The Echo Pattern cue, encodes the echogenity of a region with respect to the adipose tissue. This can be found at the anterior part of the image with its echogenity close to the middle of the spectrum. Appearance, Brightness and the Atlas account for such information.
-
- A choice regarding the encoding of the data term has to be made by using a \ac{ml} classifier. An \ac{svm} classifier  with an \ac{rbf} kernel is selected to determine the data model during the training stage. During the testing stage, $D_s(\omega_s=l)$ corresponds to the distance between the testing samples and the model associated with $l$ as the \ac{svm} classification reward. The pairwise term is our framework was defined as in Eq.\,\eqref{eq:smoothing}.
-
-The optimization method used as solver to minimize our cost function $U(\cdot)$ is \ac{gc}. \ac{gc} when applicable allows to rapidly find a strong local minima guaranteeing that no other minimum with lower energies can be found~\cite{delong2012fast}. 
-\ac{gc} is applicable if, and only if, the pairwise term favours coherent labelling configurations and penalizes labelling configurations where neighbours labels differs; 
-such is our case, given by Eq.\,\eqref{eq:smoothing}.
+The relationships between the lexicon and the descriptors previously described is depicted in Table~{\color{red}??}. More precisely, we highlight the corresponding elements of the lexicon which is encoded by each feature. A choice regarding the encoding of the data term $D(\cdot)$ has to be made by using a \ac{ml} classifier. An \ac{svm} classifier with an \ac{rbf} kernel is selected to determine the data model during the training stage. The pairwise term is our framework was defined as in Eq.\,\eqref{eq:smoothing}. The optimization method used as solver to minimize our cost function $U(\cdot)$ is \ac{gc}. \ac{gc} when applicable allows to rapidly find a strong local minima guaranteeing that no other minimum with lower energies can be found~\cite{delong2012fast}. \ac{gc} is applicable if, and only if, the pairwise term favours coherent labelling configurations and penalizes labelling configurations where neighbours labels differs; such is our case, given by Eq.\,\eqref{eq:smoothing}.
 
 %%% Local Variables: 
 %%% mode: latex
