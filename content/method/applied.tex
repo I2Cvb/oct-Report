@@ -1,6 +1,15 @@
 \section{\ac{bus} images segmentation using optimization}\label{sec:methodApp}
 This section defines the problem of delineating structures in \ac{bus} images as an optimization problem that can be solved applying the framework presented in \cref{sec:method}.
-In general terms, the image is divided in a discrete set $\mathcal{S}$, and each of these elements is associated with a label $l \in \{\text{lesion}, \overline{\text{lesion}}\}$ by simultaneously optimizing the data and pairwise terms. 
+We recall that the aim in segmentation is to tie each element of a discrete set describing a given image $\mathcal{S}$ to an element of the labelling set $\mathcal{L}$
+
+to a discrete set of elements $\mathcal{S}$, a label $l$ from a labelling set $\mathcal{L}$. In our case, our labelling set $\mathcal{L} = \{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$ (see Fig\,\ref{
+
+
+As a recall, the image is divided in a discrete set $\mathcal{S}$. The goal 
+, and its elements are labelled based on a 
+
+at the aim in segmentation is to affect to a discrete set of elements $\mathcal{S}$, a label $l$ from a labelling set $\mathcal{L}$. In our case, our labelling set $\mathcal{L} = \{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$ (see Fig\,\ref{fig:methodTerms:problem} for the entire set of labels) and the set $\mathcal{S}$ is chosen to be a sup
+each of this elements is associated with a label $l \in \{\text{lesion}, \overline{\text{lesion}}\}$ by simultaneously optimizing the data and pairwise terms. 
 
 Figure~\ref{fig:methodterms} uses the problem of delineating the tissues present in a \ac{bus} images ($\mathcal{L} = \{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$) to illustrate the terms described in \cref{sec:method}. 
 
