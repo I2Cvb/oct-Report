@@ -8,11 +8,28 @@ $\mathcal{S}$ is considered the result from an over-segmentation of the image us
 The structures of the breast and their rendering when using a hand-held 2D \ac{us} probe are sketched in Fig.\,\ref{fig:features}a. Figure~\ref{fig:features}b illustrates the lexicon proposed by the \ac{acr}~\cite{biradsus} and used by clinicians to perform their diagnosis. Thus, our aim is to generate a set of computer vision features which is able to encode the characteristic described in the lexicon. The selected features are the following:
 
 \begin{figure}[t]
-  \includegraphics[width=0.9\textwidth]{lexiconReworked}
-    \caption {{\footnotesize Visual reference: (a) breast structures, (b) US BI-RADS lexicon, (c) encoded visual cues.}} 
+    \centering
+    \begin{subfigure}[b]{0.30\textwidth}
+        \centering
+        \begin{tikzpicture}
+          \node[inner sep=0, ] (breast) {\includegraphics[width=0.4\textwidth]{breast}};
+          \node[inner sep=0, below= 2pt of breast] (slice) {\includegraphics[width=0.4\textwidth]{slice}};
+        \end{tikzpicture}
+        %\caption{{\small Breast structure}}    
+        \label{fig:features:breast}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.65\textwidth}   
+        \centering 
+        \includegraphics[width=\textwidth]{lexiconReworked}
+        %\caption[]%
+        %{Breast lesion characteristics in \ac{us} screening influencing clinical management~\cite{biradsus}}    
+        \label{fig:features:lexicon}
+    \end{subfigure}
+    \hfill
+    \caption {{\footnotesize Visual reference: (a) breast structures, (b) US BI-RADS lexicon}} 
     \label{fig:features}
 \end{figure}
-
 
 
 
