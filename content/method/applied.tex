@@ -31,7 +31,17 @@ The structures of the breast and their rendering when using a hand-held 2D \ac{u
     \label{fig:features}
 \end{figure}
 
-
+\begin{table}[b]
+  \centering
+  \caption{Design choices summary}
+  \label{tab:method}
+  \begin{tabular}{lll}
+   $\mathcal{S}$: Quick-Shift super-pixels &\quad &$D(\cdot)$: \\
+   $\arg \min:$ Graph-Cuts&&\quad Features \tikz[remember picture]{\coordinate[remember picture] (featCoord) at (0,0);}\\ 
+   $V(\cdot,\cdot)$: homogeneity as Eq.\,\ref{eq:smoothing}& & \quad Construction { \acs{svm}-\acs{rbf}} \\
+  \end{tabular}
+  \tikz[remember picture, overlay, inner sep=0mm, outer sep=0mm]{\node[inner sep=0mm, outer sep=0mm, anchor=south west] at (featCoord) {\includegraphics[height=13pt]{featAll}};}
+\end{table}
 
 \begin{description}
   \item[Appearance] 
