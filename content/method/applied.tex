@@ -1,65 +1,20 @@
 \section{\ac{bus} images segmentation using optimization}\label{sec:methodApp}
-This section defines the problem of delineating structures in \ac{bus} images as an optimization problem that can be solved applying the framework presented in \cref{sec:method}.
-We recall that the aim in segmentation is to tie each element of a discrete set describing a given image $\mathcal{S}$ to an element of the labelling set $\mathcal{L}$
+In this section, the problem of delineating structures in \ac{bus} images is defined as an optimization problem that can be solved applying the framework presented in Sect.\,\ref{sec:method}.
+The segmentation here proposed aims at tying a label $l\in\mathcal{L}$ (\emph{i.e.} $\{\text{lesion}, \overline{\text{lesion}}\}$ or $\{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$) to each element of $\mathcal{S}$ by simultaneously optimizing the data and pairwise terms as illustrated in Fig.\,\ref{fig:methodTerms}.
+Choices made regarding these different elements:
+the representation $\mathcal{S}$, the data term $D(\cdot)$, the pairwise term $V(.)$, and the optimizer choice are summarized in Table~{\color{red}??} and justified thereafter (see Fig.\,\ref{fig:method} for reference).
 
-to a discrete set of elements $\mathcal{S}$, a label $l$ from a labelling set $\mathcal{L}$. In our case, our labelling set $\mathcal{L} = \{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$ (see Fig\,\ref{
+$\mathcal{S}$ is considered the result from an over-segmentation of the image using Quick-shift super-pixel~\cite{achanta2012slic}. 
+The structures of the breast and their rendering when using a hand-held 2D \ac{us} probe are sketched in Fig.\,\ref{fig:features}a. Figure~\ref{fig:features}b illustrates the lexicon proposed by the \ac{acr}~\cite{biradsus} and used by clinicians to perform their diagnosis. Thus, our aim is to generate a set of computer vision features which is able to encode the characteristic described in the lexicon. The selected features are the following:
 
-
-As a recall, the image is divided in a discrete set $\mathcal{S}$. The goal 
-, and its elements are labelled based on a 
-
-at the aim in segmentation is to affect to a discrete set of elements $\mathcal{S}$, a label $l$ from a labelling set $\mathcal{L}$. In our case, our labelling set $\mathcal{L} = \{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$ (see Fig\,\ref{fig:methodTerms:problem} for the entire set of labels) and the set $\mathcal{S}$ is chosen to be a sup
-each of this elements is associated with a label $l \in \{\text{lesion}, \overline{\text{lesion}}\}$ by simultaneously optimizing the data and pairwise terms. 
-
-Figure~\ref{fig:methodterms} uses the problem of delineating the tissues present in a \ac{bus} images ($\mathcal{L} = \{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$) to illustrate the terms described in \cref{sec:method}. 
-
-{\color{red}
-In general, $\mathcal{S}$ can be any discrete set representing the image (i.e.\, pixels, overlapping or non overlapping windows, super-pixels, etc.). 
-Figure~\ref{fig:methodTerms:problem} illustrates one such representation $\mathcal{S}$, applied to a \ac{bus} image example using super-pixels. The super-pixels are coloured according to the image's \ac{gt}.
-
-Figure~\ref{fig:methodTerms:data} illustrates the data cost associated to some arbitrary labelling configurations to clarify the desired effect (or behaviour) of this data term (Fig.\,\ref{fig:methodTerms:problem} shows the \ac{gt} of each site $s$).
-}
-
-\begin{figure}
-    \centering
-    \begin{subfigure}[b]{0.19\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{problem}
-        %\caption{{\small Problem definition}}    
-        \label{fig:methodTerms:problem}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.39\textwidth}  
-        \centering 
-        \includegraphics[width=\textwidth]{data}
-        %\caption[]% {{\small Data term}}    
-        \label{fig:methodTerms:data}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.39\textwidth}   
-        \centering 
-        \includegraphics[width=\textwidth]{smooth} 
-        %\caption[]% {{\small Pairwise term }}
-        \label{fig:methodTerms:boundary}
-    \end{subfigure}
-    \caption {\small Methodology: (a) Problem definition, (b) Data term, (c) Pairwise term.} 
-    \label{fig:methodterms}
-\end{figure}
-
-
- We recall that the aim in segmentation is to affect to a discrete set of elements $\mathcal{S}$, a label $l$ from a labelling set $\mathcal{L}$. In our case, our labelling set $\mathcal{L} = \{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$ (see Fig\,\ref{fig:methodTerms:problem} for the entire set of labels) and the set $\mathcal{S}$ is chosen to be a super-pixels representation of the image~\cite{achanta2012slic}. In our case, $\mathcal{S}$ is the result from an over-segmentation of the image using Quick-shift super-pixel. Figure~\ref{fig:methodTerms:problem} illustrates one such representation $\mathcal{S}$, applied to a \ac{bus} image example. The super-pixels are coloured according to the image's \ac{gt}. Bear in mind that given an unseen \ac{bus} image, the ultimate goal is to represent the image as a set of super-pixels and infer the appropriated labelling for each of them.
-
-\begin{figure}
+\begin{figure}[t]
   \includegraphics[width=0.9\textwidth]{lexiconReworked}
     \caption {{\footnotesize Visual reference: (a) breast structures, (b) US BI-RADS lexicon, (c) encoded visual cues.}} 
     \label{fig:features}
 \end{figure}
 
-In this section, the generic framework presented in the previous section is applied to \ac{bus} imaging. We need to define our problem properly. We recall that the aim in segmentation is to affect to a discrete set of elements $\mathcal{S}$, a label $l$ from a labelling set $\mathcal{L}$. In our case, our labelling set $\mathcal{L} = \{ \text{chest wall}, \text{lungs}, \dots, \text{lesion} \}$ (see Fig\,\ref{fig:methodTerms:problem} for the entire set of labels).
 
-As illustrated in Fig.\,{\color{red}??}, choices have to be made regarding the different elements: the set $\mathcal{S}$, the data term $D(\cdot)$, the pairwise term $V(.)$, and the optimizer choice. These preferences are summarized in Table~{\color{red}??} and justified thereafter.
 
-$\mathcal{S}$ is chosen to be the result from an over-segmentation of the input image using the Quick-shift super-pixel. The structures of the breast and their rendering when using a hand-held 2D \ac{us} probe are sketched in Fig.\,\ref{fig:features}. Figure~\ref{fig:features:lexicon} illustrates the lexicon proposed by the \ac{acr}~\cite{biradsus} and used by clinicians to perform their diagnosis. Thus, our aim is to generate a set of computer vision features which is able to encode the characteristic described in the lexicon. The selected features are the following:
 
 \begin{description}
   \item[Appearance] 
