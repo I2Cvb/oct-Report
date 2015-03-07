@@ -13,10 +13,9 @@ and (3) a re-mapping the labels obtained from the previous stage to produce the 
 \begin{figure}[htpb]
   \centering
   \includegraphics[width=0.9\linewidth]{method}
-  \caption{Conceptual block representation of the segmentation methodology.
+  \caption{Conceptual block representation of the segmentation methodology.}%\footnotemark}
     %\footnote{\cref{fig:methodTerms} illustrates the $\mathcal{S}$, $D(\cdot)$, and $V(\cdot)$ for the applied case of delineating breast structures in \ac{us} data.}
     %\footnote{(todo:add all the names of the elements in the figure)}
-  }
   \label{fig:method}
 \end{figure}
 
@@ -31,6 +30,7 @@ Then, the desired segmentation $\hat{\omega}$ corresponds to the labelling confi
 \label{eq:costMin}
 \end{equation}
 
+\footnotetext{\Cref{fig:methodTerms} illustrates the $\mathcal{S}$, $D(\cdot)$, and $V(\cdot)$ for the applied case of delineating breast structures in \ac{us} data. {\color{red}(final version the figure elements should be labelled)}}
 
 This goodness measure $U(\cdot)$ must be defined to take into account the appearance of the target region, its relation with other regions and other designing constraints.
 Equation~\eqref{eq:labelingeq} describes this cost function as the combination of two independent costs that need to be simultaneously minimized as a whole.
