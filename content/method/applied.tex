@@ -36,12 +36,19 @@ The selected features are the following:
   \centering
   \caption{Design choices summary}
   \label{tab:method}
-  \begin{tabular}{lll}
-   $\mathcal{S}$: Quick-Shift super-pixels &\quad &$D(\cdot)$: \\
-   $\arg \min:$ Graph-Cuts&&\quad Features \tikz[remember picture]{\coordinate[remember picture] (featCoord) at (0,0);}\\ 
-   $V(\cdot,\cdot)$: homogeneity as Eq.\,\ref{eq:smoothing}& & \quad Construction { \acs{svm}-\acs{rbf}} \\
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular}{>{\centering\bfseries}m{1in} l}
+    \hline 
+    $\mathcal{S}$ & Quick-Shift super-pixels \\
+    $D(\cdot)$ \vspace{20pt} &  \tikz[inner sep=0mm, outer sep=0mm]{\node[inner sep=0mm, outer sep=0mm, anchor=south west] {\includegraphics[height=40pt]{featAll}};} \\ 
+    $V(\cdot,\cdot)$ & homogeneity as Eq.\,\eqref{eq:smoothing} \\
+    $\arg \min U(\cdot)$ & Graph-Cuts \\ \hline
   \end{tabular}
-  \tikz[remember picture, overlay, inner sep=0mm, outer sep=0mm]{\node[inner sep=0mm, outer sep=0mm, anchor=south west] at (featCoord) {\includegraphics[height=13pt]{featAll}};}
+  % \begin{tabular}{lll}
+  %  $\mathcal{S}$: Quick-Shift super-pixels &\quad &$D(\cdot)$: \\
+  %  $\arg \min:$ Graph-Cuts&&\quad Features \tikz[remember picture]{\coordinate[remember picture] (featCoord) at (0,0);}\\ 
+  %  $V(\cdot,\cdot)$: homogeneity as Eq.\,\eqref{eq:smoothing}& & \quad Construction { \acs{svm}-\acs{rbf}} \\
+  % \end{tabular}
 \end{table}
 
 \begin{description}
