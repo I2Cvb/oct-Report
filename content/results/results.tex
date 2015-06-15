@@ -66,14 +66,16 @@ The dataset is composed of cysts, \acp{fa}, \acp{dic} and \acp{ilc}. This datase
 Due to the lack of publicly available dataset and source code, a comparison between the
 different methods is limited to a compilation of results provided
 by the different authors and express them with common metric, as reported in~\cite{massich2013phd}.
-This information has been replicated in Fig.\,\ref{fig:surveyResults} using \ac{aov}.
+This information has been replicated in Fig.\,\ref{fig:surveyResults} using the \ac{aov} metric.
 
 Figure~\ref{fig:surveyResults} is divided in three main parts: (i) a table on the top summarizes the core stages of each study framework, (ii) a legend box on the right side informing of our testing setup and (iii) a comparison of the different metrics in a radial manner. An extra element is also represented in this radial representation: a blue swatch delimited by two blue dashed lines. The boundaries of this swatch correspond to the performance of some expert radiologists based on an inter- and intra-observer experiments carried out by Pons et al.~\cite{gerard2013}.
-It is interesting to note that some methodologies outperform the experiment carried out in~\cite{gerard2013}.
+It is interesting to note that some methodologies outperform this swatch.
 A publicly available dataset should allow a better comparison in that regard.
 
-The ability of \ac{ml} to cope with data variability, as well as its need of data, explains why these methodologies
-have been tested, whereas the ability of \ac{acm} methods in constraining the boundary lead to slightly better results in terms of \ac{aov}.
+The results point out the inherent capabilities of \ac{ml} to cope with data scalability and variability, induce its usage in conjunction with larger datasets.
+Whereas, \ac{acm} methodologies show its effectiveness for model the boundary in a natural manner.
+% The ability of \ac{ml} to cope with data variability, as well as its need of data, explains why these methodologies
+% have been tested, whereas the ability of \ac{acm} methods in constraining the boundary lead to slightly better results in terms of \ac{aov}.
 
 For our proposed framework, the performance in terms of \ac{aov} lies within the state-of-the-art despite its final delineation 
 limited by the capacity of the super-pixels to snap the desired boundary.
