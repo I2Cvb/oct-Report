@@ -63,13 +63,23 @@ Every image in the dataset presents a single lesion with a variable extension.
 The size of the lesions ranges from under $1/100$ to over $1/5$ of the image size.
 The dataset is composed of cysts, \acp{fa}, \acp{dic} and \acp{ilc}. This dataset is now publicly available at \texttt{http://*************}
 
-Due to the lack of publicly available dataset and source code, a comparison between the different methods can only be limited to a compilation of results provided by the different authors on their own data. \emph{******** et al.}~\cite{massich2013phd} compile such information in terms of \ac{aov} as depicted in Fig.\,\ref{fig:surveyResults}.
+Due to the lack of publicly available dataset and source code, a comparison between the
+different methods is limited to a compilation of results provided
+by the different authors and express them with common metric, as reported in~\cite{massich2013phd}.
+This information has been replicated in Fig.\,\ref{fig:surveyResults} using \ac{aov}.
 
-Figure~\ref{fig:surveyResults} is divided in three main parts: (i) a table on the top summarizes the core stages of each study framework, (ii) a legend box on the right side informing of our testing setup and (iii) a comparison of the different metrics in a radial manner. An extra element is also represented in this radial representation: a blue swatch delimited by two blue dashed lines. The boundaries of this swatch correspond to the performance of some expert radiologists in terms of \ac{aov} based on an inter- and intra-observer experiments carried out by Pons et al. on the same dataset used in our experiments~\cite{gerard2013}.
+Figure~\ref{fig:surveyResults} is divided in three main parts: (i) a table on the top summarizes the core stages of each study framework, (ii) a legend box on the right side informing of our testing setup and (iii) a comparison of the different metrics in a radial manner. An extra element is also represented in this radial representation: a blue swatch delimited by two blue dashed lines. The boundaries of this swatch correspond to the performance of some expert radiologists based on an inter- and intra-observer experiments carried out by Pons et al.~\cite{gerard2013}.
+It is interesting to note that some methodologies outperform the experiment carried out in~\cite{gerard2013}.
+A publicly available dataset should allow a better comparison in that regard.
 
-It is interested to note that the performance of some of the state-of-the-art methods outperform the performance of our radiologists. A publicly available dataset should allow a better comparison in that regard. Furthermore, \ac{ml} methods have been developed in conjunction with larger dataset, whereas \ac{acm} methods lead to a better segmentation due to the capability of these methods to better model the lesion boundary.
+The ability of \ac{ml} to cope with data variability, as well as its need of data, explains why these methodologies
+have been tested, whereas the ability of \ac{acm} methods in constraining the boundary lead to slightly better results in terms of \ac{aov}.
 
-For our proposed framework, the performance in terms of \ac{aov} is limited by the capacity of the super-pixels to snap the desired boundary. Figure~\ref{fig:results} depicts the differences between the delineation resulting from a proper labeling of the super-pixels and the one from the \ac{gt}.
+For our proposed framework, the performance in terms of \ac{aov} lies within the state-of-the-art despite its final delineation 
+limited by the capacity of the super-pixels to snap the desired boundary.
+Figure~\ref{fig:results} shows some qualitative results where the limitations of labeling super-pixels when compared to hand-drawn \ac{gt}.
+Figure~\ref{fig:results} also illustrates the influence of the pair-wise term.
+%depicts the differences between the delineation resulting from a proper labeling of the super-pixels and the one from the \ac{gt}.
 
 %The iconography used for the table, relates methodology stages, the technology used and if the stages have been treated separately or as a single processing.
 %The figure, also arranges the information in a radial manner for direct visual comparison.
