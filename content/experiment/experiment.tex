@@ -1,0 +1,19 @@
+% % include the figures path relative to the master file
+% \graphicspath{ {./content/results/figures/} }
+
+\section{Experiments}
+\subsection{Datasets}
+\subsubsection{SERI} - dataset contains 32 OCT volumes (16 DME and 16 normal). This dataset was acquired in \textbf{Institutional Review Board-approved protocols} using CIRRUS TM (Carl Zeiss Meditec, Inc, Dublin, CA) SD-OCT device. All SD-OCT images are read and assessed by trained graders and identifies as normal or DME cases based on evaluation of retinal thickening, hard exudates, intraretinal cystoid space formation and subretinal fluid. This dataset was acquired by our colleagues from Singapore Eye Research Institute (SERI). 
+
+\subsubsection{Duke} - dataset published by Srinivasan et al. \cite{Srinivasan2014}, consists of 45 OCT volumes (15 AMD, 15 DME and 15 normal). All the SD-OCT volumes were acquired in Institutional Review Board-approved protocols using Spectralis SD-OCT (Heidelberg Engineering Ins., Heidelberg, Germany) imaging at Duke University, Harvard University and Michigan University. In this study we only consider a subset of the original data containing 15 DME and 15 normal OCT volumes.
+
+\subsection{Evaluation}
+The SERI dataset is provided in complete SD-OCT volumes by 512$\times$1024$\times$128 dimensions. Using this dataset, first the three low-level features such as \textit{LBP}, \textit{LBP+PCA} and \textit{LBP-TOP} are extracted. These descriptors are calculated with the $P$ number of 8, 16 and 24 for the radius if 1, 2 and 3 respectively. The features are classified using RF with 100 tress. The relative results are shown in Tab. \ref{tab:LbPTopVolumeResult}. 
+
+The second experiment is carried using high-level features and BoW approach.  
+%----------
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End: 
