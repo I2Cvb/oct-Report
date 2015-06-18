@@ -15,27 +15,18 @@
 
 \begin{abstract}
 \acresetall  % reset the acronyms from the title (if any)
-Due to the fact that breast cancer remains the leading cause of cancer death among female population world-wide, any attempts to create tools for assisting radiologists during the diagnosis process are necessary.
-However, most of the technologies developed in the imaging laboratories are expelled from this process because these technologies are not based on the existing findings and procedures undertaken by the clinicians.
-To address this issue, and to develop \ac{cad} systems that take advantage of this clinical findings already adopted by clinicians, these systems only lack strategies to accurately delineate the breast structures and its lesions.
-
-Therefore, this article proposes a highly modular and flexible framework for segmenting breast tissues and lesions present in \ac{bus} images using optimization strategies and high-level descriptors designed analogously to the visual cues used by radiologists.
+THIS IS THE ABSTRACT
 \end{abstract}
 
-\keywords{Breast Ultra-Sound, BI-RADS lexicon, Optimization based Segmentation, Machine-Learning based Segmentation, Graph-Cuts}
+\keywords{kw1, kw2}
 
 %% Incldue the content without .tex extension
 \acresetall  % reset the acronyms from the abstract
 \include*{content/intro/intro}          % the file wihtout .tex
 \include*{content/method/method} 
-\include*{content/method/applied}       
-%\include*{content/features/features}    
 \include*{content/results/results}
 
 \section{Conclusions}
-This work presents a segmentation strategy to delineate lesions in \ac{bus} images using an optimization framework that takes advantage of all the facilities available when using \ac{ml} techniques.
-Despite the limitation that the final segmentation is subject to the super-pixels' boundaries, the \ac{aov} results here reported are similar to those reported by other methodologies in the literature.
-A higher \ac{aov} result can be achieved by refining the delineation resulting from our proposed framework by post-processing it with an \ac{acm}. In this manner the contour constraints could be applied to achieve a more natural delineation.
 
 \bibliography{./content/literature_review}   %>>>> bibliography data in report.bib
 \bibliographystyle{splncs03}
