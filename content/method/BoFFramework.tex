@@ -26,9 +26,9 @@
     \node [block3, below of=DL,node distance = 2.5cm](PR){Projection};
     \begin{pgfonlayer}{background}
       \path (DL.west |- DL.north)+(-0.4,-0.1+\blockdist) node (a) {};
-    \path (PR.east |- PR.south)+(+0.4,-0.7) node (b) {};          
-    \path[fill=gray!10,rounded corners, draw=gray!20, dashed] (a) rectangle (b);
-\end{pgfonlayer}
+      \path (PR.east |- PR.south)+(+0.4,-0.7) node (b) {};          
+      \path[fill=gray!10,rounded corners, draw=gray!20, dashed] (a) rectangle (b);
+    \end{pgfonlayer}
 \path (DL.west |- DL.north)+(+1.2,-0.5+\blockdist) node (SP) {\textbf{Bag of Features}};
 \path (PR.east |- PR.south)+(-1.3,-0.4+\blockdist) node (c){};
 \path (PR.east)+(-3.15,0) node (d) {};
