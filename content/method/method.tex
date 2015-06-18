@@ -1,6 +1,6 @@
 % include the figures path relative to the master file
 % \graphicspath{ {./content/method/figures/visual_cues/}{./content/method/figures/}}
-\graphicspath{ {./content/method/figures/}}
+% \graphicspath{ {./content/method/figures/}}
 
 \section{Materials and Methods}
 
@@ -20,12 +20,12 @@
    As a possible mappings, for representing the volumes, 2D image slices of the volume and \color{red}{7x7x7}\color{black} sliding volumes, have been considered. 
    As a classifier, a \color{red}{Random Forest}\color{black} using 100 trees, has been considered.
    
-\begin{figure}[h]
-\centering{
-  \includegraphics[width=1\textwidth]{figures/mm.pdf}}
-  \caption{Machine learning classification basic scheme}
-  \label{fig:ML-scheme}
-\end{figure}
+% \begin{figure}[h]
+% \centering{
+%   \includegraphics[width=1\textwidth]{mm.pdf}}
+%   \caption{Machine learning classification basic scheme}
+%   \label{fig:ML-scheme}
+% \end{figure}
 
 \subsection{Data}
 \color{red}{
@@ -88,7 +88,7 @@ The LBP features are extracted from each slice of the volume and their histogram
 
 \begin{figure}
 \centering{
-	\includegraphics[width=0.40\textwidth]{figures/LBPTOP_fig.png}}
+	\includegraphics[width=0.40\textwidth]{./content/method/figures/LBPTOP_fig.png}}
 	\caption{LBP-TOP framework, the image is taken from \cite{JiangEtAl13}}
 	\label{fig:LBPTOP-framework}
 \end{figure}
@@ -108,8 +108,7 @@ The LBP features are extracted from each slice of the volume and their histogram
 
 \subsubsection{High-level features} - are extracted using bag of features (BoF) approach which is illustrated in Fig. \ref{fig:BoF-framework}. After de-noising the images by non-local-mean approach, a patch detection step is carried out by identifying informative regions of the data. These patches can either be sampled densely or sparsely. The dense sampling extracts more information regarding the object appearance. However, it might retain redundant features. In the contrary sparse sampling is based on detecting salient key points from the most informative regions of the volume. Our proposed BoF approach is based on the first strategy. In this stage 2D-LBP (7$\times$7) and 3D-LBP-TOP patches (7$\times$7$\times$7) are extracted for each patient. Defining $N$ as the number of selected patches for each volume and $d$ as the number of feature dimensions, then each volume is characterized by a $N \times d$ feature matrix (see Fig. \ref{fig:BoF-framework}, ``feature extraction''). The next step in bag of features consists of building the dictionary of ``visual-words''. All the feature matrices of the training set are concatenated together and k-means clustering method (see Fig.\ref{fig:BoF-framework}, ``clustering'') is used to define the ``visual-words''. K-means is an iterative algorithm which finds k centroids by alternating assignment and update steps. The assignment steps is based on $L_{2}$ norm (Euclidean) distance. Different initialization methods can be used in order to assign the initial k clusters \cite {celebi2013comparative}, here the initial k clusters are selected based on greedy k-means++ method \cite{arthur2007k}. \textbf{Depending on the framework and application, different choices of the number of ``visual-words'' (number of $k$ clusters) can be made. In our framework, the number of clusters are varying in the range of [2 4 8 16 32 64 100]. SHOULD CHNAGE} Finally, the probability distribution (e.g., histogram) of the ``visual-words'' of each feature matrix is computed (feature quantization) and is used to feed the classifier to be trained. In the prediction stage, the histogram of the feature matrix corresponding to the new volume is computed using the previously learned dictionary and, finally, it is classified by the previously trained classifier.\\
 
-
-\input{BoFFrameWork.tex}
+%\input{./content/method/BoFFramework.tex}
 
 \subsection{Classification}
 
@@ -124,3 +123,8 @@ any pruning. In the prediction stage a sample is voted by each tree and it is
 labeled by considering the majority of the votes.
 
 \color{black}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End: 
