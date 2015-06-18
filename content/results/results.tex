@@ -1,4 +1,25 @@
 % % include the figures path relative to the master file
 % \graphicspath{ {./content/results/figures/} }
 
-This is the results
+\subsection{Results}
+
+
+\begin{table}
+\caption{Obtained results with Lbp, Lbp+pca and Lbp-Top features and RF with 100 trees on our dataset}
+\centering
+\begin{tabular}{lcclcclcccclcclcccclcclc}
+\toprule
+Features 	& & &\multicolumn{4}{c}{LBP}&	 & & & &\multicolumn{4}{c}{LBP+PCA}& & & & &\multicolumn{4}{c}{LBP-TOP} &\\
+  \cmidrule(l){2-8}  \cmidrule(l){10-16}  \cmidrule(l){18-24}
+	       & & & SE & & & SP & & & & & SE & & & SP & & & & & SE & & & SP & \\
+\midrule
+ $8^{riu2}$ 						& & & 43.75 & & & 43.75 & & & & & 50.00 & & & 68.75 & & & & & 56.25 & & & 62.50 & \\	
+ $16^{riu2}$						& & & 37.50 & & & 50.00 & & & & & 68.75 & & & 56.25 & & & & & \textbf{87.50} & & & \textbf{75.00} & \\	
+ $24^{riu2}$						& & & 50.00 & & & 62.50 & & & & & 56.25 & & & 37.50 & & & & & 68.75 & & & 68.75 & \\
+ $\lbrace 8,16,24\rbrace^{riu2}$	& & & 37.50 & & & 56.25 & & & & & \textbf{68.75} & & & \textbf{68.75} & & & & & \textbf{81.25} & & & \textbf{81.25} & \\
+\bottomrule
+\end{tabular}
+\label{tab:LbPTopVolumeResult}
+\end{table}
+
+%----------

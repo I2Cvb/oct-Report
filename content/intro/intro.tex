@@ -1,4 +1,39 @@
 % include the figures path relative to the master file
 \graphicspath{ {./content/intro/figures/} }
 
-This is the intro
+\section{Introduction}
+
+Eye diseases such as \ac{dr} and {dme} are the most common causes of irreversible vision loss in individuals with diabetes. It is estimated that eye diseases will cost US\$500 million annually in healthcare and associated costs in the United States alone~\cite{Sharma2005}. Moreover, the prevalence of DR is expected to grow exponentially and affect over 300 millions people worldwide by 2025~\cite{Wild2004}.
+Early detection and treatment of \ac{dr} and \ac{dme} is the key to preventing blindness.
+The detection and diagnosis of retinal diseases are based on the detection of vascular abnormalities or lesions in the retina. 
+\Ac{cad} systems have focused on the automatic analysis of fundus images in past decades~\cite{Abramoff2010,Trucco2013}.
+The use of fundus photography is limited to the detection of signs correlated with retinal thickening such as hard and soft exudates, hemorrhages or microaneurysms.
+However, DME is characterized as an increase in retinal thickness within 1 disk diameter of the fovea center with or without hard exudates and sometimes associated with cysts~\cite{ETDRSG1985}.
+Therefore, fundus photography cannot always identify the clinical signs of DME, for example cysts, which are not visible in the retinal surface. In addition, it does not provide any quantitative measurements of retina thickness or information about cross-sectional retinal morphology. 
+
+Recently, optical coherence tomography (OCT) has been widely used as a valuable diagnosis tool for DME detection.
+OCT is based on optical reflectivity and produces cross-sectional and three-dimensional images of the central retina, thus allowing quantitative retinal thickness and structure measurements. 
+
+The new generation of OCT imaging, namely spectral domain OCT (SD-OCT) offers higher resolution and faster image acquisition over conventional time domain OCT. SD-OCT can produce 27,000 to 40,000 A-scans/seconds with an axial resolution of $3.5-6$ $\mu m$~\cite{Chen2005}. 
+
+Many of the previous works on OCT image analysis have focused on the problem of retinal layers segmentation, which is a necessary step for retinal thickness measurements~\cite{Chiu2010,Kafieh2013}.
+Few works have addressed the specific problem of DME and its associated features detection from OCT images. Quellec \textit{et al.}~\cite{Quellec2010} proposed a method for the identification of fluid-filled regions in SD-OCT images of the macula based on texture features extracted in the segmented retinal layers.
+The authors in~\cite{Srinivasan2014} proposed a classification method for the detection of DME versus AMD and normal OCT images. The method is based on pre-processing to reduce the speckle noise in OCT images and flattening of the images to reduce the variation of retinal curvature among patients. Then, histograms of oriented gradients (HOG) are extracted in each image of a volume and a linear SVM is used for classification. On a dataset of 45 patients containing 15 normal subjects, 15 DME patients and 15 AMD patients, the methods achieved a correct classification of 100\%, 100\% and 86.67\% for AMD, DME and normal cases respectively. 
+Venhuizen \textit{et al.}~\cite{Venhuizen2015} also proposed a method for OCT images classification using the bag of words (BoW) approach.
+The method starts with the selection of interest points in each individual B-scan by keeping the points corresponding to the top 3\% vertical gradient values. Then, a $9\times 9$ patch of intensity values is extracted around each selected interest point, and PCA is applied to reduce the dimension of every patch from 81 ($9\times 9$) to 9. 
+All extracted patches are used to create a codebook using k-means clustering, and the obtained codebook from training is used to represent each OCT volume as a patch occurrence histogram. Finally, this histogram is used as feature vector to train a Random forest (RF) with a maximum of 100 trees. The method was used to classify OCT volumes between AMD and normal cases and achieved an area under the ROC curve (AUC) of 0.984 with a dataset of 384 OCT volumes. 
+The most similar work to ours is the work of Liu \textit{et al.}~\cite{Liu2011} who proposed a method for macular pathology detection in OCT images using local binary patterns (LBP) as features.
+The method starts by aligning and flattening the images, then a 3-level multi-scale spatial pyramid is created and LBP histograms are extracted in each block at every level of the pyramid. All obtained LBP histograms are concatenated into a global descriptor whose dimension is reduced using PCA. Finally a SVM is used as classifier. The method achieved good results in detection OCT scan containing different pathology such as DME or AMD, with an AUC of 0.93 using a dataset of 326 OCT scans.  
+
+
+In this paper, we propose a method for automatic identification of patients with DME versus normal subjects by classifying the OCT volumes. Our method is based on LBP features to describe the texture of OCT images and dictionary learning using the BoW approach~\cite{Sivic2003}.
+However, we do not based on interest points selection as opposed to the work of 
+Venhuizen \textit{et al.}~\cite{Venhuizen2015} who also employed the BoW approach. We rather divide the images into local patches and extract a dense set of LBP descriptors.
+We also use the entire OCT volume and extract 3D-LBP features to describe the volume, which is different from the work of Liu \textit{et al.}~\cite{Liu2011} who classified only the foveal scan for each patient.
+We will show in the experiments, Section 4, that using the 3D-LBP descriptor provides better classification performances than extraction LBP in each individual B-scan.
+
+This paper is organized as follows. In Section~2, we describe the features extraction methodology and the classification approach based on the BoW method.
+Section~3 shows experimental results using two different datasets and comparison with another approach. Finally, the paper ends with concluding remarks in Section~4.
+
+
+%----------
