@@ -43,20 +43,21 @@ For evaluation purposes, the results have been cross-validated, by splitting the
 \subsection{Image pre-processing}
 
 \Ac{oct} images are known to be affected by a speckle noise~\cite{schmitt1999speckle}.
-Subsequently, \ac{nlm}~\cite{buades2005non} filtering has been previously successfully used in \ac{us} images to filter similar noise~\cite{Coupe2009} and is used in our framework to denoise each slice of the  \ac{oct} volumes.
+Subsequently, \ac{nlm}~\cite{buades2005non} filtering has been previously successfully used in \ac{us} images to filter similar noise~\cite{Coupe2009} and is used in our framework to denoise each B-scan (i.e. $y$ axis) of the  \ac{oct} volumes (see in Fig.\,\ref{subfig:vol}).
 %The pre-processing stage in the proposed methodology applies an image denoising method to reduce the speckle noise in \ac{oct} images.
 %Since image details and texture of the original image are needed by the following stages in the method, \ac{nlm} algorithm \cite{buades2005non} is used. 
 \ac{nlm} filtering offers the advantage to use all the possible self-predictions that the image can provide rather than local or frequency filters such as Gaussian, anisotropic or Wiener filters~\cite{buades2005non}.
 The different parameters were empirically tested and fixed such that the patch size, the search window and the filtering parameter $h$ were set to $(15 \times 15)$, $(35 \times 35)$ and $0.4$, respectively.
-Figure~\ref{fig:denoise} depicts an example of filtering using \ac{nlm} filter on \ac{oct} image.
+An example of filtering using \ac{nlm} filter on \ac{oct} image is depicted in Fig\,\ref{subfig:raw} and Fig.\,\ref{subfig:nlm}.
 
 \begin{figure}
   \centering
   \hspace*{\fill}
+  \subfigure[]{\label{subfig:vol}\includegraphics[width=0.3\linewidth]{volume.png}} \hfill
   \subfigure[]{\label{subfig:raw}\includegraphics[width=0.3\linewidth]{raw_crop.png}} \hfill
   \subfigure[]{\label{subfig:nlm}\includegraphics[width=0.3\linewidth]{nlm_crop.png}}
   \hspace*{\fill}
-  \caption{Noise filtering via \ac{nlm}: (a) Original image - (b) \ac{nlm} filtering.}
+  \caption{\ac{oct}: (a) Organization of the \ac{oct} data - (b) Original image - (c) \ac{nlm} filtering.}
   \label{fig:denoise}
 \end{figure}
 
