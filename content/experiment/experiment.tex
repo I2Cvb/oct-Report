@@ -47,9 +47,10 @@ For both datasets, \ac{lbp} and \ac{lbptop} features are extracted for different
 Two different mapping strategies are used: (i) the 2D B-scan for \ac{lbp} or the 3D volume for \ac{lbptop} and (ii) a set of 2D \ac{sw} of size $(7 \times 7)$ for \ac{lbp} or the 3D sub-volume for \ac{lbptop} of size $(7 \times 7 \times 7)$.
 For the high-level representation, when \ac{pca} is applied, the eigenvectors associated with the largest $99\%$ cumulative eigenvalues are selected to reduce the number of dimensions. In \ac{bow} approach, an empirical search was performed to find the optimal number of visual words which is finally fixed to 32.
 The number of trees for each \ac{rf} classifier was fixed to 100.
-For evaluation purposes, the results are cross-validated using a \ac{lopo} strategy. Thus, at each round a pair $(\ac{dme}, normal)$ is selected for testing while the rest acts as trainig.
-Performing \ac{lopo} cross validation, has the limitation that despite acheaving robust results due to the cross validation, no variance can be reported.
-However, and despite this limitation, \ac{lopo} has been choosed due to the reduced amount of \ac{oct} volumes available.
+For evaluation purposes, all the results are expressed in terms of \ac{se} and \ac{sp} using a cross-validated \ac{lopo} strategy.
+Thus, at each round a pair $(\ac{dme}, normal)$ is selected for testing while the rest acts as trainig.
+Performing \ac{lopo} cross validation, has the limitation that despite acheaving robust results due to the cross validation, no variance in \ac{se} or \ac{sp}, can be reported.
+A larger testing set can not be used here, due to the limited amount of available \ac{oct} volumes.
 
 \begin{tiny}
   \begin{table}[Ht]
