@@ -15,39 +15,80 @@ In this work, we validated our classification framework using two different data
 
 \end{description}
 
+\begin{tiny}
+  \begin{table}[Ht]
+\caption{Obtained results using SERI datasets.}% using \ac{rf} with 100 trees. High-level features with \ac{bow} are obtained with $K$ = 32 visual-words.}
+\centering
+\begin{tabular}{lcclcclcccclcclcccclcclc}
+\toprule
+Features 	& & &\multicolumn{4}{c}{$8^{riu2}$}&	 & & & &\multicolumn{4}{c}{$16^{riu2}$}& & & & &\multicolumn{4}{c}{$24^{riu2}$} &\\
+  \cmidrule(l){2-8}  \cmidrule(l){10-16}  \cmidrule(l){18-24}
+	       & & & SE & & & SP & & & & & SE & & & SP & & & & & SE & & & SP & \\
+\midrule
+  	\ac{lbp}					& & & 43.75 & & & 43.75 & & & & & 37.50 & & & 50.00 & & & & & 50.00 & & & 62.50 & \\
+ 	\ac{lbptop}				& & & 56.25 & & & 62.50 & & & & & \textbf{87.50} & & & \textbf{75.00} & & & & & 68.75 & & & 68.75 & \\
+	\ac{lbp}+\ac{pca}		& & & 50.00 & & & 62.50 & & & & & 56.25 & & & 37.50 & & & & & 68.75 & & & 68.75 & \\
+	\ac{lbp}+\ac{bow}		& & & 50.00 & & & 81.25 & & & & & 57.50 & & & 68.75 & & & & & 50.00 & & & 50.00 & \\
+	\ac{lbp}+\ac{bow}+\acs{sw}		& & & 75.00 & & & 87.50 & & & & & \textbf{81.25} & & & \textbf{75.00} & & & & & 68.75 & & & 62.5 & \\
+	\ac{lbptop}+\ac{bow}+\acs{sw}		& & & 62.50 & & & 68.75 & & & & & 56.25 & & & 37.50 & & & & & 37.50 & & & 43.75 & \\
+\bottomrule
+\end{tabular}
+\label{tab:SERI-data}
+\end{table}
+\end{tiny}
+
 \subsection{Experiments \& results}
 
-Both datasets are filtered to attenuate the effect of speckle noise. 
+Both datasets are filtered to attenuate the effect of speckle noise.
 SIRE dataset is processed using \ac{nlm} as stated in Sect.\,\ref{subsec:prepro}.
 The different parameters were empirically tested and fixed such that the patch size, the search window and the filtering parameter were set to $(15 \times 15)$, $(35 \times 35)$ and $0.4$, respectively.
 However, Duke dataset is already filtered using BM3D method~\cite{Srinivasan2014}.
 For both datasets, \ac{lbp} and \ac{lbptop} features are extracted for different sampling points of 8, 16 and 24 for radius of 1, 2 and 3, respectively.
 Two different mapping strategies are used: (i) the 2D B-scan for \ac{lbp} or the 3D volume for \ac{lbptop} and (ii) a set of 2D \ac{sw} of size $(7 \times 7)$ for \ac{lbp} or the 3D sub-volume for \ac{lbptop} of size $(7 \times 7 \times 7)$.
-For the high-level representation, when \ac{pca} is applied, the eigenvectors associated with the largest $99\%$ cumulative eigenvalues are selected to reduce the number of dimensions. In \ac{bow} approach, an empirical search was performed to find the optimal number of visual words which is finally fixed to 32. 
+For the high-level representation, when \ac{pca} is applied, the eigenvectors associated with the largest $99\%$ cumulative eigenvalues are selected to reduce the number of dimensions. In \ac{bow} approach, an empirical search was performed to find the optimal number of visual words which is finally fixed to 32.
 The number of trees for each \ac{rf} classifier was fixed to 100.
 For evaluation purposes, the results are cross-validated using a \ac{lopo} strategy. Thus, at each round a pair $(\ac{dme}, normal)$ is selected for testing while the rest acts as trainig.
 Performing \ac{lopo} cross validation, has the limitation that despite acheaving robust results due to the cross validation, no variance can be reported.
 However, and despite this limitation, \ac{lopo} has been choosed due to the reduced amount of \ac{oct} volumes available.
 
+\begin{tiny}
+  \begin{table}[Ht]
+\caption{Obtained results using Duke datasets.}% using \ac{rf} with 100 trees. High-level features with \ac{bow} are obtained with $K$ = 32 visual-words.}
+\centering
+\begin{tabular}{lcclcclcccclcclcccclcclc}
+\toprule
+Features 	& & &\multicolumn{4}{c}{$8^{riu2}$}&	 & & & &\multicolumn{4}{c}{$16^{riu2}$}& & & & &\multicolumn{4}{c}{$24^{riu2}$} &\\
+  \cmidrule(l){2-8}  \cmidrule(l){10-16}  \cmidrule(l){18-24}
+	       & & & SE & & & SP & & & & & SE & & & SP & & & & & SE & & & SP & \\
+\midrule
+ 	\ac{lbptop}				& & & 80.00& & & 93.33 & & & & & 73.33 & & & 86.67 & & & & & 73.33 & & & 86.67 & \\
+	\ac{lbp}+\ac{bow}+\acs{sw}		& & & 80.00 & & & 86.67 & & & & & 86.67 & & & 100 & & & & &93.33 & & & 86.67 & \\
+	\ac{lbptop}+\ac{bow}+\acs{sw}		& & & 80.00 & & & 86.67 & & & & & 86.67 & & & 86.67 & & & & & 60.00 & & & 80.00 & \\
+\bottomrule
+\end{tabular}
+\label{tab:Duke-data}
+\end{table}
+\end{tiny}
+
 \begin{description}
 
 \item[Experiment \#1] is carried out on SERI dataset. Both low and high level feature representation are extracted and tested. The results are reported in Table~\ref{tab:SERI-data}.
 
-\item[Experiment \#2] is carried out on the Duke dataset~\cite{Srinivasan2014}. The \ac{oct} volumes provided by this dataset are cropped, with different sizes. 
+\item[Experiment \#2] is carried out on the Duke dataset~\cite{Srinivasan2014}. The \ac{oct} volumes provided by this dataset are cropped, with different sizes.
 Subsequently, the experiments involving the mapping using 2D B-scan do not comply with these requirements and thus are not carried out.
 The obtained results for this experiment are shown in Table~\ref{tab:Duke-data}.
 
 \item[Experiment \#3] presents a comparison of our best approaches with the method reported in~\cite{Venhuizen2015} in-house implemented and are expressed in Table~\ref{tab:ComparisonRefandOurs}.
 
 \end{description}
-% The SERI datasets are provided in complete \ac{oct} volumes by 512$\times$1024$\times$128 dimensions. Using this datasets, first the three low-level features such as \ac{lbp}, \ac{lbp}+\ac{pca} and \ac{lbptop} are extracted. The rotation invariant uniform ($riu2$) descriptors are calculated with the $P$ number of 8, 16 and 24 for the radius if 1, 2 and 3 respectively. The features are classified using RF with 100 tress. Table \ref{tab:LbPTopVolumeResult} shows the relative results for $8riu2$, $16riu2$, $24riu2$ and their combination $8riu2 + 16riu2 + 24riu2$. The results are presented in terms of \ac{se} and \ac{sp} percentages.  
+% The SERI datasets are provided in complete \ac{oct} volumes by 512$\times$1024$\times$128 dimensions. Using this datasets, first the three low-level features such as \ac{lbp}, \ac{lbp}+\ac{pca} and \ac{lbptop} are extracted. The rotation invariant uniform ($riu2$) descriptors are calculated with the $P$ number of 8, 16 and 24 for the radius if 1, 2 and 3 respectively. The features are classified using RF with 100 tress. Table \ref{tab:LbPTopVolumeResult} shows the relative results for $8riu2$, $16riu2$, $24riu2$ and their combination $8riu2 + 16riu2 + 24riu2$. The results are presented in terms of \ac{se} and \ac{sp} percentages.
 
-% The second experiment is carried out using high-level features and \ac{bow} approach, on SERI datasets. The first high-level feature \ac{lbp}+\ac{bow} is obtained by applying \ac{bow} with 32 visual-words on the previously low-level \ac{lbp} features (applied on each B-scan). The second and third high-level descriptors are obtained using a dense approach by applying the \ac{sw} of size (7$\times$7) on each B-scan and \ac{sw} of size (7$\times$7$\times$7) to the whole volume respectively. \ac{lbp}+\ac{bow}+\ac{sw} represent the second high-level feature where the 2D-\ac{lbp} features are extracted for each sliding window on each B-scan and the visual-words are selected from the pool, consisting of their histograms. The third high-level feature, \ac{lbptop}+\ac{bow}+\ac{sw}, is defined using \ac{lbptop}. By using the sliding window the 3D-\ac{lbp} features are extracted for each patch. Same as previous experiment with low-level features, the descriptors are calculated with the $P$ number of 8, 16 and 24 for the radius if 1, 2 and 3 respectively. The obtained results of this experiment are illustrated in Tab. \ref{tab:SERIBoWResult}. 
+% The second experiment is carried out using high-level features and \ac{bow} approach, on SERI datasets. The first high-level feature \ac{lbp}+\ac{bow} is obtained by applying \ac{bow} with 32 visual-words on the previously low-level \ac{lbp} features (applied on each B-scan). The second and third high-level descriptors are obtained using a dense approach by applying the \ac{sw} of size (7$\times$7) on each B-scan and \ac{sw} of size (7$\times$7$\times$7) to the whole volume respectively. \ac{lbp}+\ac{bow}+\ac{sw} represent the second high-level feature where the 2D-\ac{lbp} features are extracted for each sliding window on each B-scan and the visual-words are selected from the pool, consisting of their histograms. The third high-level feature, \ac{lbptop}+\ac{bow}+\ac{sw}, is defined using \ac{lbptop}. By using the sliding window the 3D-\ac{lbp} features are extracted for each patch. Same as previous experiment with low-level features, the descriptors are calculated with the $P$ number of 8, 16 and 24 for the radius if 1, 2 and 3 respectively. The obtained results of this experiment are illustrated in Tab. \ref{tab:SERIBoWResult}.
 
 % In order to compare our proposed framework the third experiment is carried out using the subsection of Duke datasets \cite{Srinivasan2014}. The OCT volumes provided by this datasets are of different volume size, cropped and denoised by the method of authors choice. Subsequently only the second experiment with high-level features and low-level \ac{lbptop} features comply with these requirements. The number of visual-words and the size of \ac{sw} for 2D and 3D features are the same than the previous experiment. The 2D and 3D \ac{lbp} features are extracted with $P$ number of 8, 16 and 24 for the radius if 1, 2 and 3 respectively. The obtained results for this experiment are shown in Tab. \ref{tab:DukeBoWResult}.
 %----------
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
-%%% End: 
+%%% End:

@@ -12,8 +12,8 @@
 %       \cmidrule(l){2-8}  \cmidrule(l){10-16}  \cmidrule(l){18-24}
 %             & & & SE & & & SP & & & & & SE & & & SP & & & & & SE & & & SP & \\
 %     \midrule
-%         \ac{lbp}					& & & 43.75 & & & 43.75 & & & & & 37.50 & & & 50.00 & & & & & 50.00 & & & 62.50 & \\	
-%       \ac{lbptop}				& & & 56.25 & & & 62.50 & & & & & \textbf{87.50} & & & \textbf{75.00} & & & & & 68.75 & & & 68.75 & \\	
+%         \ac{lbp}					& & & 43.75 & & & 43.75 & & & & & 37.50 & & & 50.00 & & & & & 50.00 & & & 62.50 & \\
+%       \ac{lbptop}				& & & 56.25 & & & 62.50 & & & & & \textbf{87.50} & & & \textbf{75.00} & & & & & 68.75 & & & 68.75 & \\
 %       \ac{lbp}+\ac{pca}		& & & 50.00 & & & 62.50 & & & & & 56.25 & & & 37.50 & & & & & 68.75 & & & 68.75 & \\
 %       \ac{lbp}+\ac{bow}		& & & 50.00 & & & 81.25 & & & & & 57.50 & & & 68.75 & & & & & 50.00 & & & 50.00 & \\
 %       \ac{lbp}+\ac{bow}+\acs{sw}		& & & 75.00 & & & 87.50 & & & & & \textbf{81.25} & & & \textbf{75.00} & & & & & 68.75 & & & 62.5 & \\
@@ -27,60 +27,60 @@
 
 \begin{tiny}
 
-\begin{table}
-\caption{Obtained results using SERI datasets.}% using \ac{rf} with 100 trees. High-level features with \ac{bow} are obtained with $K$ = 32 visual-words.}
-\centering
-\begin{tabular}{lcclcclcccclcclcccclcclc}
-\toprule
-Features 	& & &\multicolumn{4}{c}{$8^{riu2}$}&	 & & & &\multicolumn{4}{c}{$16^{riu2}$}& & & & &\multicolumn{4}{c}{$24^{riu2}$} &\\
-  \cmidrule(l){2-8}  \cmidrule(l){10-16}  \cmidrule(l){18-24}
-	       & & & SE & & & SP & & & & & SE & & & SP & & & & & SE & & & SP & \\
-\midrule
-  	\ac{lbp}					& & & 43.75 & & & 43.75 & & & & & 37.50 & & & 50.00 & & & & & 50.00 & & & 62.50 & \\	
- 	\ac{lbptop}				& & & 56.25 & & & 62.50 & & & & & \textbf{87.50} & & & \textbf{75.00} & & & & & 68.75 & & & 68.75 & \\	
-	\ac{lbp}+\ac{pca}		& & & 50.00 & & & 62.50 & & & & & 56.25 & & & 37.50 & & & & & 68.75 & & & 68.75 & \\
-	\ac{lbp}+\ac{bow}		& & & 50.00 & & & 81.25 & & & & & 57.50 & & & 68.75 & & & & & 50.00 & & & 50.00 & \\
-	\ac{lbp}+\ac{bow}+\acs{sw}		& & & 75.00 & & & 87.50 & & & & & \textbf{81.25} & & & \textbf{75.00} & & & & & 68.75 & & & 62.5 & \\
-	\ac{lbptop}+\ac{bow}+\acs{sw}		& & & 62.50 & & & 68.75 & & & & & 56.25 & & & 37.50 & & & & & 37.50 & & & 43.75 & \\
-\bottomrule
-\end{tabular}
-\label{tab:SERI-data}
-\end{table}
+% \begin{table}
+% \caption{Obtained results using SERI datasets.}% using \ac{rf} with 100 trees. High-level features with \ac{bow} are obtained with $K$ = 32 visual-words.}
+% \centering
+% \begin{tabular}{lcclcclcccclcclcccclcclc}
+% \toprule
+% Features 	& & &\multicolumn{4}{c}{$8^{riu2}$}&	 & & & &\multicolumn{4}{c}{$16^{riu2}$}& & & & &\multicolumn{4}{c}{$24^{riu2}$} &\\
+%   \cmidrule(l){2-8}  \cmidrule(l){10-16}  \cmidrule(l){18-24}
+% 	       & & & SE & & & SP & & & & & SE & & & SP & & & & & SE & & & SP & \\
+% \midrule
+%   	\ac{lbp}					& & & 43.75 & & & 43.75 & & & & & 37.50 & & & 50.00 & & & & & 50.00 & & & 62.50 & \\
+%  	\ac{lbptop}				& & & 56.25 & & & 62.50 & & & & & \textbf{87.50} & & & \textbf{75.00} & & & & & 68.75 & & & 68.75 & \\
+% 	\ac{lbp}+\ac{pca}		& & & 50.00 & & & 62.50 & & & & & 56.25 & & & 37.50 & & & & & 68.75 & & & 68.75 & \\
+% 	\ac{lbp}+\ac{bow}		& & & 50.00 & & & 81.25 & & & & & 57.50 & & & 68.75 & & & & & 50.00 & & & 50.00 & \\
+% 	\ac{lbp}+\ac{bow}+\acs{sw}		& & & 75.00 & & & 87.50 & & & & & \textbf{81.25} & & & \textbf{75.00} & & & & & 68.75 & & & 62.5 & \\
+% 	\ac{lbptop}+\ac{bow}+\acs{sw}		& & & 62.50 & & & 68.75 & & & & & 56.25 & & & 37.50 & & & & & 37.50 & & & 43.75 & \\
+% \bottomrule
+% \end{tabular}
+% \label{tab:SERI-data}
+% \end{table}
+
+% \begin{tiny}
+% \begin{table}
+% \caption{Obtained results using Duke datasets.}% using \ac{rf} with 100 trees. High-level features with \ac{bow} are obtained with $K$ = 32 visual-words.}
+% \centering
+% \begin{tabular}{lcclcclcccclcclcccclcclc}
+% \toprule
+% Features 	& & &\multicolumn{4}{c}{$8^{riu2}$}&	 & & & &\multicolumn{4}{c}{$16^{riu2}$}& & & & &\multicolumn{4}{c}{$24^{riu2}$} &\\
+%   \cmidrule(l){2-8}  \cmidrule(l){10-16}  \cmidrule(l){18-24}
+% 	       & & & SE & & & SP & & & & & SE & & & SP & & & & & SE & & & SP & \\
+% \midrule
+%  	\ac{lbptop}				& & & 80.00& & & 93.33 & & & & & 73.33 & & & 86.67 & & & & & 73.33 & & & 86.67 & \\
+% 	\ac{lbp}+\ac{bow}+\acs{sw}		& & & 80.00 & & & 86.67 & & & & & 86.67 & & & 100 & & & & &93.33 & & & 86.67 & \\
+% 	\ac{lbptop}+\ac{bow}+\acs{sw}		& & & 80.00 & & & 86.67 & & & & & 86.67 & & & 86.67 & & & & & 60.00 & & & 80.00 & \\
+% \bottomrule
+% \end{tabular}
+% \label{tab:Duke-data}
+% \end{table}
+% \end{tiny}
 
 
-\begin{table}
-\caption{Obtained results using Duke datasets.}% using \ac{rf} with 100 trees. High-level features with \ac{bow} are obtained with $K$ = 32 visual-words.}
-\centering
-\begin{tabular}{lcclcclcccclcclcccclcclc}
-\toprule
-Features 	& & &\multicolumn{4}{c}{$8^{riu2}$}&	 & & & &\multicolumn{4}{c}{$16^{riu2}$}& & & & &\multicolumn{4}{c}{$24^{riu2}$} &\\
-  \cmidrule(l){2-8}  \cmidrule(l){10-16}  \cmidrule(l){18-24}
-	       & & & SE & & & SP & & & & & SE & & & SP & & & & & SE & & & SP & \\
-\midrule
- 	\ac{lbptop}				& & & 80.00& & & 93.33 & & & & & 73.33 & & & 86.67 & & & & & 73.33 & & & 86.67 & \\	
-	\ac{lbp}+\ac{bow}+\acs{sw}		& & & 80.00 & & & 86.67 & & & & & 86.67 & & & 100 & & & & &93.33 & & & 86.67 & \\
-	\ac{lbptop}+\ac{bow}+\acs{sw}		& & & 80.00 & & & 86.67 & & & & & 86.67 & & & 86.67 & & & & & 60.00 & & & 80.00 & \\
-\bottomrule
-\end{tabular}
-\label{tab:Duke-data}
-\end{table}
-
-
-
-
+  \vspace{-.5cm}
 \begin{table}
 \caption{Comparing the proposed method by \cite{Venhuizen2015} on SERI and Duke datasets.}% with the \textbf{our two} best proposed methods. $K$ = 32 and \ac{rf} is trained using 100 tress}
 \centering
 \begin{tabular}{lcclcclcccclcclc}
 \toprule
 Data sets 	& & &\multicolumn{4}{c}{SERI}& & & & &\multicolumn{4}{c}{Duke} & \\
-  \cmidrule(l){2-8}  \cmidrule(l){10-16} 
+  \cmidrule(l){2-8}  \cmidrule(l){10-16}
 	         & & & SE & & & SP & & & & & SE & & & SP & \\
 \midrule
- \cite{Venhuizen2015} 		& & & 61.53 & & & 58.82 & & & & & 71.42 & & & 68.75 & \\	
+ \cite{Venhuizen2015} 		& & & 61.53 & & & 58.82 & & & & & 71.42 & & & 68.75 & \\
 \{\ac{lbp}+\ac{bow}+\ac{sw}\},$16^{riu2}$ 	& & & 81.25 & & & 75.00 & & & & & 86.67 & & & 100.00 &  \\
 \{\ac{lbptop}\},$16^{riu2}$				& & & 87.50 & & & 75.00 & & & & & 73.33 & & & 86.76 &  \\
- 		    					
+
 
 \bottomrule
 \end{tabular}
@@ -88,10 +88,11 @@ Data sets 	& & &\multicolumn{4}{c}{SERI}& & & & &\multicolumn{4}{c}{Duke} & \\
 \end{table}
 
 \end{tiny}
+\vspace{-1cm}
 
 %----------
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
-%%% End: 
+%%% End:
