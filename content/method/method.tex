@@ -64,43 +64,29 @@ Figure~\ref{fig:denoise} depicts an example of filtering using \ac{nlm} filter o
 Need to write something here !!!
 
 
-\subsubsection{Low-level features} are extracted considering the whole volume using \ac{lbp} and 3D-\ac{lbp} descriptors. 
-\ac{lbp} is a discriminative rotation invariant feature descriptor proposed by Ojala et al. \cite{ojala2002multiresolution}. 
-\ac{lbp} descriptor encodes the intensity differences of a central pixel ($g_c$) with its neighboring pixels ($g_{p}$), within in a defined neighborhood of radius $R$. The differences are encoded in terms of binary patterns as in~Eq. \ref{Eq:LBP}: 
+\subsubsection{Low-level features} are extracted considering the whole volume using LBP and 3D-LBP descriptors. 
+LBP is a discriminative rotation invariant feature descriptor proposed by Ojala et al. \cite{ojala2002multiresolution}. 
+LBP descriptor encodes the intensity differences of a central pixel ($g_c$) with its neighboring pixels ($g_{p}$), within in a defined neighborhood of radius $R$. The differences are encoded in terms of binary patterns as in~Eq. \ref{Eq:LBP}: 
 
 \begin{equation} \label{Eq:LBP}
-  LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p},
+LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p},
 \end{equation}
 where $s(a) = 1$ if $a \geq 0$, and $s(a)=0$ otherwise. $P$ is the number of sampling points in the circle of radius $R$.
 
 The binary patterns are calculated for each pixel in the given image and their histogram defines the final descriptor.
-The \ac{lbp} histograms are computed for each slice of the volume and are concatenated into a single histogram.
+The LBP histograms are computed for each slice of the volume and are concatenated into a single histogram. This forms the first low-level feature.
+The second low-level descriptor is defined in a similar manner as the first one. However principal component analysis (PCA) is applied to the concatenated histograms in order to reduce the dimension.
 
-
-% In this research we consider rotation invariant features with uniform patterns. The uniform patterns are defined by the unifromity measure ($U$) of 2. Uniformity measure corresponds to the number of spatial transitions in the LBP pattern \cite{ojala2002multiresolution}. For instance patterns $00000000_{2}$ and $11111111_{2}$ have the U value of 0 while patterns like $01111111_{2}$ and $00000011_{2}$ have two transitions of 0/1 in their pattern, therfore they are considered as uniform patterns (see Eq. \ref{Eq:LBPru}). 
-% \begin{equation}\label{Eq:LBPru}
-%   LBP_{P,R}^{riu2} = 
-%   \begin{cases}
-%     \sum_{p=0}^{P-1}s(g_{p} - g_{c}) & \text{ if } U(LBP_{P,R}) \le 2\\
-%     P+1 & \text{otherwise,}
-%   \end{cases}
-% \end{equation}
-
-
-The \ac{lbp} features are extracted from each slice of the volume and their histograms are concatenated to build the first low-level descriptor. The second low-level descriptor is defined in a similar manner as the first one. However \ac{pca} is applied to the concatenated histograms in order to reduce the dimensions. The first and second low-level descriptors are obtained using the 2D \ac{lbp} descriptor. However the third low-level feature is obtained using 3D-\ac{lbp} (\ac{lbptop}). Zhao et al. \cite{zhao2007dynamic} proposed \ac{lbptop} as a dynamic texture descriptor. This descriptor is an extension to normal \ac{lbp} while it considers texture descriptors along the temporal domain. \ac{lbptop} considers the \ac{lbp} pattern in three orthogonal planes (see Fig. \ref{fig:LBPTOP-framework}), XY, XT and YT. The obtained \ac{lbp} patterns from the three planes are concatenated to form the final descriptor. The three low-level descriptors are calculated with the $P$ number of 8, 16 and 24 for the radius if 1, 2 and 3 respectively
-
-\begin{figure}
-  \centering{
-    \includegraphics[width=0.40\textwidth]{LBPTOP_fig}}
-  \caption{LBP-TOP framework, the image is taken from \cite{JiangEtAl13}}
-  \label{fig:LBPTOP-framework}
-\end{figure}
+For the third low-level descriptor, since the OCT data is a 3D volume, following the approach of Zhao \textit{et al}. \cite{zhao2007dynamic}, we extract 3D-LBP by considering three orthogonal planes, XY, XZ and YZ. Note that $X$, $Y$, and $Z$ are respectively the horizontal, vertical and depth direction of the OCT volume as shown in Figure~\ref{fig:oct_data}(a).
+LBP patterns are computed for each of the three planes, and the obtained three histograms are concatenated into a final 3D-LBP descriptor.
 
 
 
-\subsubsection{High-level features} - are extracted using \ac{bof} approach which is illustrated in Fig. \ref{fig:BoF-framework}. After de-noising the images by non-local-mean approach, a patch detection step is carried out by identifying informative regions of the data. These patches can either be sampled densely or sparsely. The dense sampling extracts more information regarding the object appearance. However, it might retain redundant features. In the contrary sparse sampling is based on detecting salient key points from the most informative regions of the volume. Our proposed \ac{bof} approach is based on the first strategy. In this stage 2D-\ac{lbp} (7$\times$7) and 3D-\ac{lbptop} patches (7$\times$7$\times$7) are extracted for each patient. Defining $N$ as the number of selected patches for each volume and $d$ as the number of feature dimensions, then each volume is characterized by a $N \times d$ feature matrix (see Fig. \ref{fig:BoF-framework}, ``feature extraction''). The next step in bag of features consists of building the dictionary of ``visual-words''. All the feature matrices of the training set are concatenated together and k-means clustering method (see Fig.\ref{fig:BoF-framework}, ``clustering'') is used to define the ``visual-words''. K-means is an iterative algorithm which finds k centroids by alternating assignment and update steps. The assignment steps is based on $L_{2}$ norm (Euclidean) distance. Different initialization methods can be used in order to assign the initial k clusters \cite {celebi2013comparative}, here the initial k clusters are selected based on greedy k-means++ method \cite{arthur2007k}. \textbf{Depending on the framework and application, different choices of the number of ``visual-words'' (number of $k$ clusters) can be made. In our framework, the number of clusters are varying in the range of [2 4 8 16 32 64 100]. SHOULD CHNAGE} Finally, the probability distribution (e.g., histogram) of the ``visual-words'' of each feature matrix is computed (feature quantization) and is used to feed the classifier to be trained. In the prediction stage, the histogram of the feature matrix corresponding to the new volume is computed using the previously learned dictionary and, finally, it is classified by the previously trained classifier.\\
-
-
+\subsubsection{High-level features} - are extracted using bag of words (BoW) approach which is a feature representation technique based of creating a visual dictionary, or codebook, from a set of low-level features~\cite{Sivic2003}. 
+To do so, the OCT images are divided into local patches and LBP histograms are computed for every local patch.
+This set of LBP histograms is then used to create a codebook using K-means clustering. If we define $K$ clusters in the feature space, then the visual dictionary will contain $K$ words each one being the center of one cluster.
+After creating the codebook, each of the training example is represented as a histogram of size $K$ obtained by calculating the frequency of occurrences of each of the $K$ words in the features extracted from the training example. 
+Note that in the 2D case, each slice is divided into patches of size $N\times N$ and we extract 2D-LBP from each patch, while in the 3D case, the volume is divided into $N \times N \times N$ patches and 3D-LBP histograms are computed. In our experiments in Section 3, we set $N=7$, and vary the size of the codebook $K$ in the range $\{2, 4, 8, 16, 32, 64, 100 \}$.
 % \input{./content/method/BoFFramework.tex}
 
 \subsection{Classification}
