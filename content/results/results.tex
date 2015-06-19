@@ -29,13 +29,13 @@ Features 	& & &\multicolumn{4}{c}{\ac{lbp}}&	 & & & &\multicolumn{4}{c}{\ac{lbp}
 \centering
 \begin{tabular}{lcclcclcccclcclcccclcclc}
 \toprule
-Features 	& & &\multicolumn{4}{c}{\ac{lbp}+\ac{bow}}&	 & & & &\multicolumn{4}{c}{\ac{lbp}+\ac{bow}+\ac{sw}}& & & & &\multicolumn{4}{c}{\ac{lbptop}+\ac{bow}} &\\
+Features 	& & &\multicolumn{4}{c}{\ac{lbp}+\ac{bow}}&	 & & & &\multicolumn{4}{c}{\ac{lbp}+\ac{bow}+\ac{sw}}& & & & &\multicolumn{4}{c}{\ac{lbptop}+\ac{bow}+\ac{sw}} &\\
   \cmidrule(l){2-8}  \cmidrule(l){10-16}  \cmidrule(l){18-24}
 	       & & & SE & & & SP & & & & & SE & & & SP & & & & & SE & & & SP & \\
 \midrule
  $8^{riu2}$ 						& & & 50.00 & & & 81.25 & & & & & 75.00 & & & 87.50 & & & & & 62.50 & & & 68.75 & \\	
  $16^{riu2}$						& & & 57.50 & & & 68.75 & & & & & 81.25 & & & 75.00 & & & & & 56.25 & & & 37.50 & \\	
- $24^{riu2}$						& & & 50.00 & & & 50.00 & & & & & 68.75 & & & 62.5 & & & & & - & & & - & \\
+ $24^{riu2}$						& & & 50.00 & & & 50.00 & & & & & 68.75 & & & 62.5 & & & & & 37.50 & & & 43.75 & \\
  %$\lbrace 8,16,24\rbrace^{riu2}$	& & & 37.50 & & & 56.25 & & & & & \textbf{68.75} & & & \textbf{68.75} & & & & & \textbf{81.25} & & & \textbf{81.25} & \\
 \bottomrule
 \end{tabular}
@@ -44,17 +44,17 @@ Features 	& & &\multicolumn{4}{c}{\ac{lbp}+\ac{bow}}&	 & & & &\multicolumn{4}{c}
 
 
 \begin{table}
-\caption{Obtained results for \ac{lbp}+\ac{bow}+\ac{sw}, \ac{lbptop}+\ac{bow}+\ac{sw} features and \ac{rf} with 100 trees on Duke dataset. The \ac{bow} is computed with 32 visual words for all the experiments}
+\caption{Obtained results for \ac{lbp}+\ac{bow}+\ac{sw}, \ac{lbptop}+\ac{bow}+\ac{sw}, \ac{lbptop} features and \ac{rf} with 100 trees on Duke dataset. The \ac{bow} is computed with 32 visual words for all the experiments}
 \centering
-\begin{tabular}{lcclcclcccclcclc}
+\begin{tabular}{lcclcclcccclcclcccclcclc}
 \toprule
-Features 	& & &\multicolumn{4}{c}{\ac{lbp}+\ac{bow}+\ac{sw}}&	 & & & &\multicolumn{4}{c}{\ac{lbptop}+\ac{bow}} &\\
-  \cmidrule(l){2-8}  \cmidrule(l){10-16}  
-	       & & & SE & & & SP & & & & & SE & & & SP& \\
+Features 	& & &\multicolumn{4}{c}{\ac{lbp}+\ac{bow}+\ac{sw}}&	 & & & &\multicolumn{4}{c}{\ac{lbptop}+\ac{bow}+\ac{sw}} & & & & &\multicolumn{4}{c}{\ac{lbptop}} &\\
+  \cmidrule(l){2-8}  \cmidrule(l){10-16}  \cmidrule(l){18-24}
+	         & & & SE & & & SP & & & & & SE & & & SP & & & & & SE & & & SP & \\
 \midrule
- $8^{riu2}$ 						& & & 80.00 & & & 86.67 & & & & & 80.00 & & & 86.67 & \\	
- $16^{riu2}$						& & & 86.67 & & & 100.00 & & & & & 86.67 & & & 86.67 & \\	
- $24^{riu2}$						& & & 93.33 & & & 86.67 & & & & & 60.00 & & & 80.00 & \\
+ $8^{riu2}$ 						& & & 80.00 & & & 86.67 & & & & & 80.00 & & & 86.67 & & & & & 80.00 & & & 93.33 &\\	
+ $16^{riu2}$						& & & 86.67 & & & 100.00 & & & & & 86.67 & & & 86.67 & & & & & 73.33 & & & 86.67 & \\	
+ $24^{riu2}$						& & & 93.33 & & & 86.67 & & & & & 60.00 & & & 80.00 & & & & & 73.33 & & & 86.67 & \\
  %$\lbrace 8,16,24\rbrace^{riu2}$	& & & 37.50 & & & 56.25 & & & & & \textbf{68.75} & & & \textbf{68.75} & & & & & \textbf{81.25} & & & \textbf{81.25} & \\
 \bottomrule
 \end{tabular}
