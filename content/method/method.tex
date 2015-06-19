@@ -49,7 +49,6 @@ Subsequently, \ac{nlm}~\cite{buades2005non} filtering has been previously succes
 %The pre-processing stage in the proposed methodology applies an image denoising method to reduce the speckle noise in \ac{oct} images.
 %Since image details and texture of the original image are needed by the following stages in the method, \ac{nlm} algorithm \cite{buades2005non} is used. 
 \ac{nlm} filtering offers the advantage to use all the possible self-predictions that the image can provide rather than local or frequency filters such as Gaussian, anisotropic or Wiener filters~\cite{buades2005non}.
-The different parameters were empirically tested and fixed such that the patch size, the search window and the filtering parameter were set to $(15 \times 15)$, $(35 \times 35)$ and $0.4$, respectively.
 An example of filtering using \ac{nlm} filter on \ac{oct} image is depicted in Fig\,\ref{subfig:raw} and Fig.\,\ref{subfig:nlm}.
 
 \begin{figure}
@@ -67,7 +66,7 @@ An example of filtering using \ac{nlm} filter on \ac{oct} image is depicted in F
 
 \ac{lbp} is a texture descriptor based on the signs of the differences of a central pixel with respect to its neighboring pixels~\cite{ojala2002multiresolution}. 
 %More precisely, this descriptor encodes the intensity differences of a central pixel ($g_c$) with its neighboring pixels ($g_{p}$), within in a defined neighborhood of radius $R$. 
-These differences are encoded in terms of binary patterns as in~Eq.\,\ref{Eq:LBP}: 
+These differences are encoded in terms of binary patterns as in~Eq.\,\eqref{Eq:LBP}: 
 
 \begin{equation}\label{Eq:LBP}
 LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p} \ , \qquad s(\cdot) = \begin{cases}
@@ -83,7 +82,7 @@ LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p} \ , \qquad s(\cdot) = \begin{c
 %     0  & \quad \text{otherwise}\nonumber\\
 %   \end{cases} \ .
 % \end{align}
-\noindent where $g_c$, $g_{p}$ are the intensities of the central pixel and a given neighbor pixel, respectively. $P$ is the number of sampling points in the circle of radius $R$.
+\noindent where $g_c$, $g_{p}$ are the intensities of the central pixel and a given neighbor pixel, respectively. $P$ is the number of sampling points in the circle of radius $R$. Figure~\ref{subfig:lbp} illustrates the meaning of $P$ and $R$.
 
 Ojala\,\textit{et al.} further extend the original \ac{lbp} formulation to achieve rotation invariance at the expense of limiting the texture description to the notion of circular ``uniformity''~\cite{ojala2002multiresolution}. Volume encoding is later proposed by Zhao\,\textit{et al.} by computing \ac{lbp} descriptors in each orthogonal planes, so called \ac{lbptop}~\cite{zhao2012rotation}.
 
@@ -103,7 +102,7 @@ Each \ac{oct} volume can be described by its texture and we employed two strateg
 
 \begin{description}
 
-\item[Low-level representation] The texture descriptor of an \ac{oct} volume is defined as the concatenation of the \ac{lbp} histograms. 
+\item[Low-level representation] The texture descriptor of an \ac{oct} volume is defined as the concatenation of the \ac{lbp} histograms. Regarding the \ac{lbptop}, the feature descriptor is computed through the concatenation of the \ac{lbp} histograms of the three orthogonal planes. 
 Furthermore, the size of this entire feature vector is defined according to the mapping strategy chosen (see Fig.\,\ref{fig:ML-scheme}).
 
 \item[High-level representation] According to the chosen mapping strategy, the low-level representation can lead to a high dimensional feature space. 
@@ -112,9 +111,6 @@ High-level representation simplifies this high dimensional feature space into a 
 Although \ac{pca} maps the data according to their variance, \ac{bow} models represent the features by creating a visual dictionary, or ``codebook'', from the set of low-level features.
 The set of low-level features is clustered using \textit{k}-means to create the codebook with \textit{k} defining the number of visual words.
 After creating the codebook, each of the training example is represented as a histogram of size \textit{k} obtained by calculating the frequency of occurrences of each of the \textit{k} words in the features extracted from the training example. 
-
-
-Note that in the 2D case, each slice is divided into patches of size $N\times N$ and we extract 2D-LBP from each patch, while in the 3D case, the volume is divided into $N \times N \times N$ patches and 3D-LBP histograms are computed. In our experiments in Section 3, we set $N=7$, and vary the size of the codebook $K$ in the range $\{2, 4, 8, 16, 32, 64, 100 \}$.
 
 \end{description}
 
