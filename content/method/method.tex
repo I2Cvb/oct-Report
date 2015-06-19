@@ -4,13 +4,13 @@
 
 \section{Materials and Methods}
 
- This section offers a general description of the methodology proposed for OCT volume classification, whereas further details of some elements involved in the methodology are found as subsections.
+ This section offers a general description of the methodology proposed for \ac{oct} volume classification, whereas further details of some elements involved in the methodology are found as subsections.
   
   The proposed method, as well as, its experimental set-up are outlined in Fig.\,\ref{fig:ML-scheme}.
   The methodology is formulated as a standard classification procedure.
-  The available dataset with its acompaining \textcolor{red}{GT} are divided into training $(S1,l1)$ and testing $(S2,l2)$. 
-  The final goal is to represent $S1$ and $S2$ in the feature space $F$ by supplying $(sxF,l1)$ as a training to a classifier, using the trained classifier to estimate $l2$ from $S2xF$ and comparing the estimation with the \textcolor{red}{GT}.
-   To do so, the images forming the OCT volumes are preprocessed using non-local means (NL-means) algorithm \cite{buades2005non}. This algorithm preserve important details and textures of the original image, while reducing the noise.
+  The available dataset with its acompaining \ac{gt} are divided into training $(S1,l1)$ and testing $(S2,l2)$. 
+  The final goal is to represent $S1$ and $S2$ in the feature space $F$ by supplying $(sxF,l1)$ as a training to a classifier, using the trained classifier to estimate $l2$ from $S2xF$ and comparing the estimation with the \ac{gt}.
+  To do so, the images forming the \ac{oct} volumes are preprocessed using \ac{nlm} algorithm \cite{buades2005non}. This algorithm preserve important details and textures of the original image, while reducing the noise.
    The mapping stage is used to determine a discrete set of elements (or structures) $Z$  which is used for representing the volume $s  in S$.
    The feature detection stage correspond to measurements done in $G(Z)$ used for representing $s$ in terms of $ZxG$. 
    This mapping and feature detection steps can be found as a single-steps in the literature.
@@ -22,7 +22,7 @@
    
 \begin{figure}[h]
 \centering{
-  \includegraphics[width=1\textwidth]{mm.pdf}}
+  \includegraphics[width=1\textwidth]{ml}}
   \caption{Machine learning classification basic scheme}
   \label{fig:ML-scheme}
 \end{figure}
@@ -35,22 +35,22 @@
   \item DUC dataset
 \end{itemize}}\color{black}
 
-For evaluation purposes, the results have been cross-validated, by splitting the data in training and testing using a \color{red}{loo}\color{black} strategy. In this manner for each round a pair \color{red}{dce,normal} has been selected to be used as the round test set, while the rest of the dataset has been used as a training. \color{red}{Doing the cross validation in this manner, has the limitation that despite the fact that the results are robust due to the cross validation, no results variance can be reported. However, and despite this limitation, LOO has been choose due to the reduced amount of OCT volumes available.}\color{black}
+For evaluation purposes, the results have been cross-validated, by splitting the data in training and testing using a \ac{lopo} strategy. In this manner for each round a pair \color{red}{dce,normal} has been selected to be used as the round test set, while the rest of the dataset has been used as a training. \color{red}{Doing the cross validation in this manner, has the limitation that despite the fact that the results are robust due to the cross validation, no results variance can be reported. However, and despite this limitation, \ac{lopo} has been choose due to the reduced amount of \ac{oct} volumes available.}\color{black}
 
 \color{red}{The dataset blablablabal...}\color{black}
 \color{red}{The duc dataset blabla bla...}\color{black}
 
 \subsection{Image pre-processing}
-The pre-processing stage in the proposed methodology applies an image denoising method to reduce the speckle noise in OCT images. Since image details and texture of the original image are needed by the following stages in the method, non-local means (NL-means) algorithm \cite{buades2005non} is used. NL-means algorithm has the advantage to use all the possible self-predictions that the image can provide \cite{buades2005non} rather than local or frequency filters such as Gaussian, anisotropic or Wiener filters. \color{red}{Figure .. shows an OCT slice before and after denoising}\color{black}
+The pre-processing stage in the proposed methodology applies an image denoising method to reduce the speckle noise in \ac{oct} images. Since image details and texture of the original image are needed by the following stages in the method, \ac{nlm} algorithm \cite{buades2005non} is used. \ac{nlm} algorithm has the advantage to use all the possible self-predictions that the image can provide \cite{buades2005non} rather than local or frequency filters such as Gaussian, anisotropic or Wiener filters. \color{red}{Figure .. shows an \ac{oct} slice before and after denoising}\color{black}
 
 
 \subsection{Features extraction}
 Need to write something here !!!
 
 
-\subsubsection{Low-level features} are extracted considering the whole volume using LBP and 3D-LBP descriptors. 
-LBP is a discriminative rotation invariant feature descriptor proposed by Ojala et al. \cite{ojala2002multiresolution}. 
-LBP descriptor encodes the intensity differences of a central pixel ($g_c$) with its neighboring pixels ($g_{p}$), within in a defined neighborhood of radius $R$. The differences are encoded in terms of binary patterns as in~Eq. \ref{Eq:LBP}: 
+\subsubsection{Low-level features} are extracted considering the whole volume using \ac{lbp} and 3D-\ac{lbp} descriptors. 
+\ac{lbp} is a discriminative rotation invariant feature descriptor proposed by Ojala et al. \cite{ojala2002multiresolution}. 
+\ac{lbp} descriptor encodes the intensity differences of a central pixel ($g_c$) with its neighboring pixels ($g_{p}$), within in a defined neighborhood of radius $R$. The differences are encoded in terms of binary patterns as in~Eq. \ref{Eq:LBP}: 
 
 \begin{equation} \label{Eq:LBP}
 LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p},
@@ -58,7 +58,7 @@ LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p},
 where $s(a) = 1$ if $a \geq 0$, and $s(a)=0$ otherwise. $P$ is the number of sampling points in the circle of radius $R$.
 
 The binary patterns are calculated for each pixel in the given image and their histogram defines the final descriptor.
-The LBP histograms are computed for each slice of the volume and are concatenated into a single histogram.
+The \ac{lbp} histograms are computed for each slice of the volume and are concatenated into a single histogram.
 
 
 %In this research we consider rotation invariant features with uniform patterns. The uniform patterns are defined by the unifromity measure ($U$) of 2. Uniformity measure corresponds to the number of spatial transitions in the LBP pattern \cite{ojala2002multiresolution}. For instance patterns $00000000_{2}$ and $11111111_{2}$ have the U value of 0 while patterns like $01111111_{2}$ and $00000011_{2}$ have two transitions of 0/1 in their pattern, therfore they are considered as uniform patterns (see Eq. \ref{Eq:LBPru}). 
@@ -71,7 +71,7 @@ The LBP histograms are computed for each slice of the volume and are concatenate
 %    \end{equation}
 
 
-The LBP features are extracted from each B-slice of the volume and their histograms are concatenated to build the first low-level descriptor. The second low-level descriptor is defined in a similar manner as the first one. However principal component analysis (PCA) is applied to the concatenated histograms in order to reduce the dimensions. The first and second low-level descriptors are obtained using the 2D LBP descriptor. However the third low-level feature is obtained using 3D-LBP (LBP-TOP). Zhao et al. \cite{zhao2007dynamic} proposed Local Binary Pattern histogram from Three Orthogonal Planes (LBP-TOP) as a dynamic texture descriptor. This descriptor is an extension to normal LBP while it considers texture descriptors along the temporal domain. LBP-TOP considers the LBP pattern in three orthogonal planes (see Fig. \ref{fig:LBPTOP-framework}), XY, XT and YT. The obtained LBP patterns from the three planes are concatenated to form the final descriptor. 
+The \ac{lbp} features are extracted from each slice of the volume and their histograms are concatenated to build the first low-level descriptor. The second low-level descriptor is defined in a similar manner as the first one. However \ac{pca} is applied to the concatenated histograms in order to reduce the dimensions. The first and second low-level descriptors are obtained using the 2D \ac{lbp} descriptor. However the third low-level feature is obtained using 3D-\ac{lbp} (\ac{lbptop}). Zhao et al. \cite{zhao2007dynamic} proposed \ac{lbptop} as a dynamic texture descriptor. This descriptor is an extension to normal \ac{lbp} while it considers texture descriptors along the temporal domain. \ac{lbptop} considers the \ac{lbp} pattern in three orthogonal planes (see Fig. \ref{fig:LBPTOP-framework}), XY, XT and YT. The obtained \ac{lbp} patterns from the three planes are concatenated to form the final descriptor. The three low-level descriptors are calculated with the $P$ number of 8, 16 and 24 for the radius if 1, 2 and 3 respectively
 
 \begin{figure}
 \centering{
@@ -82,7 +82,7 @@ The LBP features are extracted from each B-slice of the volume and their histogr
 
 
 
-\subsubsection{High-level features} - are extracted using bag of features (BoF) approach which is illustrated in Fig. \ref{fig:BoF-framework}. After de-noising the images by non-local-mean approach, a patch detection step is carried out by identifying informative regions of the data. These patches can either be sampled densely or sparsely. The dense sampling extracts more information regarding the object appearance. However, it might retain redundant features. In the contrary sparse sampling is based on detecting salient key points from the most informative regions of the volume. Our proposed BoF approach is based on the first strategy. In this stage 2D-LBP (7$\times$7) and 3D-LBP-TOP patches (7$\times$7$\times$7) are extracted for each patient. Defining $N$ as the number of selected patches for each volume and $d$ as the number of feature dimensions, then each volume is characterized by a $N \times d$ feature matrix (see Fig. \ref{fig:BoF-framework}, ``feature extraction''). The next step in bag of features consists of building the dictionary of ``visual-words''. All the feature matrices of the training set are concatenated together and k-means clustering method (see Fig.\ref{fig:BoF-framework}, ``clustering'') is used to define the ``visual-words''. K-means is an iterative algorithm which finds k centroids by alternating assignment and update steps. The assignment steps is based on $L_{2}$ norm (Euclidean) distance. Different initialization methods can be used in order to assign the initial k clusters \cite {celebi2013comparative}, here the initial k clusters are selected based on greedy k-means++ method \cite{arthur2007k}. \textbf{Depending on the framework and application, different choices of the number of ``visual-words'' (number of $k$ clusters) can be made. In our framework, the number of clusters are varying in the range of [2 4 8 16 32 64 100]. SHOULD CHNAGE} Finally, the probability distribution (e.g., histogram) of the ``visual-words'' of each feature matrix is computed (feature quantization) and is used to feed the classifier to be trained. In the prediction stage, the histogram of the feature matrix corresponding to the new volume is computed using the previously learned dictionary and, finally, it is classified by the previously trained classifier.\\
+\subsubsection{High-level features} - are extracted using \ac{bof} approach which is illustrated in Fig. \ref{fig:BoF-framework}. After de-noising the images by non-local-mean approach, a patch detection step is carried out by identifying informative regions of the data. These patches can either be sampled densely or sparsely. The dense sampling extracts more information regarding the object appearance. However, it might retain redundant features. In the contrary sparse sampling is based on detecting salient key points from the most informative regions of the volume. Our proposed \ac{bof} approach is based on the first strategy. In this stage 2D-\ac{lbp} (7$\times$7) and 3D-\ac{lbptop} patches (7$\times$7$\times$7) are extracted for each patient. Defining $N$ as the number of selected patches for each volume and $d$ as the number of feature dimensions, then each volume is characterized by a $N \times d$ feature matrix (see Fig. \ref{fig:BoF-framework}, ``feature extraction''). The next step in bag of features consists of building the dictionary of ``visual-words''. All the feature matrices of the training set are concatenated together and k-means clustering method (see Fig.\ref{fig:BoF-framework}, ``clustering'') is used to define the ``visual-words''. K-means is an iterative algorithm which finds k centroids by alternating assignment and update steps. The assignment steps is based on $L_{2}$ norm (Euclidean) distance. Different initialization methods can be used in order to assign the initial k clusters \cite {celebi2013comparative}, here the initial k clusters are selected based on greedy k-means++ method \cite{arthur2007k}. \textbf{Depending on the framework and application, different choices of the number of ``visual-words'' (number of $k$ clusters) can be made. In our framework, the number of clusters are varying in the range of [2 4 8 16 32 64 100]. SHOULD CHNAGE} Finally, the probability distribution (e.g., histogram) of the ``visual-words'' of each feature matrix is computed (feature quantization) and is used to feed the classifier to be trained. In the prediction stage, the histogram of the feature matrix corresponding to the new volume is computed using the previously learned dictionary and, finally, it is classified by the previously trained classifier.\\
 
 
 % \input{./content/method/BoFFramework.tex}
