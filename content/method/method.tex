@@ -45,11 +45,11 @@ A \ac{rf} classifier has been selected to perform the classification of the \ac{
 \subsection{Image pre-processing}\label{subsec:prepro}
 
 \Ac{oct} images are known to be affected by a speckle noise~\cite{schmitt1999speckle}.
-Subsequently, \ac{nlm}~\cite{buades2005non} filtering has been previously successfully used in \ac{us} images to filter similar noise~\cite{Coupe2009} and is used in our framework to denoise each B-scan (i.e. $y$ axis) of the  \ac{oct} volumes (see in Fig.\,\ref{subfig:vol}).
+Subsequently, \ac{nlm}~\cite{buades2005non} filtering has been previously successfully used in \ac{us} images to filter similar noise~\cite{Coupe2009} and is used in our framework to denoise each B-scan (i.e. each $x-z$ slice) of the \ac{oct} volumes (see in Fig.\,\ref{subfig:vol}).
 %The pre-processing stage in the proposed methodology applies an image denoising method to reduce the speckle noise in \ac{oct} images.
 %Since image details and texture of the original image are needed by the following stages in the method, \ac{nlm} algorithm \cite{buades2005non} is used. 
 \ac{nlm} filtering offers the advantage to use all the possible self-predictions that the image can provide rather than local or frequency filters such as Gaussian, anisotropic or Wiener filters~\cite{buades2005non}.
-The different parameters were empirically tested and fixed such that the patch size, the search window and the filtering parameter $h$ were set to $(15 \times 15)$, $(35 \times 35)$ and $0.4$, respectively.
+The different parameters were empirically tested and fixed such that the patch size, the search window and the filtering parameter were set to $(15 \times 15)$, $(35 \times 35)$ and $0.4$, respectively.
 An example of filtering using \ac{nlm} filter on \ac{oct} image is depicted in Fig\,\ref{subfig:raw} and Fig.\,\ref{subfig:nlm}.
 
 \begin{figure}
@@ -72,8 +72,8 @@ These differences are encoded in terms of binary patterns as in~Eq.\,\ref{Eq:LBP
 \begin{equation}\label{Eq:LBP}
 LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p} \ , \qquad s(\cdot) = \begin{cases}
     1  & \ \text{if } (g_{p} - g_{c}) \geq 0\\
-    0  & \ \text{otherwise}\nonumber\\
-  \end{cases} \ .
+    0  & \ \text{otherwise}\\
+  \end{cases} \ ,
 \end{equation}
 
 % \begin{align} \label{Eq:LBP}
@@ -85,7 +85,7 @@ LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p} \ , \qquad s(\cdot) = \begin{c
 % \end{align}
 \noindent where $g_c$, $g_{p}$ are the intensities of the central pixel and a given neighbor pixel, respectively. $P$ is the number of sampling points in the circle of radius $R$.
 
-Ojala\,\textit{et al.} further extend the original \ac{lbp} formulation to achieve rotation invariance at the expense of limiting the texture description to the notion of circular ``uniformity''~\cite{ojala2002multiresolution}. Volume encoding is later proposed by Zhao\,\textit{et al.} by computing \ac{lbp} descriptors in each orthogonal planes, so called \ac{lbptop}.
+Ojala\,\textit{et al.} further extend the original \ac{lbp} formulation to achieve rotation invariance at the expense of limiting the texture description to the notion of circular ``uniformity''~\cite{ojala2002multiresolution}. Volume encoding is later proposed by Zhao\,\textit{et al.} by computing \ac{lbp} descriptors in each orthogonal planes, so called \ac{lbptop}~\cite{zhao2012rotation}.
 
 \begin{figure}
   \centering
@@ -93,23 +93,24 @@ Ojala\,\textit{et al.} further extend the original \ac{lbp} formulation to achie
   \subfigure[]{\label{subfig:lbp}\includegraphics[height=0.15\textheight]{lbp.png}} \hfill
   \subfigure[]{\label{subfig:lbptop}\includegraphics[height=0.15\textheight]{LBPTOP_fig.png}}
   \hspace*{\fill}
-  \caption{The different \ac{lbp} descriptors: (a) \ac{lbp} - (b) \ac{lbptop}.}
+  \caption{The different \ac{lbp} descriptors: (a) \ac{lbp} with $(R=2,P=16)$ - (b) \ac{lbptop}~\cite{zhao2012rotation}.}
   \label{fig:lbp}
 \end{figure}
 
 \subsection{Feature representation}\label{subsec:fearep}
 
-Texture is defined as the area property related to spatial repetition of structures, statistical properties of the area or both. Two strategies here are employed.
+Each \ac{oct} volume can be described by its texture and we employed two strategies.
 
 \begin{description}
 
-\item[Low-level representation] The texture descriptor of an \ac{oct} volume is defined as the concatenation of the \ac{lbp} histogram. Furthermore, the size of this entire feature vector is defined according to the mapping strategy chosen (see Fig.\,\ref{fig:ML-scheme}).
+\item[Low-level representation] The texture descriptor of an \ac{oct} volume is defined as the concatenation of the \ac{lbp} histograms. 
+Furthermore, the size of this entire feature vector is defined according to the mapping strategy chosen (see Fig.\,\ref{fig:ML-scheme}).
 
-\item[High-level representation] According to the chosen mapping strategy, the low-level representation can lead to a high dimensional feature space leading. 
+\item[High-level representation] According to the chosen mapping strategy, the low-level representation can lead to a high dimensional feature space. 
 High-level representation simplifies this high dimensional feature space into a more discriminant lower space. 
 \Ac{pca} and \ac{bow} among other methods, are used for this purpose~\cite{Sivic2003}. 
 Although \ac{pca} maps the data according to their variance, \ac{bow} models represent the features by creating a visual dictionary, or ``codebook'', from the set of low-level features.
-The set of low-level features is clustered using \textit{k}-means in order to create the codebook with \textit{k} defining the number of visual words.
+The set of low-level features is clustered using \textit{k}-means to create the codebook with \textit{k} defining the number of visual words.
 After creating the codebook, each of the training example is represented as a histogram of size \textit{k} obtained by calculating the frequency of occurrences of each of the \textit{k} words in the features extracted from the training example. 
 
 
