@@ -15,9 +15,6 @@ In this work, we validated our classification framework using two different data
 
 \end{description}
 
-\subsection{Validation}
-For evaluation purposes, the results have been cross-validated, by splitting the data in training and testing using a \ac{lopo} strategy. In this manner for each round a pair \ac{dme}, normal has been selected to be used as the round test set, while the rest of the datasets have been used as a training. Doing the cross validation in this manner, has the limitation that despite the fact that the results are robust due to the cross validation, no results variance can be reported. However, and despite this limitation, \ac{lopo} has been choose due to the reduced amount of OCT volumes available.
-
 \subsection{Experiments \& results}
 
 Both datasets are filtered to attenuate the effect of speckle noise. 
@@ -28,6 +25,7 @@ For both datasets, \ac{lbp} and \ac{lbptop} features are extracted for different
 Two different mapping strategies are used: (i) the 2D B-scan for \ac{lbp} or the 3D volume for \ac{lbptop} and (ii) a set of 2D \ac{sw} of size $(7 \times 7)$ for \ac{lbp} or the 3D sub-volume for \ac{lbptop} of size $(7 \times 7 \times 7)$.
 For the high-level representation, when \ac{pca} is applied, the eigenvectors associated with the largest $99\%$ cumulative eigenvalues are selected to reduce the number of dimensions. In \ac{bow} approach, an empirical search was performed to find the optimal number of visual words which is finally fixed to 32. 
 The number of trees for each \ac{rf} classifier was fixed to 100.
+For evaluation purposes, the results are cross-validated, by splitting the data in training and testing using a \ac{lopo} strategy. In this manner for each round a pair \ac{dme}, normal has been selected to be used as the round test set, while the rest of the datasets have been used as a training. Doing the cross validation in this manner, has the limitation that despite the fact that the results are robust due to the cross validation, no results variance can be reported. However, and despite this limitation, \ac{lopo} has been choose due to the reduced amount of \ac{oct} volumes available.
 
 \begin{description}
 
