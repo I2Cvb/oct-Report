@@ -25,7 +25,7 @@ Features 	& & &\multicolumn{4}{c}{\ac{lbp}}&	 & & & &\multicolumn{4}{c}{\ac{lbp}
 
 
 \begin{table}
-\caption{Obtained results for \ac{lbp}+\ac{bow}, \ac{lbp}+\ac{bow}+\ac{sw}, \ac{lbptop}+\ac{bow}+\ac{sw}features and \ac{rf} with 100 trees on SERI dataset. The \ac{bow} is computed with 32 visual words for all the experiments}
+\caption{Obtained results for \ac{lbp}+\ac{bow}, \ac{lbp}+\ac{bow}+\ac{sw}, and \ac{lbptop}+\ac{bow}+\ac{sw} features with $K$ = 32 and \ac{rf} with 100 trees using SERI dataset.}
 \centering
 \begin{tabular}{lcclcclcccclcclcccclcclc}
 \toprule
@@ -44,7 +44,7 @@ Features 	& & &\multicolumn{4}{c}{\ac{lbp}+\ac{bow}}&	 & & & &\multicolumn{4}{c}
 
 
 \begin{table}
-\caption{Obtained results for \ac{lbp}+\ac{bow}+\ac{sw}, \ac{lbptop}+\ac{bow}+\ac{sw}, \ac{lbptop} features and \ac{rf} with 100 trees on Duke dataset. The \ac{bow} is computed with 32 visual words for all the experiments}
+\caption{Obtained results for \ac{lbp}+\ac{bow}+\ac{sw}, and \ac{lbptop}+\ac{bow}+\ac{sw}, \ac{lbptop} features on Duke data sets. Number of \ac{rf} trees is set to 100 and $K$ = 32.}
 \centering
 \begin{tabular}{lcclcclcccclcclcccclcclc}
 \toprule
@@ -61,6 +61,25 @@ Features 	& & &\multicolumn{4}{c}{\ac{lbp}+\ac{bow}+\ac{sw}}&	 & & & &\multicolu
 \label{tab:DukeBoWResult}
 \end{table}
 
+
+\begin{table}
+\caption{Comparing the proposed method by \cite{Venhuizen2015} on SERI and Duke data sets with the \textbf{our two} best proposed methods. $K$ = 32 and \ac{rf} is trained using 100 tress}
+\centering
+\begin{tabular}{lcclcclcccclcclc}
+\toprule
+Data sets 	& & &\multicolumn{4}{c}{SERI}& & & & &\multicolumn{4}{c}{Duke} & \\
+  \cmidrule(l){2-8}  \cmidrule(l){10-16} 
+	         & & & SE & & & SP & & & & & SE & & & SP & \\
+\midrule
+ \cite{Venhuizen2015} 		& & & 61.53 & & & 58.82 & & & & & 71.42 & & & 68.75 & \\	
+\{\ac{lbp}+\ac{bow}+\ac{sw}\},$16^{riu2}$ 	& & & 81.25 & & & 75.00 & & & & & 86.67 & & & 100.00 &  \\
+\{\ac{lbptop}\},$16^{riu2}$				& & & 87.50 & & & 75.00 & & & & & 73.33 & & & 86.76 &  \\
+ 		    					
+
+\bottomrule
+\end{tabular}
+\label{tab:ComparisonRefandOurs}
+\end{table}
 
 %----------
 
