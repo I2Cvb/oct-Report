@@ -4,123 +4,155 @@
 
 \section{Materials and Methods}
 
-  This section offers a general description of the methodology proposed for OCT volume classification, whereas further details of some elements involved in the methodology are found as subsections.
-  
-  The proposed method, as well as, its experimental set-up are outlined in Fig.\,\ref{fig:ML-scheme}.
-  The methodology is formulated as a standard classification procedure.
-  The available dataset with its acompaining \textcolor{red}{GT} are divided into training $(S1,l1)$ and testing $(S2,l2)$. 
-  The final goal is to represent $S1$ and $S2$ in the feature space $F$ by supplying $(sxF,l1)$ as a training to a classifier, using the trained classifier to estimate $l2$ from $S2xF$ and comparing the estimation with the \textcolor{red}{GT}.
-   To do so, the images forming the OCT volumes are preprocessed using non-local means (NL-means) algorithm \cite{buades2005non}. This algorithm preserve important details and textures of the original image, while reducing the noise.
-   The mapping stage is used to determine a discrete set of elements (or structures) $Z$  which is used for representing the volume $s  in S$.
-   The feature detection stage correspond to measurements done in $G(Z)$ used for representing $s$ in terms of $ZxG$. 
-   This mapping and feature detection steps can be found as a single-steps in the literature.
-   The feature extraction procedure combines the elements in $Z$ and its measurements $G(Z)$ to create the final feature space $F$ and project $s$ on it.
-   
-   The design choices are all illustrated in Fig.\,\ref{fig:ML-scheme} and discussed further in this section. The work here presented does not discuss in detail neither the mapping, nor the adopted classifier, further than this lines.
-   As a possible mappings, for representing the volumes, 2D image slices of the volume and \color{red}{7x7x7}\color{black} sliding volumes, have been considered. 
-   As a classifier, a \color{red}{Random Forest}\color{black} using 100 trees, has been considered.
-   
+The proposed method, as well as, its experimental set-up for \ac{oct} volume classification are outlined in Fig.\,\ref{fig:ML-scheme}.
+The methodology is formulated as a standard classification procedure.
+% The available dataset with its acompaining \ac{gt} are divided into training $(S1,l1)$ and testing $(S2,l2)$. 
+% The final goal is to represent $S1$ and $S2$ in the feature space $F$ by supplying $(sxF,l1)$ as a training to a classifier, using the trained classifier to estimate $l2$ from $S2xF$ and comparing the estimation with the \ac{gt}.
+First, the \ac{oct} volumes are pre-processed as presented in details in Sect.\,\ref{subsec:prepro}.
+% This algorithm preserve important details and textures of the original image, while reducing the noise.
+The mapping stage is used to determine a discrete set of elements (or structures) which is used for representing the \ac{oct} volume.
+The feature extraction and representation are presented in depth in Sect.\,\ref{subsec:feaext} and Sect.\,\ref{subsec:fearep}.
+% The feature detection stage correspond to measurements done in $G(Z)$ used for representing $s$ in terms of $ZxG$. 
+% This mapping and feature detection steps can be found as a single-steps in the literature.
+% The feature extraction procedure combines the elements in $Z$ and its measurements $G(Z)$ to create the final feature space $F$ and project $s$ on it.
+A \ac{rf} classifier has been selected to perform the classification of the \ac{oct} volume~\cite{breiman2001random}.
+% The design choices are all illustrated in Fig.\,\ref{fig:ML-scheme} and discussed further in this section. The work here presented does not discuss in detail neither the mapping, nor the adopted classifier, further than this lines.
+% As a possible mappings, for representing the volumes, 2D image slices of the volume and \color{red}{7x7x7}\color{black} sliding volumes, have been considered. 
+% As a classifier, a \color{red}{Random Forest}\color{black} using 100 trees, has been considered.
+
+
+
 \begin{figure}[h]
-\centering{
-  \includegraphics[width=1\textwidth]{figures/mm.pdf}}
+  \centering{
+    \includegraphics[width=1\textwidth]{ml}}
   \caption{Machine learning classification basic scheme}
   \label{fig:ML-scheme}
 \end{figure}
 
-\subsection{Data}
-\color{red}{
-\begin{itemize}
-  \item cross-validation
-  \item our dataset
-  \item DUC dataset
-\end{itemize}}\color{black}
+% \subsection{Data}
+% \color{red}{
+%   \begin{itemize}
+%   \item cross-validation
+%   \item our dataset
+%   \item DUC dataset
+%   \end{itemize}}\color{black}
 
-For evaluation purposes, the results have been cross-validated, by splitting the data in training and testing using a \color{red}{loo}\color{black} strategy. In this manner for each round a pair \color{red}{dce,normal} has been selected to be used as the round test set, while the rest of the dataset has been used as a training. \color{red}{Doing the cross validation in this manner, has the limitation that despite the fact that the results are robust due to the cross validation, no results variance can be reported. However, and despite this limitation, LOO has been choose due to the reduced amount of OCT volumes available.}\color{black}
+% For evaluation purposes, the results have been cross-validated, by splitting the data in training and testing using a \ac{lopo} strategy. In this manner for each round a pair \color{red}{dce,normal} has been selected to be used as the round test set, while the rest of the dataset has been used as a training. \color{red}{Doing the cross validation in this manner, has the limitation that despite the fact that the results are robust due to the cross validation, no results variance can be reported. However, and despite this limitation, \ac{lopo} has been choose due to the reduced amount of \ac{oct} volumes available.}\color{black}
 
-\color{red}{The dataset blablablabal...}\color{black}
-\color{red}{The duc dataset blabla bla...}\color{black}
+% \color{red}{The dataset blablablabal...}\color{black}
+% \color{red}{The duc dataset blabla bla...}\color{black}
 
-\subsection{Image pre-processing}
-The pre-processing stage in the proposed methodology applies an image denoising method to reduce the speckle noise in OCT images. Since image details and texture of the original image are needed by the following stages in the method, non-local means (NL-means) algorithm \cite{buades2005non} is used. NL-means algotithm has the advantage to use all the possible self-predictions that the image can provide \cite{buades2005non} rather than local or frequency filters such as Gaussian, anisotropic or Wiener filters. \color{red}{Figure .. shows an OCT slice before and after denoising}\color{black}
+\subsection{Image pre-processing}\label{subsec:prepro}
 
-\subsection{Feature detection}
-Why texture
-\subsubsection{LBP}
-\subsubsection{LBPTOP}
-
-\subsection{Feature extraction}
-\begin{itemize}
-  \item explanation of why feat-extraction
-  \item Histograms concatenation
-  \item PCA(Histgrams concatenation)
-\end{itemize}
-
-\color{blue}
-%\subsection{Image denoising}
-%In order to preserve the details and the texture of the original image, non-local means (NL-means) algorithm \cite{buades2005non} is used. NL-means algotithm has the advantage to use all the possible self-predictions that the image can provide \cite{buades2005non} rather than local or frequency filtes such as Gaussian, anisotropic or Wiener filters. Given the noisy image $\upsilon = \lbrace \upsilon(i) \vert  i\in I\rbrace$, the estimated value for a pixel $i$, is computed as a weighted average of all the pixels in the image, 
-%\[ NL[\upsilon](i) = \sum_{j\in I}  w(i,j) \upsilon(j),\]
-%The family of the wights $\lbrace w(i,j)\rbrace j$ depend on the Euclidean distance of the intenisty gray level vectors of the two pixels $i$ and $j$. These wights are defined as,  
-%\[ w(i,j) = \frac{1}{Z(i)} e^{-\frac{\Vert u(N_{i} - N_{j}) \Vert^2_{2,a}}{h^{2}}}\]
-%Where $a > 0$ is the standard deviation of the Gaussian kernel, $Z(i)$ is the normalizing factor and $h$ acts as a degree of filtering \cite{buades2005non}.
-%\[Z(i) = \sum_{j} e^{-\frac{\Vert \upsilon(N_{i}) - \upsilon(N_{i}) \Vert^{2}_{2,a}}{h^{2}}}\]
-
-%Figure {\color{red} reference to fig} \color{black} shows one slide before and after denoising.
-
-
-\subsection{Features extraction and representation}
-We are extracting the 2D and 3D LBP features in low and high level manners. The aforementioned approaches are describe in the following.
-
-
-\subsubsection{Low-level features} - are extracted considering the whole volume using LBP and LBP-TOP descriptors. LBP is a discriminative rotation invariant feature descriptor proposed by Ojala et al. \cite{ojala2002multiresolution}. In this descriptor a central pixel ($g_c$) in a defined neighborhood by $R$ radius is compared to its neighborhood pixels ($g_{p}$, with distance of $R$ from the central pixel) and their differences are encoded in terms of binary patterns (see Eq. \ref{Eq:LBP}). The binary patterns are calculated for each pixel in the given image and their histogram, defines the final descriptor.
-
-	\begin{equation} \label{Eq:LBP}
- 		LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p}
-	\end{equation}
-In this research we consider rotation invariant features with uniform patterns. The uniform patterns are defined by the unifromity measure ($U$) of 2. Uniformity measure corresponds to the number of spatial transitions in the LBP pattern \cite{ojala2002multiresolution}. For instance patterns $00000000_{2}$ and $11111111_{2}$ have the U value of 0 while patterns like $01111111_{2}$ and $00000011_{2}$ have two transitions of 0/1 in their pattern, therfore they are considered as uniform patterns (see Eq. \ref{Eq:LBPru}). 
-	\begin{equation}\label{Eq:LBPru}
-		LBP_{P,R}^{riu2} = 
-  			\begin{cases}
-    				 \sum_{p=0}^{P-1}s(g_{p} - g_{c}) & \text{ if } U(LBP_{P,R}) \le 2\\
-    				  P+1 & \text{otherwise,}
-  			\end{cases}
-    \end{equation}
-The LBP features are extracted from each slice of the volume and their histograms are concatenated to build the first low-level descriptor. The second low-level descriptor is defined in a similar manner as the first one. However principal component analysis (PCA) is applied to the concatenated histograms in order to reduce the dimensions. The first and second low-level descriptors are obtained using the 2D LBP descriptor. However the third low-level feature is obtained using 3D-LBP (LBP-TOP). Zhao et al. \cite{zhao2007dynamic} proposed Local Binary Pattern histogram from Three Orthogonal Planes (LBP-TOP) as a dynamic texture descriptor. This descriptor is an extension to normal LBP while it considers texture descriptors along the temporal domain. LBP-TOP considers the LBP pattern in three orthogonal planes (see Fig. \ref{fig:LBPTOP-framework}), XY, XT and YT. The obtained LBP patterns from the three planes are concatenated to form the final descriptor. The three low-level descriptors are calculated with the $P$ number of 8, 16 and 24 for the radius if 1, 2 and 3 respectively
+\Ac{oct} images are known to be affected by a speckle noise~\cite{schmitt1999speckle}.
+Subsequently, \ac{nlm}~\cite{buades2005non} filtering has been previously successfully used in \ac{us} images to filter similar noise~\cite{Coupe2009} and is used in our framework to denoise each B-scan (i.e. $y$ axis) of the  \ac{oct} volumes (see in Fig.\,\ref{subfig:vol}).
+%The pre-processing stage in the proposed methodology applies an image denoising method to reduce the speckle noise in \ac{oct} images.
+%Since image details and texture of the original image are needed by the following stages in the method, \ac{nlm} algorithm \cite{buades2005non} is used. 
+\ac{nlm} filtering offers the advantage to use all the possible self-predictions that the image can provide rather than local or frequency filters such as Gaussian, anisotropic or Wiener filters~\cite{buades2005non}.
+The different parameters were empirically tested and fixed such that the patch size, the search window and the filtering parameter $h$ were set to $(15 \times 15)$, $(35 \times 35)$ and $0.4$, respectively.
+An example of filtering using \ac{nlm} filter on \ac{oct} image is depicted in Fig\,\ref{subfig:raw} and Fig.\,\ref{subfig:nlm}.
 
 \begin{figure}
-\centering{
-	\includegraphics[width=0.40\textwidth]{figures/LBPTOP_fig.png}}
-	\caption{LBP-TOP framework, the image is taken from \cite{JiangEtAl13}}
-	\label{fig:LBPTOP-framework}
+  \centering
+  \hspace*{\fill}
+  \subfigure[]{\label{subfig:vol}\includegraphics[width=0.3\linewidth]{volume.png}} \hfill
+  \subfigure[]{\label{subfig:raw}\includegraphics[width=0.3\linewidth]{raw_crop.png}} \hfill
+  \subfigure[]{\label{subfig:nlm}\includegraphics[width=0.3\linewidth]{nlm_crop.png}}
+  \hspace*{\fill}
+  \caption{\ac{oct}: (a) Organization of the \ac{oct} data - (b) Original image - (c) \ac{nlm} filtering.}
+  \label{fig:denoise}
 \end{figure}
 
- 
-% In the proposed framework we consider different neighborhoods ($P$) of 8, 16, 32 and 64 pixels with radius of 1, 2, 3 and 4 respectively.
+\subsection{Features extraction}\label{subsec:feaext}
 
-%%% VLBP 
-% Zhao et al. \cite{zhao2007dynamic} first proposed to model the dynamic texture with Volume Local Binary Pattern (VLBP) or 3D-LBP. VLBP considers the joint distribution of the gray level pixels in a local neighborhood in a monochrome dynamic texture sequence. Figure \ref{fig:VLBP-framework} illustrates the procedure of VLBP for a texture volume. The final length of VLBP feature vector, as it is shown in Fig.\ref{fig:VLBP-framework}, depends on the number of neighboring points ($P$). As this number increases, the final dimension of the feature vector increase by $2^{3P+2}$. Due to this rapid increase, adapting VLBP for large number of neighboring points will be complex.
+\ac{lbp} is a texture descriptor based on the signs of the differences of a central pixel with respect to its neighboring pixels~\cite{ojala2002multiresolution}. 
+%More precisely, this descriptor encodes the intensity differences of a central pixel ($g_c$) with its neighboring pixels ($g_{p}$), within in a defined neighborhood of radius $R$. 
+These differences are encoded in terms of binary patterns as in~Eq.\,\ref{Eq:LBP}: 
 
-% \begin{figure}[h]
-% \centering{
-% 	\includegraphics[width=1\textwidth]{figures/VLBP_fig_h.png}}
-% 	\caption{VLBP framework}
-% 	\label{fig:VLBP-framework}
-% \end{figure}
+\begin{equation}\label{Eq:LBP}
+LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p} \ , \qquad s(\cdot) = \begin{cases}
+    1  & \ \text{if } (g_{p} - g_{c}) \geq 0\\
+    0  & \ \text{otherwise}\nonumber\\
+  \end{cases} \ .
+\end{equation}
 
-\subsubsection{High-level features} - are extracted using bag of features (BoF) approach which is illustrated in Fig. \ref{fig:BoF-framework}. After de-noising the images by non-local-mean approach, a patch detection step is carried out by identifying informative regions of the data. These patches can either be sampled densely or sparsely. The dense sampling extracts more information regarding the object appearance. However, it might retain redundant features. In the contrary sparse sampling is based on detecting salient key points from the most informative regions of the volume. Our proposed BoF approach is based on the first strategy. In this stage 2D-LBP (7$\times$7) and 3D-LBP-TOP patches (7$\times$7$\times$7) are extracted for each patient. Defining $N$ as the number of selected patches for each volume and $d$ as the number of feature dimensions, then each volume is characterized by a $N \times d$ feature matrix (see Fig. \ref{fig:BoF-framework}, ``feature extraction''). The next step in bag of features consists of building the dictionary of ``visual-words''. All the feature matrices of the training set are concatenated together and k-means clustering method (see Fig.\ref{fig:BoF-framework}, ``clustering'') is used to define the ``visual-words''. K-means is an iterative algorithm which finds k centroids by alternating assignment and update steps. The assignment steps is based on $L_{2}$ norm (Euclidean) distance. Different initialization methods can be used in order to assign the initial k clusters \cite {celebi2013comparative}, here the initial k clusters are selected based on greedy k-means++ method \cite{arthur2007k}. \textbf{Depending on the framework and application, different choices of the number of ``visual-words'' (number of $k$ clusters) can be made. In our framework, the number of clusters are varying in the range of [2 4 8 16 32 64 100]. SHOULD CHNAGE} Finally, the probability distribution (e.g., histogram) of the ``visual-words'' of each feature matrix is computed (feature quantization) and is used to feed the classifier to be trained. In the prediction stage, the histogram of the feature matrix corresponding to the new volume is computed using the previously learned dictionary and, finally, it is classified by the previously trained classifier.\\
+% \begin{align} \label{Eq:LBP}
+% LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p}& \ , \\
+% \text{where } &s(\cdot) = \begin{cases}
+%     1  & \quad \text{if } g_{p} - g_{c} \geq 0\\
+%     0  & \quad \text{otherwise}\nonumber\\
+%   \end{cases} \ .
+% \end{align}
+\noindent where $g_c$, $g_{p}$ are the intensities of the central pixel and a given neighbor pixel, respectively. $P$ is the number of sampling points in the circle of radius $R$.
+
+Ojala\,\textit{et al.} further extend the original \ac{lbp} formulation to achieve rotation invariance at the expense of limiting the texture description to the notion of circular ``uniformity''~\cite{ojala2002multiresolution}. Volume encoding is later proposed by Zhao\,\textit{et al.} by computing \ac{lbp} descriptors in each orthogonal planes, so called \ac{lbptop}.
+
+\begin{figure}
+  \centering
+  \hspace*{\fill}
+  \subfigure[]{\label{subfig:lbp}\includegraphics[height=0.15\textheight]{lbp.png}} \hfill
+  \subfigure[]{\label{subfig:lbptop}\includegraphics[height=0.15\textheight]{LBPTOP_fig.png}}
+  \hspace*{\fill}
+  \caption{The different \ac{lbp} descriptors: (a) \ac{lbp} - (b) \ac{lbptop}.}
+  \label{fig:lbp}
+\end{figure}
+
+\subsection{Feature representation}\label{subsec:fearep}
+
+Texture is defined as the area property related to spatial repetition of structures, statistical properties of the area or both. Two strategies here are employed.
+
+\begin{description}
+
+\item[Low-level representation] The texture descriptor of an \ac{oct} volume is defined as the concatenation of the \ac{lbp} histogram. Furthermore, the size of this entire feature vector is defined according to the mapping strategy chosen (see Fig.\,\ref{fig:ML-scheme}).
+
+\item[High-level representation] According to the chosen mapping strategy, the low-level representation can lead to a high dimensional feature space leading. 
+High-level representation simplifies this high dimensional feature space into a more discriminant lower space. 
+\Ac{pca} and \ac{bow} among other methods, are used for this purpose~\cite{Sivic2003}. 
+Although \ac{pca} maps the data according to their variance, \ac{bow} models represent the features by creating a visual dictionary, or ``codebook'', from the set of low-level features.
+The set of low-level features is clustered using \textit{k}-means in order to create the codebook with \textit{k} defining the number of visual words.
+After creating the codebook, each of the training example is represented as a histogram of size \textit{k} obtained by calculating the frequency of occurrences of each of the \textit{k} words in the features extracted from the training example. 
 
 
-\input{BoFFrameWork.tex}
+Note that in the 2D case, each slice is divided into patches of size $N\times N$ and we extract 2D-LBP from each patch, while in the 3D case, the volume is divided into $N \times N \times N$ patches and 3D-LBP histograms are computed. In our experiments in Section 3, we set $N=7$, and vary the size of the codebook $K$ in the range $\{2, 4, 8, 16, 32, 64, 100 \}$.
 
-\subsection{Classification}
+\end{description}
 
-Random Forest is an ensemble of decision trees and was introduced by \cite{breiman2001random}.
-The ensemble uses each tree to predict an output and finalize the ultimate
-prediction by aggregating the outputs of all tress. This classifier learns the
-data by training multiple decision trees on bootstrap samples of the original
-data. Each bootstrap of D dimension is used for training one decision tree
-and at each node, the best split among randomly (d << D) selected subset
-of descriptors is chosen. Each tree is grown to its maximum length without
-any pruning. In the prediction stage a sample is voted by each tree and it is
-labeled by considering the majority of the votes.
+%\subsubsection{Low-level features} are extracted considering the whole volume using LBP and 3D-LBP descriptors. 
+% LBP is a discriminative rotation invariant feature descriptor proposed by Ojala et al. \cite{ojala2002multiresolution}. 
+% LBP descriptor encodes the intensity differences of a central pixel ($g_c$) with its neighboring pixels ($g_{p}$), within in a defined neighborhood of radius $R$. The differences are encoded in terms of binary patterns as in~Eq. \ref{Eq:LBP}: 
 
-\color{black}
+% \begin{equation} \label{Eq:LBP}
+% LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p},
+% \end{equation}
+% where $s(a) = 1$ if $a \geq 0$, and $s(a)=0$ otherwise. $P$ is the number of sampling points in the circle of radius $R$.
+
+% The binary patterns are calculated for each pixel in the given image and their histogram defines the final descriptor.
+% The LBP histograms are computed for each slice of the volume and are concatenated into a single histogram. This forms the first low-level feature.
+% The second low-level descriptor is defined in a similar manner as the first one. However principal component analysis (PCA) is applied to the concatenated histograms in order to reduce the dimension.
+
+% For the third low-level descriptor, since the OCT data is a 3D volume, following the approach of Zhao \textit{et al}. \cite{zhao2007dynamic}, we extract 3D-LBP by considering three orthogonal planes, XY, XZ and YZ. Note that $X$, $Y$, and $Z$ are respectively the horizontal, vertical and depth direction of the OCT volume as shown in Figure~\ref{fig:oct_data}(a).
+% LBP patterns are computed for each of the three planes, and the obtained three histograms are concatenated into a final 3D-LBP descriptor.
+
+
+
+% \subsubsection{High-level features} - are extracted using bag of words (BoW) approach which is a feature representation technique based of creating a visual dictionary, or codebook, from a set of low-level features~\cite{Sivic2003}. 
+% To do so, the OCT images are divided into local patches and LBP histograms are computed for every local patch.
+% This set of LBP histograms is then used to create a codebook using K-means clustering. If we define $K$ clusters in the feature space, then the visual dictionary will contain $K$ words each one being the center of one cluster.
+% After creating the codebook, each of the training example is represented as a histogram of size $K$ obtained by calculating the frequency of occurrences of each of the $K$ words in the features extracted from the training example. 
+% Note that in the 2D case, each slice is divided into patches of size $N\times N$ and we extract 2D-LBP from each patch, while in the 3D case, the volume is divided into $N \times N \times N$ patches and 3D-LBP histograms are computed. In our experiments in Section 3, we set $N=7$, and vary the size of the codebook $K$ in the range $\{2, 4, 8, 16, 32, 64, 100 \}$.
+% % \input{./content/method/BoFFramework.tex}
+
+% \subsection{Classification}
+
+% Random Forest is an ensemble of decision trees and was introduced by~\cite{breiman2001random}.
+% The ensemble uses each tree to predict an output and finalize the ultimate prediction by aggregating the outputs of all tress. 
+% This classifier learns the data by training multiple decision trees on bootstrap samples of the original data. 
+% Each bootstrap of D dimension is used for training one decision tree and at each node, the best split among randomly ($d << D$) selected subset of descriptors is chosen. 
+% Each tree is grown to its maximum length without any pruning. 
+% In the prediction stage a sample is voted by each tree and it is labeled by considering the majority of the votes.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End: 

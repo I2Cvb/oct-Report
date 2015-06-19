@@ -14,17 +14,22 @@
 \maketitle 
 
 \begin{abstract}
-\acresetall  % reset the acronyms from the title (if any)
-THIS IS THE ABSTRACT
-\end{abstract}
+This paper addresses the problem of automatic classification of \ac{sdoct} data for automatic identification of patients with \ac{dme} versus normal subjects.
+Our method is based on \ac{lbp} features to describe the texture of \ac{oct} images and we compare different \ac{lbp} features extraction approaches to compute a single signature for the whole \ac{oct} volume.
+Experimental results with two datasets of respectively 32 and 30 \ac{oct} volumes show that ...(TB BE WRITTEN BASED ON RESULTS)
 
-\keywords{kw1, kw2}
+Moreover, the experiments show that the proposed method achieves better classification performances than other recent published works.
+
+\keywords{\acl{dme}, \acl{oct}, acs{dme}, \acs{oct}, \ac{lbp}.}
+\end{abstract}
 
 %% Incldue the content without .tex extension
 \acresetall  % reset the acronyms from the abstract
-\include*{content/intro/intro}          % the file wihtout .tex
-\include*{content/method/method} 
-\include*{content/results/results}
+\input{content/intro/intro}          % the file wihtout .tex
+\input{content/method/method} 
+\input{content/experiment/experiment}
+\input{content/results/results}
+
 
 \section{Conclusions}
 
