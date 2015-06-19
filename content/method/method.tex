@@ -4,36 +4,36 @@
 
 \section{Materials and Methods}
 
- This section offers a general description of the methodology proposed for \ac{oct} volume classification, whereas further details of some elements involved in the methodology are found as subsections.
-  
-  The proposed method, as well as, its experimental set-up are outlined in Fig.\,\ref{fig:ML-scheme}.
-  The methodology is formulated as a standard classification procedure.
-  The available dataset with its acompaining \ac{gt} are divided into training $(S1,l1)$ and testing $(S2,l2)$. 
-  The final goal is to represent $S1$ and $S2$ in the feature space $F$ by supplying $(sxF,l1)$ as a training to a classifier, using the trained classifier to estimate $l2$ from $S2xF$ and comparing the estimation with the \ac{gt}.
-  To do so, the images forming the \ac{oct} volumes are preprocessed using \ac{nlm} algorithm \cite{buades2005non}. This algorithm preserve important details and textures of the original image, while reducing the noise.
-   The mapping stage is used to determine a discrete set of elements (or structures) $Z$  which is used for representing the volume $s  in S$.
-   The feature detection stage correspond to measurements done in $G(Z)$ used for representing $s$ in terms of $ZxG$. 
-   This mapping and feature detection steps can be found as a single-steps in the literature.
-   The feature extraction procedure combines the elements in $Z$ and its measurements $G(Z)$ to create the final feature space $F$ and project $s$ on it.
-   
-   The design choices are all illustrated in Fig.\,\ref{fig:ML-scheme} and discussed further in this section. The work here presented does not discuss in detail neither the mapping, nor the adopted classifier, further than this lines.
-   As a possible mappings, for representing the volumes, 2D image slices of the volume and \color{red}{7x7x7}\color{black} sliding volumes, have been considered. 
-   As a classifier, a \color{red}{Random Forest}\color{black} using 100 trees, has been considered.
-   
+This section offers a general description of the methodology proposed for \ac{oct} volume classification, whereas further details of some elements involved in the methodology are found as subsections.
+
+The proposed method, as well as, its experimental set-up are outlined in Fig.\,\ref{fig:ML-scheme}.
+The methodology is formulated as a standard classification procedure.
+The available dataset with its acompaining \ac{gt} are divided into training $(S1,l1)$ and testing $(S2,l2)$. 
+The final goal is to represent $S1$ and $S2$ in the feature space $F$ by supplying $(sxF,l1)$ as a training to a classifier, using the trained classifier to estimate $l2$ from $S2xF$ and comparing the estimation with the \ac{gt}.
+To do so, the images forming the \ac{oct} volumes are preprocessed using \ac{nlm} algorithm \cite{buades2005non}. This algorithm preserve important details and textures of the original image, while reducing the noise.
+The mapping stage is used to determine a discrete set of elements (or structures) $Z$  which is used for representing the volume $s  in S$.
+The feature detection stage correspond to measurements done in $G(Z)$ used for representing $s$ in terms of $ZxG$. 
+This mapping and feature detection steps can be found as a single-steps in the literature.
+The feature extraction procedure combines the elements in $Z$ and its measurements $G(Z)$ to create the final feature space $F$ and project $s$ on it.
+
+The design choices are all illustrated in Fig.\,\ref{fig:ML-scheme} and discussed further in this section. The work here presented does not discuss in detail neither the mapping, nor the adopted classifier, further than this lines.
+As a possible mappings, for representing the volumes, 2D image slices of the volume and \color{red}{7x7x7}\color{black} sliding volumes, have been considered. 
+As a classifier, a \color{red}{Random Forest}\color{black} using 100 trees, has been considered.
+
 \begin{figure}[h]
-\centering{
-  \includegraphics[width=1\textwidth]{ml}}
+  \centering{
+    \includegraphics[width=1\textwidth]{ml}}
   \caption{Machine learning classification basic scheme}
   \label{fig:ML-scheme}
 \end{figure}
 
 \subsection{Data}
 \color{red}{
-\begin{itemize}
+  \begin{itemize}
   \item cross-validation
   \item our dataset
   \item DUC dataset
-\end{itemize}}\color{black}
+  \end{itemize}}\color{black}
 
 For evaluation purposes, the results have been cross-validated, by splitting the data in training and testing using a \ac{lopo} strategy. In this manner for each round a pair \color{red}{dce,normal} has been selected to be used as the round test set, while the rest of the dataset has been used as a training. \color{red}{Doing the cross validation in this manner, has the limitation that despite the fact that the results are robust due to the cross validation, no results variance can be reported. However, and despite this limitation, \ac{lopo} has been choose due to the reduced amount of \ac{oct} volumes available.}\color{black}
 
@@ -41,8 +41,24 @@ For evaluation purposes, the results have been cross-validated, by splitting the
 \color{red}{The duc dataset blabla bla...}\color{black}
 
 \subsection{Image pre-processing}
-The pre-processing stage in the proposed methodology applies an image denoising method to reduce the speckle noise in \ac{oct} images. Since image details and texture of the original image are needed by the following stages in the method, \ac{nlm} algorithm \cite{buades2005non} is used. \ac{nlm} algorithm has the advantage to use all the possible self-predictions that the image can provide \cite{buades2005non} rather than local or frequency filters such as Gaussian, anisotropic or Wiener filters. \color{red}{Figure .. shows an \ac{oct} slice before and after denoising}\color{black}
 
+\Ac{oct} images are known to be affected by a speckle noise~\cite{schmitt1999speckle}.
+Subsequently, \ac{nlm}~\cite{buades2005non} filtering has been previously successfully used in \ac{us} images to filter similar noise~\cite{Coupe2009} and is used in our framework to denoise each slice of the  \ac{oct} volumes.
+%The pre-processing stage in the proposed methodology applies an image denoising method to reduce the speckle noise in \ac{oct} images.
+%Since image details and texture of the original image are needed by the following stages in the method, \ac{nlm} algorithm \cite{buades2005non} is used. 
+\ac{nlm} filtering offers the advantage to use all the possible self-predictions that the image can provide rather than local or frequency filters such as Gaussian, anisotropic or Wiener filters~\cite{buades2005non}.
+The different parameters were empirically tested and fixed such that the patch size, the search window and the filtering parameter $h$ were set to $(15 \times 15)$, $(35 \times 35)$ and $0.4$, respectively.
+Figure~\ref{fig:denoise} depicts an example of filtering using \ac{nlm} filter on \ac{oct} image.
+
+\begin{figure}
+  \centering
+  \hspace*{\fill}
+  \subfigure[]{\label{subfig:raw}\includegraphics[width=0.3\linewidth]{raw_crop.png}} \hfill
+  \subfigure[]{\label{subfig:nlm}\includegraphics[width=0.3\linewidth]{nlm_crop.png}}
+  \hspace*{\fill}
+  \caption{Noise filtering via \ac{nlm}: (a) Original image - (b) \ac{nlm} filtering.}
+  \label{fig:denoise}
+\end{figure}
 
 \subsection{Features extraction}
 Need to write something here !!!
@@ -53,7 +69,7 @@ Need to write something here !!!
 \ac{lbp} descriptor encodes the intensity differences of a central pixel ($g_c$) with its neighboring pixels ($g_{p}$), within in a defined neighborhood of radius $R$. The differences are encoded in terms of binary patterns as in~Eq. \ref{Eq:LBP}: 
 
 \begin{equation} \label{Eq:LBP}
-LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p},
+  LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p},
 \end{equation}
 where $s(a) = 1$ if $a \geq 0$, and $s(a)=0$ otherwise. $P$ is the number of sampling points in the circle of radius $R$.
 
@@ -61,23 +77,23 @@ The binary patterns are calculated for each pixel in the given image and their h
 The \ac{lbp} histograms are computed for each slice of the volume and are concatenated into a single histogram.
 
 
-%In this research we consider rotation invariant features with uniform patterns. The uniform patterns are defined by the unifromity measure ($U$) of 2. Uniformity measure corresponds to the number of spatial transitions in the LBP pattern \cite{ojala2002multiresolution}. For instance patterns $00000000_{2}$ and $11111111_{2}$ have the U value of 0 while patterns like $01111111_{2}$ and $00000011_{2}$ have two transitions of 0/1 in their pattern, therfore they are considered as uniform patterns (see Eq. \ref{Eq:LBPru}). 
-%\begin{equation}\label{Eq:LBPru}
-%  LBP_{P,R}^{riu2} = 
-%  \begin{cases}
+% In this research we consider rotation invariant features with uniform patterns. The uniform patterns are defined by the unifromity measure ($U$) of 2. Uniformity measure corresponds to the number of spatial transitions in the LBP pattern \cite{ojala2002multiresolution}. For instance patterns $00000000_{2}$ and $11111111_{2}$ have the U value of 0 while patterns like $01111111_{2}$ and $00000011_{2}$ have two transitions of 0/1 in their pattern, therfore they are considered as uniform patterns (see Eq. \ref{Eq:LBPru}). 
+% \begin{equation}\label{Eq:LBPru}
+%   LBP_{P,R}^{riu2} = 
+%   \begin{cases}
 %     \sum_{p=0}^{P-1}s(g_{p} - g_{c}) & \text{ if } U(LBP_{P,R}) \le 2\\
-%       P+1 & \text{otherwise,}
-%       \end{cases}
-%    \end{equation}
+%     P+1 & \text{otherwise,}
+%   \end{cases}
+% \end{equation}
 
 
 The \ac{lbp} features are extracted from each slice of the volume and their histograms are concatenated to build the first low-level descriptor. The second low-level descriptor is defined in a similar manner as the first one. However \ac{pca} is applied to the concatenated histograms in order to reduce the dimensions. The first and second low-level descriptors are obtained using the 2D \ac{lbp} descriptor. However the third low-level feature is obtained using 3D-\ac{lbp} (\ac{lbptop}). Zhao et al. \cite{zhao2007dynamic} proposed \ac{lbptop} as a dynamic texture descriptor. This descriptor is an extension to normal \ac{lbp} while it considers texture descriptors along the temporal domain. \ac{lbptop} considers the \ac{lbp} pattern in three orthogonal planes (see Fig. \ref{fig:LBPTOP-framework}), XY, XT and YT. The obtained \ac{lbp} patterns from the three planes are concatenated to form the final descriptor. The three low-level descriptors are calculated with the $P$ number of 8, 16 and 24 for the radius if 1, 2 and 3 respectively
 
 \begin{figure}
-\centering{
-  \includegraphics[width=0.40\textwidth]{LBPTOP_fig}}
-\caption{LBP-TOP framework, the image is taken from \cite{JiangEtAl13}}
-\label{fig:LBPTOP-framework}
+  \centering{
+    \includegraphics[width=0.40\textwidth]{LBPTOP_fig}}
+  \caption{LBP-TOP framework, the image is taken from \cite{JiangEtAl13}}
+  \label{fig:LBPTOP-framework}
 \end{figure}
 
 
