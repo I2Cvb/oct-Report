@@ -10,34 +10,46 @@ Moreover, the prevalent cases of \ac{dr} are expected to grow exponentially affe
 %Moreover, the prevalence of \ac{dr} is expected to grow exponentially and affect over 300 millions people worldwide by 2025~\cite{Wild2004}.
 Early detection and treatment of \ac{dr} and \ac{dme} play a major role to prevent adverse effects such as blindness.
 Indeed, the detection and diagnosis of retinal diseases are based on the detection of vascular abnormalities or lesions in the retina. 
+
 In past decades, \ac{cad} systems have been developed focusing on the automatic analysis of fundus images~\cite{Abramoff2010,Trucco2013}.
 %\Ac{cad} systems have focused on the automatic analysis of fundus images in past decades~\cite{Abramoff2010,Trucco2013}.
 However, the use of fundus photography is limited to the detection of signs which are correlated with retinal thickening such as hard and soft exudates, hemorrhages or micro-aneurysms.
 However, \ac{dme} is characterized as an increase in retinal thickness within 1 disk diameter of the fovea center with or without hard exudates and sometimes associated with cysts~\cite{ETDRSG1985}.
-Therefore, fundus photography cannot always identify the clinical signs of DME, for example cysts, which are not visible in the retinal surface. In addition, it does not provide any quantitative measurements of retina thickness or information about cross-sectional retinal morphology. 
+Therefore, fundus photography cannot always identify the clinical signs of \ac{dme}; for example cysts, which are not visible in the retinal surface. In addition, it does not provide any quantitative measurements of retina thickness or information about cross-sectional retinal morphology. 
 
 Recently, \ac{oct} has been widely used as a valuable diagnosis tool for \ac{dme} detection.
-\ac{oct} is based on optical reflectivity and produces cross-sectional and three-dimensional images of the central retina, thus allowing quantitative retinal thickness and structure measurements. 
-
-The new generation of \ac{oct} imaging, namely \ac{sdoct} offers higher resolution and faster image acquisition over conventional time domain \ac{oct}. \Ac{sdoct} can produce $27,000$ to $40,000$ A-scans/seconds with an axial resolution of \SIrange{3.5}{6}{\micro \metre}~\cite{Chen2005}. 
+\ac{oct} is based on optical reflectivity and produces cross-sectional and three-dimensional images of the central retina, thus allowing quantitative retinal thickness and structure measurements.
+The new generation of \ac{oct} imaging, namely \ac{sdoct} offers higher resolution and faster image acquisition over conventional time domain \ac{oct}. \Ac{sdoct} can produce $27,000$ to $40,000$ A-scans/seconds with an axial resolution ranging from \SIrange{3.5}{6}{\micro \metre}~\cite{Chen2005}. 
 
 Many of the previous works on \ac{oct} image analysis have focused on the problem of retinal layers segmentation, which is a necessary step for retinal thickness measurements~\cite{Chiu2010,Kafieh2013}.
-Few works have addressed the specific problem of \ac{dme} and its associated features detection from \ac{oct} images. Quellec \textit{et al.}~\cite{Quellec2010} proposed a method for the identification of fluid-filled regions in \ac{sdoct} images of the macula based on texture features extracted in the segmented retinal layers.
-The authors in~\cite{Srinivasan2014} proposed a classification method for the detection of \ac{dme} versus \ac{amd} and normal \ac{oct} images. The method is based on pre-processing to reduce the speckle noise in \ac{oct} images and flattening of the images to reduce the variation of retinal curvature among patients. Then, \ac{hog} are extracted in each image of a volume and a linear \ac{svm} is used for classification. On a dataset of 45 patients containing 15 normal subjects, 15 \ac{dme} patients and 15 \ac{amd} patients, the methods achieved a correct classification of $100 \%$, $100 \%$ and $86.67 \%$ for \ac{amd}, \ac{dme} and normal cases respectively. 
+Few works have addressed the specific problem of \ac{dme} and its associated features detection from \ac{oct} images. 
+Quellec~\textit{et al.} proposed a method for the identification of fluid-filled regions in \ac{sdoct} images of the macula based on texture features extracted in the pre-segmented retinal layers~\cite{Quellec2010}.
+
+The authors in~\cite{Srinivasan2014} proposed a classification method to distinguish \ac{dme}, \ac{amd} and normal \ac{sdoct} volumes.
+%The authors in~\cite{Srinivasan2014} proposed a classification method for the detection of \ac{dme} versus \ac{amd} and normal \ac{oct} images.
+The \ac{oct} images are pre-processed by reducing the speckle noise by enhancing the sparsity in a transform-domain and flattening the retinal curvature to reduce the inter-patient variations.
+%The method is based on pre-processing to reduce the speckle noise in \ac{oct} images and flattening of the images to reduce the variation of retinal curvature among patients. 
+Then, \ac{hog} are extracted for each slice of a volume and a linear \ac{svm} is used for classification. 
+On a dataset of 45 patients equally subdivided into the three aforementioned classes, this method leads to a correct classification rate of $100 \%$, $100 \%$ and $86.67 \%$ for normal, \ac{dme} and \ac{amd} patients, respectively.
+%On a dataset of 45 patients containing 15 normal subjects, 15 \ac{dme} patients and 15 \ac{amd} patients, the methods achieved a correct classification of $100 \%$, $100 \%$ and $86.67 \%$ for \ac{amd}, \ac{dme} and normal cases respectively. 
+
 Venhuizen2015~\textit{et al.}~\cite{Venhuizen2015} also proposed a method for \ac{oct} images classification using the \ac{bow} models.
-The method starts with the selection of interest points in each individual B-scan by keeping the points corresponding to the top $3 \%$ vertical gradient values. Then, a $ 9\times 9$ patch of intensity values is extracted around each selected interest point, and PCA is applied to reduce the dimension of every patch from $81$ ($9\times 9$) to $9$. 
-All extracted patches are used to create a codebook using \textit{k}-means clustering, and the obtained codebook from training is used to represent each \ac{oct} volume as a patch occurrence histogram. Finally, this histogram is used as feature vector to train a \ac{rf} with a maximum of $100$ trees. The method was used to classify \ac{oct} volumes between \ac{amd} and normal cases and achieved an \ac{auc} of $0.984$ with a dataset of $384$ \ac{oct} volumes. 
-The most similar work to ours is the work of Liu~\textit{et al.}~\cite{Liu2011} who proposed a method for macular pathology detection in \ac{oct} images using \ac{lbp} as features.
-The method starts by aligning and flattening the images, then a $3$-level multi-scale spatial pyramid is created and \ac{lbp} histograms are extracted in each block at every level of the pyramid. All obtained \ac{lbp} histograms are concatenated into a global descriptor whose dimension is reduced using \ac{pca}. Finally a \ac{svm} is used as classifier. The method achieved good results in detection \ac{oct} scan containing different pathology such as \ac{dme} or \ac{amd}, with an \ac{auc} of $0.93$ using a dataset of $326$ OCT scans.  
+The method starts with the detection and selection of keypoints in each individual B-scan by keeping the most salient points corresponding to the top $3 \%$ of the vertical gradient values. Then, a texton of size $9 \times 9$ pixels is extracted around each keypoint, and \ac{pca} is applied to reduce the dimension of every texton to get a feature vector of size $9$. 
+All extracted feature vectors are used to create a codebook using \textit{k}-means clustering, and the obtained codebook from the training is used to represent each \ac{oct} volume as a feature vector occurrence histogram. 
+Finally, this histogram is used as feature vector to train a \ac{rf} with a maximum of $100$ trees.
+The method was used to classify \ac{oct} volumes between \ac{amd} and normal cases and achieved an \ac{auc} of $0.984$ with a dataset of $384$ \ac{oct} volumes. 
 
+The most similar work to ours is the work of Liu~\textit{et al.}~\cite{Liu2011} who proposed a method for macular pathology detection in \ac{oct} images using \ac{lbp} and gradient information as attributes.
+The method starts by aligning and flattening the images, then a $3$-level multi-scale spatial pyramid is created and edge and \ac{lbp} histograms are extracted in each block at every level of the pyramid. 
+All obtained histograms are concatenated into a global descriptor whose dimensions are reduced using \ac{pca}. Finally a \ac{svm} is used as classifier. 
+The method achieved good results in detection \ac{oct} scan containing different pathology such as \ac{dme} or \ac{amd}, with an \ac{auc} of $0.93$ using a dataset of $326$ \ac{oct} scans.  
 
-In this paper, we propose a method for automatic identification of patients with \ac{dme} versus normal subjects by classifying the \ac{oct} volumes. Our method is based on \ac{lbp} features to describe the texture of \ac{oct} images and dictionary learning using the \ac{bow} approach~\cite{Sivic2003}.
-However, we do not based on interest points selection as opposed to the work of Venhuizen~\textit{et al.}~\cite{Venhuizen2015} who also employed the \ac{bow} approach. We rather divide the images into local patches and extract a dense set of \ac{lbp} descriptors.
+In this paper, we propose a method for automatic identification of patients with \ac{dme} versus normal subjects by classifying the \ac{oct} volumes. Our method is based on \ac{lbp} features to describe the texture of \ac{oct} images and dictionary learning using the \ac{bow} models~\cite{Sivic2003}.
+However, our method do not rely on keypoints detection as opposed to the work of Venhuizen~\textit{et al.}~\cite{Venhuizen2015} who also employed the \ac{bow} models. We rather divide the images into local patches and extract a dense set of \ac{lbp} descriptors.
 We also use the entire \ac{oct} volume and extract 3D-\ac{lbp} features to describe the volume, which is different from the work of Liu~\textit{et al.}~\cite{Liu2011} who classified only the foveal scan for each patient.
-We will show in the experiments, Section~4, that using the 3D-\ac{lbp} descriptor provides better classification performances than extraction \ac{lbp} in each individual B-scan.
+%We will show in the experiments, Sect.\,\ref{sec:method}, that using the 3D-\ac{lbp} descriptor provides better classification performances than extraction \ac{lbp} in each individual B-scan.
 
-This paper is organized as follows. In Section~2, we describe the features extraction methodology and the classification approach based on the \ac{bow} method.
-Section~3 shows experimental results using two different datasets and comparison with another approach. Finally, the paper ends with concluding remarks in Section~4.
+This paper is organized as follows. Section\~\ref{sec:method} describes the features extraction methodology and the classification approach based on the \ac{bow} models. Experiments and results are discussed in Sect.\,\ref{sec:exp} and Sect.\,\ref{sec:res}, respectively. Conclusions and avenue for future directions are drawn in Sect.\,\ref{sec:con}
 
 %----------
 
