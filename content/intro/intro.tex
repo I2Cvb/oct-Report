@@ -20,7 +20,6 @@ Therefore, fundus photography cannot always identify the clinical signs of \ac{d
 Recently, \ac{oct} has been widely used as a valuable diagnosis tool for \ac{dme} detection.
 \ac{oct} is based on optical reflectivity and produces cross-sectional and three-dimensional images of the central retina, thus allowing quantitative retinal thickness and structure measurements.
 The new generation of \ac{oct} imaging, namely \ac{sdoct} offers higher resolution and faster image acquisition over conventional time domain \ac{oct}. \Ac{sdoct} can produce $27,000$ to $40,000$ A-scans/seconds with an axial resolution ranging from \SIrange{3.5}{6}{\micro \metre}~\cite{Chen2005}. 
-
 Many of the previous works on \ac{oct} image analysis have focused on the problem of retinal layers segmentation, which is a necessary step for retinal thickness measurements~\cite{Chiu2010,Kafieh2013}.
 Few works have addressed the specific problem of \ac{dme} and its associated features detection from \ac{oct} images. 
 Quellec\,\textit{et al.} proposed a method for the identification of fluid-filled regions in \ac{sdoct} images of the macula based on texture features extracted in the pre-segmented retinal layers~\cite{Quellec2010}.
@@ -49,7 +48,7 @@ However, our method do not rely on keypoints detection as opposed to the work of
 We also use the entire \ac{oct} volume and extract 3D-\ac{lbp} features to describe the volume, which is different from the work of Liu\,\textit{et al.} who classified only the foveal scan for each patient~\cite{Liu2011}.
 %We will show in the experiments, Sect.\,\ref{sec:method}, that using the 3D-\ac{lbp} descriptor provides better classification performances than extraction \ac{lbp} in each individual B-scan.
 
-This paper is organized as follows. Section~\ref{sec:method} describes the features extraction methodology and the classification approach based on the \ac{bow} models. Experiments and results are discussed in Sect.\,\ref{sec:exp} and Sect.\,\ref{sec:res}, respectively. Conclusions and avenue for future directions are drawn in Sect.\,\ref{sec:con}
+This paper is organized as follows. Section~\ref{sec:method} describes the features extraction methodology and the classification approach based on the \ac{bow} models. Experiments and results are discussed in Sect.\,\ref{sec:exp}. Conclusions and avenue for future directions are drawn in Sect.\,\ref{sec:con}.
 
 %----------
 

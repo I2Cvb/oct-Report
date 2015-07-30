@@ -24,9 +24,6 @@
 %     % \end{table}
 %     };
 % \end{tikzpicture}
-
-\begin{tiny}
-
 % \begin{table}
 % \caption{Obtained results using SERI datasets.}% using \ac{rf} with 100 trees. High-level features with \ac{bow} are obtained with $K$ = 32 visual-words.}
 % \centering
@@ -67,28 +64,7 @@
 % \end{tiny}
 
 
-  \vspace{-.5cm}
-\begin{table}
-\caption{Comparing the proposed method by \cite{Venhuizen2015} on SERI and Duke datasets.}% with the \textbf{our two} best proposed methods. $K$ = 32 and \ac{rf} is trained using 100 tress}
-\centering
-\begin{tabular}{lcclcclcccclcclc}
-\toprule
-Data sets 	& & &\multicolumn{4}{c}{SERI}& & & & &\multicolumn{4}{c}{Duke} & \\
-  \cmidrule(l){2-8}  \cmidrule(l){10-16}
-	         & & & SE & & & SP & & & & & SE & & & SP & \\
-\midrule
- \cite{Venhuizen2015} 		& & & 61.53 & & & 58.82 & & & & & 71.42 & & & 68.75 & \\
-\{\ac{lbp}+\ac{bow}+\ac{sw}\},$16^{riu2}$ 	& & & 81.25 & & & 75.00 & & & & & 86.67 & & & 100.00 &  \\
-\{\ac{lbptop}\},$16^{riu2}$				& & & 87.50 & & & 75.00 & & & & & 73.33 & & & 86.76 &  \\
 
-
-\bottomrule
-\end{tabular}
-\label{tab:ComparisonRefandOurs}
-\end{table}
-
-\end{tiny}
-\vspace{-1cm}
 
 %----------
 

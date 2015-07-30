@@ -2,7 +2,14 @@
 % \graphicspath{ {./content/method/figures/visual_cues/}{./content/method/figures/}}
 \graphicspath{ {./content/method/figures/}}
 
-\section{Materials and Methods}
+\begin{figure}[t]
+  \centering{
+    \includegraphics[width=1\textwidth]{ml}}
+  \caption{Machine learning classification basic scheme}
+  \label{fig:ML-scheme}
+\end{figure}
+
+\section{Materials and Methods}\label{sec:method}
 
 The proposed method, as well as, its experimental set-up for \ac{oct} volume classification are outlined in Fig.\,\ref{fig:ML-scheme}.
 The methodology is formulated as a standard classification procedure.
@@ -11,6 +18,9 @@ The methodology is formulated as a standard classification procedure.
 First, the \ac{oct} volumes are pre-processed as presented in details in Sect.\,\ref{subsec:prepro}.
 % This algorithm preserve important details and textures of the original image, while reducing the noise.
 The mapping stage is used to determine a discrete set of elements (or structures) which is used for representing the \ac{oct} volume.
+Thereafter, two mapping strategies are defined: (i) \emph{global} and (ii) \emph{local} mapping.
+In the global mapping approach, a single structure is computed for the image/volume while in the local mapping, a set of structures is defined by sliding a window through the image/volume.
+Then, a descriptor is computed for each structure.
 The feature extraction and representation are presented in depth in Sect.\,\ref{subsec:feaext} and Sect.\,\ref{subsec:fearep}.
 % The feature detection stage correspond to measurements done in $G(Z)$ used for representing $s$ in terms of $ZxG$. 
 % This mapping and feature detection steps can be found as a single-steps in the literature.
@@ -19,15 +29,6 @@ A \ac{rf} classifier has been selected to perform the classification of the \ac{
 % The design choices are all illustrated in Fig.\,\ref{fig:ML-scheme} and discussed further in this section. The work here presented does not discuss in detail neither the mapping, nor the adopted classifier, further than this lines.
 % As a possible mappings, for representing the volumes, 2D image slices of the volume and \color{red}{7x7x7}\color{black} sliding volumes, have been considered. 
 % As a classifier, a \color{red}{Random Forest}\color{black} using 100 trees, has been considered.
-
-
-
-\begin{figure}[h]
-  \centering{
-    \includegraphics[width=1\textwidth]{ml}}
-  \caption{Machine learning classification basic scheme}
-  \label{fig:ML-scheme}
-\end{figure}
 
 % \subsection{Data}
 % \color{red}{
@@ -45,18 +46,18 @@ A \ac{rf} classifier has been selected to perform the classification of the \ac{
 \subsection{Image pre-processing}\label{subsec:prepro}
 
 \Ac{oct} images are known to be affected by a speckle noise~\cite{schmitt1999speckle}.
-Subsequently, \ac{nlm}~\cite{buades2005non} filtering has been previously successfully used in \ac{us} images to filter similar noise~\cite{Coupe2009} and is used in our framework to denoise each B-scan (i.e. each $x-z$ slice) of the \ac{oct} volumes (see in Fig.\,\ref{subfig:vol}).
+Subsequently, \ac{nlm}~\cite{buades2005non} filtering has been successfully used in \ac{us} images to filter similar noise~\cite{Coupe2009} and is used in our framework to denoise each B-scan (i.e. each $x-z$ slice) of the \ac{oct} volumes (see in Fig.\,\ref{subfig:vol}).
 %The pre-processing stage in the proposed methodology applies an image denoising method to reduce the speckle noise in \ac{oct} images.
 %Since image details and texture of the original image are needed by the following stages in the method, \ac{nlm} algorithm \cite{buades2005non} is used. 
 \ac{nlm} filtering offers the advantage to use all the possible self-predictions that the image can provide rather than local or frequency filters such as Gaussian, anisotropic or Wiener filters~\cite{buades2005non}.
 An example of filtering using \ac{nlm} filter on \ac{oct} image is depicted in Fig\,\ref{subfig:raw} and Fig.\,\ref{subfig:nlm}.
 
-\begin{figure}[Hb]
+\begin{figure}[t]
   \centering
   \hspace*{\fill}
   \subfigure[]{\label{subfig:vol}\includegraphics[width=0.3\linewidth]{volume.png}} \hfill
-  \subfigure[]{\label{subfig:raw}\includegraphics[width=0.3\linewidth]{raw_crop.png}} \hfill
-  \subfigure[]{\label{subfig:nlm}\includegraphics[width=0.3\linewidth]{nlm_crop.png}}
+  \subfigure[]{\label{subfig:raw}\includegraphics[width=0.3\linewidth]{raw_crop_grey.png}} \hfill
+  \subfigure[]{\label{subfig:nlm}\includegraphics[width=0.3\linewidth]{nlm_crop_grey.png}}
   \hspace*{\fill}
   \caption{\ac{oct}: (a) Organization of the \ac{oct} data - (b) Original image - (c) \ac{nlm} filtering.}
   \label{fig:denoise}
@@ -86,7 +87,7 @@ LBP_{P,R} = \sum_{p=0}^{P-1}s(g_{p} - g_{c})2^{p} \ , \qquad s(\cdot) = \begin{c
 
 Ojala\,\textit{et al.} further extend the original \ac{lbp} formulation to achieve rotation invariance at the expense of limiting the texture description to the notion of circular ``uniformity''~\cite{ojala2002multiresolution}. Volume encoding is later proposed by Zhao\,\textit{et al.} by computing \ac{lbp} descriptors in each orthogonal planes, so called \ac{lbptop}~\cite{zhao2012rotation}.
 
-\begin{figure}
+\begin{figure}[t]
   \centering
   \hspace*{\fill}
   \subfigure[]{\label{subfig:lbp}\includegraphics[height=0.15\textheight]{lbp.png}} \hfill
